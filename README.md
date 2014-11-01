@@ -6,7 +6,7 @@ This is an role for installing and maintaining the zabbix-javagateway. There are
  * zabbix-server (https://galaxy.ansible.com/list#/roles/2070)
  * zabbix-proxy (https://galaxy.ansible.com/list#/roles/2073)
  * zabbix-javagateway (https://galaxy.ansible.com/list#/roles/2076)
- * zabbix-agent ()
+ * zabbix-agent (https://galaxy.ansible.com/list#/roles/2079)
 
 Requirements
 ------------
@@ -43,7 +43,7 @@ Including an example of how to use your role (for instance, with variables passe
 Extra Information
 ----------------
 
-You can install so-called userparameter files by adding the following into your roles. You can extend your zabbix configuration by adding items yourself that do specific checks:
+You can install so-called userparameter files by adding the following into your roles:
 ```
 - name: Installing sample file
   copy: src=sample.conf
@@ -57,7 +57,8 @@ Example of the "sample.conf" file:
 ```
 UserParameter=mysql.ping_to,mysqladmin -uroot ping | grep -c alive
 ```
-You can change offcourse the name of the file to whatever you want (Same for the UserParameter line ;-) )
+
+You can extend your zabbix configuration by adding items yourself that do specific checks which aren't in the zabbix core itself. You can change offcourse the name of the file to whatever you want (Same for the UserParameter line(s) ;-) )
 
 License
 -------
