@@ -1,0 +1,14 @@
+---
+# Tasks specific for RedHat systems
+
+- name: RedHat | Install basic repo file
+  template: src=rhel.repo.j2
+            dest=/etc/yum.repos.d/zabbix.repo
+            owner=root 
+            group=root 
+            mode=0644
+
+- name: RedHat | Installing zabbix-agent
+  yum:  pkg=zabbix-agent
+        state=present
+

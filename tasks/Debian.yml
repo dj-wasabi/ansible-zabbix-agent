@@ -1,0 +1,34 @@
+---
+#
+
+- name: Debian | Installing repository Debian
+  apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main" 
+                  state=present
+  when: ansible_distribution == "Debian"
+
+- name: Debian | Installing repository Debian
+  apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main" 
+                  state=present
+  when: ansible_distribution == "Debian"
+
+- name: Debian | Installing repository Ubuntu
+  apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main" 
+                  state=present
+  when: ansible_distribution == "ubuntu"
+
+- name: Debian | Installing repository Ubuntu
+  apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
+                  state=present
+  when: ansible_distribution == "ubuntu"
+
+- name: Debian | Install gpg key
+  apt_key: id=79EA5ED4
+           url=http://repo.zabbix.com/zabbix-official-repo.key
+
+- name: Debian | Installing zabbix-agent
+  apt: pkg=zabbix-agent
+       state=present 
+       update_cache=yes
+       cache_valid_time=3600
+
+
