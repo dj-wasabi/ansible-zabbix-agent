@@ -17,6 +17,7 @@ This role will work on:
  * Red Hat
  * Debian
  * Ubuntu
+ * opensuse
 
 So, you'll need one of those operating systems.. :-)
 
@@ -53,7 +54,7 @@ You can install so-called userparameter files by adding the following into your 
         owner=zabbix
         group=zabbix
         mode=0755
-  notify: zabbix-agent restarted
+  notify: "{{ zabbix_agent }} restarted"
 ```
 Example of the "sample.conf" file:
 ```
