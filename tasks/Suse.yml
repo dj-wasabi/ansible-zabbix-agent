@@ -1,0 +1,13 @@
+---
+
+- name: Suse | Set some facts
+  set_fact: 
+      zabbix_agent: "zabbix-agentd"
+
+- name: Suse | Install basic repo file
+  zypper_repository: repo="http://download.opensuse.org/repositories/server:monitoring/openSUSE_{{ ansible_distribution_version }}/server:monitoring.repo"
+
+- name: Suse | Install zabbix-agent
+  zypper: name=zabbix-agent
+          state=present
+          disable_gpg_check=yes

@@ -9,13 +9,17 @@
   include: "Debian.yml"
   when: ansible_os_family == "Debian"
 
+- name: Install the correct repository
+  include: "Suse.yml"
+  when: ansible_os_family == "Suse"
+
 - name: Configure zabbix-agent
   template: src=zabbix_agentd.conf.j2 
             dest=/etc/zabbix/zabbix_agentd.conf 
             owner=zabbix 
             group=zabbix
             mode=0755 
-  notify: zabbix-agent restarted
+  notify: "{{ zabbix_agent }} restarted"
 
 - name: Create include dir zabbix-agent
   file: path={{ agent_include }} 

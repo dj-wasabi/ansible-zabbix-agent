@@ -1,6 +1,10 @@
 ---
 #
 
+- name: Debian | Set some facts
+  set_fact: 
+      zabbix_agent: zabbix-agent
+
 - name: Debian | Installing repository Debian
   apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main" 
                   state=present
@@ -31,4 +35,7 @@
        update_cache=yes
        cache_valid_time=3600
 
+- name: Debian | Enable the service
+  service: name={{ zabbix_agent }}
+           enabled=yes
 

@@ -1,6 +1,10 @@
 ---
 # Tasks specific for RedHat systems
 
+- name: RedHat | Set some facts
+  set_fact: 
+      zabbix_agent: zabbix-agent
+
 - name: RedHat | Install basic repo file
   template: src=rhel.repo.j2
             dest=/etc/yum.repos.d/zabbix.repo
@@ -11,4 +15,8 @@
 - name: RedHat | Installing zabbix-agent
   yum:  pkg=zabbix-agent
         state=present
+
+- name: RedHat | Enable the service
+  service: name={{ zabbix_agent }}
+           enabled=yes
 
