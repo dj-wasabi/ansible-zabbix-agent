@@ -5,22 +5,22 @@
   set_fact: 
       zabbix_agent: zabbix-agent
 
-- name: Debian | Installing repository Debian
+- name: Debian | Installing deb repository Debian
   apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main" 
                   state=present
   when: ansible_distribution == "Debian"
 
-- name: Debian | Installing repository Debian
+- name: Debian | Installing deb-src repository Debian
   apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main" 
                   state=present
   when: ansible_distribution == "Debian"
 
-- name: Debian | Installing repository Ubuntu
+- name: Debian | Installing deb repository Ubuntu
   apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main" 
                   state=present
   when: ansible_distribution == "ubuntu"
 
-- name: Debian | Installing repository Ubuntu
+- name: Debian | Installing deb-src repository Ubuntu
   apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
                   state=present
   when: ansible_distribution == "ubuntu"
