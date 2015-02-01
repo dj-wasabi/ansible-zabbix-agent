@@ -25,9 +25,14 @@ Role Variables
 --------------
 
 There are some variables in de default/main.yml which can (Or needs to) be changed/overriden:
+
 * `agent_server`: The ipaddress for the zabbix-server or zabbix-proxy.
+
 * `agent_serveractive`: The ipaddress for the zabbix-server or zabbix-proxy for active checks.
+
 * `zabbix_version`: This is the version of zabbix. Default it is 2.4, but can be overriden to 2.2 or 2.0.
+
+* `zabbix_repo`: When you already have an repository with the zabbix components, you can set it to False.
 
 Dependencies
 ------------
@@ -48,7 +53,7 @@ Extra Information
 
 You can install so-called userparameter files by adding the following into your roles:
 ```
-- name: Installing sample file
+- name: "Installing sample file"
   copy: src=sample.conf
         dest="{{ agent_include }}/mysql.conf"
         owner=zabbix

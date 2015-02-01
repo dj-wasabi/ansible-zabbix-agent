@@ -1,41 +1,42 @@
 ---
 #
 
-- name: Debian | Set some facts
+- name: "Debian | Set some facts"
   set_fact: 
       zabbix_agent: zabbix-agent
 
-- name: Debian | Installing deb repository Debian
+- name: "Debian | Installing deb repository Debian"
   apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main" 
                   state=present
-  when: ansible_distribution == "Debian"
+  when: ansible_distribution == "Debian" and zabbix_repo == True
 
-- name: Debian | Installing deb-src repository Debian
+- name: "Debian | Installing deb-src repository Debian"
   apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main" 
                   state=present
-  when: ansible_distribution == "Debian"
+  when: ansible_distribution == "Debian" and zabbix_repo == True
 
-- name: Debian | Installing deb repository Ubuntu
+- name: "Debian | Installing deb repository Ubuntu"
   apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main" 
                   state=present
-  when: ansible_distribution == "ubuntu"
+  when: ansible_distribution == "ubuntu" and zabbix_repo == True
 
-- name: Debian | Installing deb-src repository Ubuntu
+- name: "Debian | Installing deb-src repository Ubuntu"
   apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
                   state=present
-  when: ansible_distribution == "ubuntu"
+  when: ansible_distribution == "ubuntu" and zabbix_repo == True
 
-- name: Debian | Install gpg key
+- name: "Debian | Install gpg key"
   apt_key: id=79EA5ED4
            url=http://repo.zabbix.com/zabbix-official-repo.key
+  when: zabbix_repo == True
 
-- name: Debian | Installing zabbix-agent
+- name: "Debian | Installing zabbix-agent"
   apt: pkg=zabbix-agent
        state=present 
        update_cache=yes
        cache_valid_time=3600
 
-- name: Debian | Enable the service
+- name: "Debian | Enable the service"
   service: name={{ zabbix_agent }}
            enabled=yes
 

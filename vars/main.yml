@@ -1,29 +1,3 @@
 ---
 # vars file for zabbix-agent
 
-agent_pidfile: /var/run/zabbix/zabbix_agentd.pid
-agent_logfile: /var/log/zabbix/zabbix_agentd.log
-agent_logfilesize: 100
-agent_debuglevel: 3
-agent_sourceip:
-agent_enableremotecommands: 0
-agent_logremotecommands: 0
-agent_listenport: 10050
-agent_listenip: 
-agent_startagents: 3
-agent_hostname: 
-agent_hostnameitem: 
-agent_hostmetadata:
-agent_hostmetadataitem: 
-agent_refreshactivechecks: 120
-agent_buffersend: 5
-agent_buffersize: 100
-agent_maxlinespersecond: 100
-agent_allowroot: 0
-agent_zabbix_alias:
-agent_timeout: 3
-agent_include: /etc/zabbix/zabbix_agentd.d
-agent_unsafeuserparameters: 0
-agent_userparameter:
-agent_loadmodulepath: ${libdir}/modules
-agent_loadmodule:

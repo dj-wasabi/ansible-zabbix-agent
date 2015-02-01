@@ -1,19 +1,19 @@
 ---
 # tasks file for wdijkerman.zabbix
 
-- name: Install the correct repository
+- name: "Install the correct repository"
   include: "RedHat.yml"
   when: ansible_os_family == "RedHat"
 
-- name: Install the correct repository
+- name: "Install the correct repository"
   include: "Debian.yml"
   when: ansible_os_family == "Debian"
 
-- name: Install the correct repository
+- name: "Install the correct repository"
   include: "Suse.yml"
   when: ansible_os_family == "Suse"
 
-- name: Configure zabbix-agent
+- name: "Configure zabbix-agent"
   template: src=zabbix_agentd.conf.j2 
             dest=/etc/zabbix/zabbix_agentd.conf 
             owner=zabbix 
@@ -21,11 +21,11 @@
             mode=0755 
   notify: "{{ zabbix_agent }} restarted"
 
-- name: Create include dir zabbix-agent
+- name: "Create include dir zabbix-agent"
   file: path={{ agent_include }} 
         owner=zabbix 
         group=zabbix 
         state=directory
 
-- name: Include sample.conf
+- name: "Include sample.conf"
   include: userparameter.yml

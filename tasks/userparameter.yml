@@ -1,6 +1,6 @@
 ---
 
-- name: Installing sample file
+- name: "Installing sample file"
   copy: src=sample.conf
         dest="{{ agent_include }}/mysql.conf"
         owner=zabbix
