@@ -21,7 +21,7 @@ This role will work on:
 
 So, you'll need one of those operating systems.. :-)
 
-When you want to automatically create the hosts in the webinterface, you'll need on your own machine the zabbix-api package. You can install this locally with the following command: `pip install zabbix-api`. This ansible role uses the modules from "Cove" found in this pull request: https://github.com/ansible/ansible-modules-extras/pull/44. So all credits goes to this huy!
+When you want to automatically create the hosts in the webinterface, you'll need on your own machine the zabbix-api package. You can install this locally with the following command: `pip install zabbix-api`. This ansible role uses the modules from "Cove" found in this pull request: https://github.com/ansible/ansible-modules-extras/pull/44. So all credits goes to this guy!
 
 
 
