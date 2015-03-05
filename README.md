@@ -113,6 +113,7 @@ You can also use the group_vars or host_vars for setting some vars.
             macro_value: reverse_proxy
 
 and in the playbook only specifying:
+
     - hosts: all
       sudo: yes
       roles:
