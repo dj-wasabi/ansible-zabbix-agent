@@ -75,8 +75,8 @@ ListenPort={{ agent_listenport }}
 #       list of comma delimited ip addresses that the agent should listen on.
 #       first ip address is sent to zabbix server if connecting to it to retrieve list of active checks.
 #
-{% if agent_listen_ip is defined and agent_listen_ip %}
-ListenIP={{ agent_listen_ip }}
+{% if agent_listeninterface is defined and agent_listeninterface %}
+ListenIP={{ hostvars[inventory_hostname]['ansible_'+ agent_listeninterface]['ipv4'].address }}
 {% endif %}
 
 ### option: startagents

@@ -38,6 +38,8 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 * `zabbix_repo`: When you already have an repository with the zabbix components, you can set it to False.
 
+* `agent_listeninterface`: On which interface zabbix-agent is listening. Default: eth0
+
 
 These variables needs to be changed/overriden when you want to make use of the zabbix-api for automatically creating and or updating hosts.
 
