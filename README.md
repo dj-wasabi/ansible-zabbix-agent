@@ -45,7 +45,7 @@ These variables needs to be changed/overriden when you want to make use of the z
 
 * `zabbix_url`: The url on which the Zabbix webpage is available. Example: http://zabbix.example.com
 
-* `zabbix_api_use`: When you want to make use of the Zabbix-API. Default: true
+* `zabbix_api_use`: When you want to make use of the Zabbix-API. Default: False
 
 * `zabbix_api_user`: Username of user which has API access.
 
