@@ -20,12 +20,14 @@
             group=zabbix
             mode=0755 
   notify: "{{ zabbix_agent }} restarted"
+  sudo: yes
 
 - name: "Create include dir zabbix-agent"
   file: path={{ agent_include }} 
         owner=zabbix 
         group=zabbix 
         state=directory
+  sudo: yes
 
 - name: "Create hostgroups"
   local_action:

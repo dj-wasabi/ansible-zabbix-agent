@@ -12,12 +12,15 @@
             group=root 
             mode=0644
   when: zabbix_repo == True
+  sudo: yes
 
 - name: "RedHat | Installing zabbix-agent"
   yum:  pkg=zabbix-agent
         state=present
+  sudo: yes
 
 - name: "RedHat | Enable the service"
   service: name={{ zabbix_agent }}
            enabled=yes
+  sudo: yes
 

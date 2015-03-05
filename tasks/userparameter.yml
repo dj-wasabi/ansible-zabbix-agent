@@ -7,4 +7,5 @@
         group=zabbix
         mode=0755
   notify: "{{ zabbix_agent }} restarted"
+  sudo: yes
 

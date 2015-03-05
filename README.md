@@ -76,7 +76,6 @@ Example Playbook
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: all
-      sudo: yes
       roles:
          - role: dj-wasabi.zabbix-agent
            agent_server: 192.168.33.30
@@ -117,7 +116,6 @@ You can also use the group_vars or host_vars for setting some vars.
 and in the playbook only specifying:
 
     - hosts: all
-      sudo: yes
       roles:
          - role: dj-wasabi.zabbix-agent
 

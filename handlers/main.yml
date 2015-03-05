@@ -4,4 +4,5 @@
 - name: "{{ zabbix_agent }} restarted"
   service: name={{ zabbix_agent }}
            state=restarted
+  sudo: yes
 
