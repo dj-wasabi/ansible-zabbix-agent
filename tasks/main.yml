@@ -27,5 +27,44 @@
         group=zabbix 
         state=directory
 
-- name: "Include sample.conf"
-  include: userparameter.yml
+- name: "Create hostgroups"
+  local_action:
+    module: zabbix_group
+    server_url: "{{ zabbix_url }}"
+    login_user: "{{ zabbix_api_user }}"
+    login_password: "{{ zabbix_api_pass }}"
+    host_groups: "{{ zabbix_host_groups }}"
+    state: "{{ zabbix_create_hostgroup }}"
+
+- name: "Create a new host or update an existing host's info"
+  local_action:
+    module: zabbix_host
+    server_url: "{{ zabbix_url }}"
+    login_user: "{{ zabbix_api_user }}"
+    login_password: "{{ zabbix_api_pass }}"
+    host_name: "{{ ansible_fqdn }}"
+    host_groups: "{{ zabbix_host_groups }}"
+    link_templates: "{{  zabbix_link_templates }}"
+    status: "{{ zabbix_host_status }}"
+    state: "{{ zabbix_create_host }}"
+    interfaces:
+      - type: 1
+        main: 1
+        useip: "{{ zabbix_useuip }}"
+        ip: "{{ hostvars[inventory_hostname]['ansible_'+ agent_listeninterface]['ipv4'].address }}"
+        dns: "{{ ansible_fqdn }}"
+        port: "{{ agent_listenport }}"
+  when: zabbix_api_use == True
+
+- name: "Updating host configuration with macros"
+  local_action:
+    module: zabbix_hostmacro
+    server_url: "{{ zabbix_url }}"
+    login_user: "{{ zabbix_api_user }}"
+    login_password: "{{ zabbix_api_pass }}"
+    host_name: "{{ ansible_fqdn }}"
+    macro_name: "{{ item.macro_key }}"
+    macro_value: "{{ item.macro_value }}"
+  with_items: zabbix_macros
+  when: zabbix_api_use == True and zabbix_macros is defined and item.macro_key is defined
+

@@ -21,6 +21,10 @@ This role will work on:
 
 So, you'll need one of those operating systems.. :-)
 
+When you want to automatically create the hosts in the webinterface, you'll need on your own machine the zabbix-api package. You can install this locally with the following command: `pip install zabbix-api`. This ansible role uses the modules from "Cove" found in this pull request: https://github.com/ansible/ansible-modules-extras/pull/44. So all credits goes to this huy!
+
+
+
 Role Variables
 --------------
 
@@ -34,19 +38,86 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 * `zabbix_repo`: When you already have an repository with the zabbix components, you can set it to False.
 
+
+These variables needs to be changed/overriden when you want to make use of the zabbix-api for automatically creating and or updating hosts.
+
+* `zabbix_url`: The url on which the Zabbix webpage is available. Example: http://zabbix.example.com
+
+* `zabbix_api_use`: When you want to make use of the Zabbix-API. Default: true
+
+* `zabbix_api_user`: Username of user which has API access.
+
+* `zabbix_api_pass`: Password for the user which has API access.
+
+* `zabbix_create_hostgroup`: present (Default) if you want to create hostgroups or absent if you not. 
+
+* `zabbix_host_status`: enabled (Default) when host in monitored, disabled when host is disabled for monitoring.
+
+* `zabbix_create_host`: present  # or absent
+
+* `zabbix_useuip`: 1 if connection to zabbix-agent is made via ip, 0 for fqdn.
+
+* `zabbix_host_groups`: An list of hostgroups which this host belongs to.
+
+* `zabbix_link_templates`: An list of templates which needs to be link to this host. The templates should exist.
+
+* `zabbix_macros`: An list with macro_key and macro_value for creating hostmacro's.
+
+
 Dependencies
 ------------
-
+There are no dependencies on other roles.
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: ALL
+    - hosts: all
       sudo: yes
       roles:
-         - { role: dj-wasabi.agent, agent_server: 192.168.33.30, agent_serveractive: 192.168.33.30}
+         - role: dj-wasabi.zabbix-agent
+           agent_server: 192.168.33.30
+           agent_serveractive: 192.168.33.30
+           zabbix_url: http://zabbix.example.com
+           zabbix_api_use: true
+           zabbix_api_user: Admin
+           zabbix_api_pass: zabbix
+           zabbix_create_host: present
+           zabbix_host_groups:
+             - Linux Servers
+           zabbix_link_templates:
+             - Template OS Linux
+             - Apache APP Template
+           zabbix_macros:
+             - macro_key: apache_type
+               macro_value: reverse_proxy
+
+You can also use the group_vars or host_vars for setting some vars.
+
+		cat group_vars/all
+		agent_server: 192.168.33.30
+        agent_serveractive: 192.168.33.30
+        zabbix_url: http://zabbix.example.com
+        zabbix_api_use: true
+        zabbix_api_user: Admin
+        zabbix_api_pass: zabbix
+        zabbix_create_host: present
+        zabbix_host_groups:
+          - Linux Servers
+        zabbix_link_templates:
+          - Template OS Linux
+          - Apache APP Template
+        zabbix_macros:
+          - macro_key: apache_type
+            macro_value: reverse_proxy
+
+and in the playbook only specifying:
+    - hosts: all
+      sudo: yes
+      roles:
+         - role: dj-wasabi.zabbix-agent
+
 
 Extra Information
 ----------------
