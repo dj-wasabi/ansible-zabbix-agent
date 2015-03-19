@@ -37,6 +37,7 @@
     login_password: "{{ zabbix_api_pass }}"
     host_groups: "{{ zabbix_host_groups }}"
     state: "{{ zabbix_create_hostgroup }}"
+  when: zabbix_api_use == True
 
 - name: "Create a new host or update an existing host's info"
   local_action:
