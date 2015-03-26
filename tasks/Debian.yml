@@ -20,13 +20,13 @@
 - name: "Debian | Installing deb repository Ubuntu"
   apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main" 
                   state=present
-  when: ansible_distribution == "ubuntu" and zabbix_repo == True
+  when: ansible_distribution == "Ubuntu" and zabbix_repo == True
   sudo: yes
 
 - name: "Debian | Installing deb-src repository Ubuntu"
   apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
                   state=present
-  when: ansible_distribution == "ubuntu" and zabbix_repo == True
+  when: ansible_distribution == "Ubuntu" and zabbix_repo == True
   sudo: yes
 
 - name: "Debian | Install gpg key"
