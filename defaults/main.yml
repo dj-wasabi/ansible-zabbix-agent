@@ -19,9 +19,6 @@ zabbix_host_groups:
   - Linux servers
 zabbix_link_templates:
   - Template OS Linux
-zabbix_macros: 
-  - macro_key: key
-    macro_value: value
 
 # Zabbix configuration variables
 agent_pidfile: /var/run/zabbix/zabbix_agentd.pid
