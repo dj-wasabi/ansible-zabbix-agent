@@ -1,0 +1,21 @@
+---
+driver:
+  name: docker
+  provision_command: sed -i '/tsflags=nodocs/d' /etc/yum.conf
+
+provisioner:
+  name: ansible_playbook
+  ansible_yum_repo: "http://mirror.logol.ru/epel/6/x86_64/epel-release-6-8.noarch.rpm"
+  hosts: localhost
+#  requirements_path: requirements.yml
+
+platforms:
+  - name: centos-6.6
+
+verifier:
+  ruby_bindir: '/usr/bin' 
+
+suites:
+  - name: default
+    run_list:
+    attributes:
