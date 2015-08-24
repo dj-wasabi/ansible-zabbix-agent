@@ -24,7 +24,7 @@ describe 'Zabbix Agent Configuration' do
         it { should be_owned_by 'zabbix'}
         it { should be_grouped_into 'zabbix'}
 
-        it { should contain "ListenPort==10050" }
+        it { should contain "ListenPort=10050" }
         it { should contain "Server=192.168.3.33" }
         it { should contain "ServerActive=192.168.3.33" }
     end
