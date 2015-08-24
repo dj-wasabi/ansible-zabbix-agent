@@ -19,7 +19,7 @@ describe 'Zabbix Agent Services' do
 end
 
 describe 'Zabbix Agent Configuration' do
-    describe file('/etc/zabbix/zabbix_agent.conf') do
+    describe file('/etc/zabbix/zabbix_agentd.conf') do
         it { should be_file}
         it { should be_owned_by 'zabbix'}
         it { should be_grouped_into 'zabbix'}
