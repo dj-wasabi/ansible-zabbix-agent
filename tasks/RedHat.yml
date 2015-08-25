@@ -2,14 +2,14 @@
 # Tasks specific for RedHat systems
 
 - name: "RedHat | Set some facts"
-  set_fact: 
+  set_fact:
       zabbix_agent: zabbix-agent
 
 - name: "RedHat | Install basic repo file"
   template: src=rhel.repo.j2
             dest=/etc/yum.repos.d/zabbix.repo
-            owner=root 
-            group=root 
+            owner=root
+            group=root
             mode=0644
   when: zabbix_repo == True
   sudo: yes

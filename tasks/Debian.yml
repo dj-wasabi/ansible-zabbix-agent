@@ -2,23 +2,23 @@
 # Tasks specific for Debian/Ubuntu Systems
 
 - name: "Debian | Set some facts"
-  set_fact: 
+  set_fact:
       zabbix_agent: zabbix-agent
 
 - name: "Debian | Installing deb repository Debian"
-  apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main" 
+  apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main"
                   state=present
   when: ansible_distribution == "Debian" and zabbix_repo == True
   sudo: yes
 
 - name: "Debian | Installing deb-src repository Debian"
-  apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main" 
+  apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main"
                   state=present
   when: ansible_distribution == "Debian" and zabbix_repo == True
   sudo: yes
 
 - name: "Debian | Installing deb repository Ubuntu"
-  apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main" 
+  apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
                   state=present
   when: ansible_distribution == "Ubuntu" and zabbix_repo == True
   sudo: yes
@@ -37,7 +37,7 @@
 
 - name: "Debian | Installing zabbix-agent"
   apt: pkg=zabbix-agent
-       state=present 
+       state=present
        update_cache=yes
        cache_valid_time=3600
   sudo: yes

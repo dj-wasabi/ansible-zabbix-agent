@@ -1,8 +1,8 @@
 ---
-# Tasks specific for OpenSyse Systems
+# Tasks specific for OpenSuse Systems
 
 - name: "Suse | Set some facts"
-  set_fact: 
+  set_fact:
       zabbix_agent: "zabbix-agentd"
 
 - name: "Suse | Install basic repo file"

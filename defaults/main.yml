@@ -30,12 +30,12 @@ agent_enableremotecommands: 0
 agent_logremotecommands: 0
 agent_listenport: 10050
 agent_listeninterface: eth0
-agent_listenip: 
+agent_listenip:
 agent_startagents: 3
-agent_hostname: 
-agent_hostnameitem: 
+agent_hostname:
+agent_hostnameitem:
 agent_hostmetadata:
-agent_hostmetadataitem: 
+agent_hostmetadataitem:
 agent_refreshactivechecks: 120
 agent_buffersend: 5
 agent_buffersize: 100

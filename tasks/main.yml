@@ -14,18 +14,18 @@
   when: ansible_os_family == "Suse"
 
 - name: "Configure zabbix-agent"
-  template: src=zabbix_agentd.conf.j2 
-            dest=/etc/zabbix/zabbix_agentd.conf 
-            owner=zabbix 
+  template: src=zabbix_agentd.conf.j2
+            dest=/etc/zabbix/zabbix_agentd.conf
+            owner=zabbix
             group=zabbix
-            mode=0755 
+            mode=0755
   notify: "{{ zabbix_agent }} restarted"
   sudo: yes
 
 - name: "Create include dir zabbix-agent"
-  file: path={{ agent_include }} 
-        owner=zabbix 
-        group=zabbix 
+  file: path={{ agent_include }}
+        owner=zabbix
+        group=zabbix
         state=directory
   sudo: yes
 
