@@ -15,12 +15,12 @@
   sudo: yes
 
 - name: "RedHat | Installing zabbix-agent"
-  yum:  pkg=zabbix-agent
+  yum:  pkg={{ zabbix_agent }}
         state=present
   sudo: yes
 
 - name: "RedHat | Enable the service"
-  service: name={{ zabbix_agent }}
+  service: name=zabbix-agent
            enabled=yes
   sudo: yes
 
