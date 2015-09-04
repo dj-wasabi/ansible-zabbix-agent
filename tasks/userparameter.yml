@@ -6,6 +6,6 @@
         owner=zabbix
         group=zabbix
         mode=0755
-  notify: "{{ zabbix_agent }} restarted"
+  notify: "{{ zabbix_agent_service }} restarted"
   sudo: yes
 
