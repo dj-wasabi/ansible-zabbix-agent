@@ -19,7 +19,7 @@
             owner=zabbix 
             group=zabbix
             mode=0755 
-  notify: "{{ zabbix_agent_service }} restarted"
+  notify: restart zabbix-agent
   sudo: yes
 
 - name: "Create include dir zabbix-agent"

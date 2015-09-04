@@ -165,7 +165,7 @@ You can install so-called userparameter files by adding the following into your 
         owner=zabbix
         group=zabbix
         mode=0755
-  notify: "{{ zabbix_agent_service }} restarted"
+  notify: restart zabbix-agent
 ```
 
 Example of the "sample.conf" file:
