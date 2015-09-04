@@ -2,7 +2,9 @@
 # defaults file for zabbix-agent
 
 zabbix_version: 2.4
-zabbix_repo: True
+zabbix_repo: epel
+zabbix_agent_package: zabbix-agent
+zabbix_agent_service: zabbix-agent
 agent_server:
 agent_serveractive:
 
