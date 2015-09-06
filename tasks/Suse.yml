@@ -3,15 +3,15 @@
 
 - name: "Suse | Set some facts"
   set_fact: 
-      zabbix_agent: "zabbix-agentd"
+      zabbix_agent_service: "zabbix-agentd"
 
 - name: "Suse | Install basic repo file"
   zypper_repository: repo="http://download.opensuse.org/repositories/server:monitoring/openSUSE_{{ ansible_distribution_version }}/server:monitoring.repo"
-  when: zabbix_repo == True
+  when: zabbix_repo == "zabbix"
   sudo: yes
 
 - name: "Suse | Install zabbix-agent"
-  zypper: name=zabbix-agent
+  zypper: name={{ zabbix_agent_package }}
           state=present
           disable_gpg_check=yes
   sudo: yes

@@ -1,49 +1,45 @@
 ---
 # Tasks specific for Debian/Ubuntu Systems
 
-- name: "Debian | Set some facts"
-  set_fact: 
-      zabbix_agent: zabbix-agent
-
 - name: "Debian | Installing deb repository Debian"
   apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main" 
                   state=present
-  when: ansible_distribution == "Debian" and zabbix_repo == True
+  when: ansible_distribution == "Debian" and zabbix_repo == "zabbix"
   sudo: yes
 
 - name: "Debian | Installing deb-src repository Debian"
   apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main" 
                   state=present
-  when: ansible_distribution == "Debian" and zabbix_repo == True
+  when: ansible_distribution == "Debian" and zabbix_repo == "zabbix"
   sudo: yes
 
 - name: "Debian | Installing deb repository Ubuntu"
   apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main" 
                   state=present
-  when: ansible_distribution == "Ubuntu" and zabbix_repo == True
+  when: ansible_distribution == "Ubuntu" and zabbix_repo == "zabbix"
   sudo: yes
 
 - name: "Debian | Installing deb-src repository Ubuntu"
   apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
                   state=present
-  when: ansible_distribution == "Ubuntu" and zabbix_repo == True
+  when: ansible_distribution == "Ubuntu" and zabbix_repo == "zabbix"
   sudo: yes
 
 - name: "Debian | Install gpg key"
   apt_key: id=79EA5ED4
            url=http://repo.zabbix.com/zabbix-official-repo.key
-  when: zabbix_repo == True
+  when: zabbix_repo == "zabbix"
   sudo: yes
 
 - name: "Debian | Installing zabbix-agent"
-  apt: pkg=zabbix-agent
+  apt: pkg={{ zabbix_agent_package }}
        state=present 
        update_cache=yes
        cache_valid_time=3600
   sudo: yes
 
 - name: "Debian | Enable the service"
-  service: name={{ zabbix_agent }}
+  service: name={{ zabbix_agent_service }}
            enabled=yes
   sudo: yes
 
