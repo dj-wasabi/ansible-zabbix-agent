@@ -69,7 +69,7 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
   * _zabbix_ install agent from Zabbix repo
   * _other_ install agent from pre-existing or other repo
 
-* `agent_listeninterface`: On which interface zabbix-agent is listening. Default: eth0
+* `agent_listeninterface`: Interface zabbix-agent listens on. Leave blank for all.
 
 
 ### Zabbix API variables
