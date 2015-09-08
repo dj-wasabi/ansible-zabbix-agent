@@ -31,7 +31,7 @@ agent_sourceip:
 agent_enableremotecommands: 0
 agent_logremotecommands: 0
 agent_listenport: 10050
-agent_listeninterface: eth0
+agent_listeninterface:
 agent_listenip: 
 agent_startagents: 3
 agent_hostname: 

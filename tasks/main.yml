@@ -13,6 +13,26 @@
   include: "Suse.yml"
   when: ansible_os_family == "Suse"
 
+- name: "Fail invalid specified agent_listeninterface"
+  fail:
+    msg: "The specified network interface does not exist"
+  when: "agent_listeninterface and (agent_listeninterface not in ansible_interfaces)"
+
+- name: "Get IP of agent_listeninterface when no agent_listenip specified"
+  set_fact:
+    agent_listenip: "{{ hostvars[inventory_hostname]['ansible_' + agent_listeninterface]['ipv4'].address | default('0.0.0.0') }}"
+  when: "agent_listeninterface and not agent_listenip"
+
+- name: "Default agent_listenip to all when not specified"
+  set_fact:
+    agent_listenip: '0.0.0.0'
+  when: "not agent_listenip"
+
+- name: "Fail invalid specified agent_listenip"
+  fail:
+    msg: "The agent_listenip does not exist"
+  when: "agent_listenip != '0.0.0.0' and agent_listenip not in ansible_all_ipv4_addresses"
+
 - name: "Configure zabbix-agent"
   template: src=zabbix_agentd.conf.j2 
             dest=/etc/zabbix/zabbix_agentd.conf 
