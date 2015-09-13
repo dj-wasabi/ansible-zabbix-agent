@@ -64,9 +64,12 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 * `zabbix_version`: This is the version of zabbix. Default it is 2.4, but can be overriden to 2.2 or 2.0.
 
-* `zabbix_repo`: When you already have an repository with the zabbix components, you can set it to False.
+* `zabbix_repo`: Default: _epel_
+  * _epel_ (default) install agent from EPEL repo
+  * _zabbix_ install agent from Zabbix repo
+  * _other_ install agent from pre-existing or other repo
 
-* `agent_listeninterface`: On which interface zabbix-agent is listening. Default: eth0
+* `agent_listeninterface`: Interface zabbix-agent listens on. Leave blank for all.
 
 
 ### Zabbix API variables
@@ -162,7 +165,7 @@ You can install so-called userparameter files by adding the following into your 
         owner=zabbix
         group=zabbix
         mode=0755
-  notify: "{{ zabbix_agent }} restarted"
+  notify: restart zabbix-agent
 ```
 
 Example of the "sample.conf" file:

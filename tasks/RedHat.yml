@@ -5,22 +5,31 @@
   set_fact:
       zabbix_agent: zabbix-agent
 
+- name: "RedHat | Set short version name"
+  set_fact:
+      zabbix_short_version: "{{ zabbix_version | regex_replace('\\.', '') }}"
+
+- name: "RedHat | Use EPEL package name"
+  set_fact:
+      zabbix_agent_package: "zabbix{{ zabbix_short_version }}-agent"
+  when: zabbix_repo == "epel"
+
 - name: "RedHat | Install basic repo file"
   template: src=rhel.repo.j2
             dest=/etc/yum.repos.d/zabbix.repo
             owner=root
             group=root
             mode=0644
-  when: zabbix_repo == True
+  when: zabbix_repo == "zabbix"
   sudo: yes
 
 - name: "RedHat | Installing zabbix-agent"
-  yum:  pkg=zabbix-agent
+  yum:  pkg={{ zabbix_agent_package }}
         state=present
   sudo: yes
 
 - name: "RedHat | Enable the service"
-  service: name={{ zabbix_agent }}
+  service: name={{ zabbix_agent_service }}
            enabled=yes
   sudo: yes
 

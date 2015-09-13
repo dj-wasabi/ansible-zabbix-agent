@@ -2,7 +2,9 @@
 # defaults file for zabbix-agent
 
 zabbix_version: 2.4
-zabbix_repo: True
+zabbix_repo: epel
+zabbix_agent_package: zabbix-agent
+zabbix_agent_service: zabbix-agent
 agent_server:
 agent_serveractive:
 
@@ -29,8 +31,8 @@ agent_sourceip:
 agent_enableremotecommands: 0
 agent_logremotecommands: 0
 agent_listenport: 10050
-agent_listeninterface: eth0
-agent_listenip:
+agent_listeninterface:
+agent_listenip: 
 agent_startagents: 3
 agent_hostname:
 agent_hostnameitem:
