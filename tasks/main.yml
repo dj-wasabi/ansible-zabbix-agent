@@ -63,6 +63,13 @@
     - config
     - include
 
+- name: "Make sure the zabbix-agent service is running"
+  service: name=zabbix-agent
+           state=started
+  tags:
+    - init
+    - service
+
 - name: "Create hostgroups"
   local_action:
     module: zabbix_group
