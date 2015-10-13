@@ -17,21 +17,29 @@
   fail:
     msg: "The specified network interface does not exist"
   when: "agent_listeninterface and (agent_listeninterface not in ansible_interfaces)"
+  tags:
+    - config
 
 - name: "Get IP of agent_listeninterface when no agent_listenip specified"
   set_fact:
     agent_listenip: "{{ hostvars[inventory_hostname]['ansible_' + agent_listeninterface]['ipv4'].address | default('0.0.0.0') }}"
   when: "agent_listeninterface and not agent_listenip"
+  tags:
+    - config
 
 - name: "Default agent_listenip to all when not specified"
   set_fact:
     agent_listenip: '0.0.0.0'
   when: "not agent_listenip"
+  tags:
+    - config
 
 - name: "Fail invalid specified agent_listenip"
   fail:
     msg: "The agent_listenip does not exist"
   when: "agent_listenip != '0.0.0.0' and agent_listenip not in ansible_all_ipv4_addresses"
+  tags:
+    - config
 
 - name: "Configure zabbix-agent"
   template: src=zabbix_agentd.conf.j2
@@ -41,6 +49,9 @@
             mode=0755
   notify: restart zabbix-agent
   sudo: yes
+  tags:
+    - config
+    - init
 
 - name: "Create include dir zabbix-agent"
   file: path={{ agent_include }}
@@ -48,6 +59,9 @@
         group=zabbix
         state=directory
   sudo: yes
+  tags:
+    - config
+    - include
 
 - name: "Create hostgroups"
   local_action:
@@ -58,6 +72,8 @@
     host_groups: "{{ zabbix_host_groups }}"
     state: "{{ zabbix_create_hostgroup }}"
   when: zabbix_api_use == True
+  tags:
+    - api
 
 - name: "Create a new host or update an existing host's info"
   local_action:
@@ -78,6 +94,8 @@
         dns: "{{ ansible_fqdn }}"
         port: "{{ agent_listenport }}"
   when: zabbix_api_use == True
+  tags:
+    - api
 
 - name: "Updating host configuration with macros"
   local_action:
@@ -90,4 +108,6 @@
     macro_value: "{{ item.macro_value }}"
   with_items: zabbix_macros
   when: zabbix_api_use == True and zabbix_macros is defined and item.macro_key is defined
+  tags:
+    - api
 
