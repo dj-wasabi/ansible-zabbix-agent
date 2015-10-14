@@ -5,6 +5,7 @@
   set_fact:
       zabbix_agent: zabbix-agent
   tags:
+    - zabbix-agent
     - init
 
 - name: "Debian | Installing deb repository Debian"
@@ -13,6 +14,7 @@
   when: ansible_distribution == "Debian" and zabbix_repo == "zabbix"
   sudo: yes
   tags:
+    - zabbix-agent
     - init
 
 - name: "Debian | Installing deb-src repository Debian"
@@ -21,6 +23,7 @@
   when: ansible_distribution == "Debian" and zabbix_repo == "zabbix"
   sudo: yes
   tags:
+    - zabbix-agent
     - init
 
 - name: "Debian | Installing deb repository Ubuntu"
@@ -29,6 +32,7 @@
   when: ansible_distribution == "Ubuntu" and zabbix_repo == "zabbix"
   sudo: yes
   tags:
+    - zabbix-agent
     - init
 
 - name: "Debian | Installing deb-src repository Ubuntu"
@@ -37,6 +41,7 @@
   when: ansible_distribution == "Ubuntu" and zabbix_repo == "zabbix"
   sudo: yes
   tags:
+    - zabbix-agent
     - init
 
 - name: "Debian | Install gpg key"
@@ -45,6 +50,7 @@
   when: zabbix_repo == "zabbix"
   sudo: yes
   tags:
+    - zabbix-agent
     - init
 
 - name: "Debian | Installing zabbix-agent"
@@ -54,6 +60,7 @@
        cache_valid_time=3600
   sudo: yes
   tags:
+    - zabbix-agent
     - init
 
 - name: "Debian | Enable the service"
@@ -61,6 +68,6 @@
            enabled=yes
   sudo: yes
   tags:
+    - zabbix-agent
     - init
     - service
-

@@ -4,20 +4,36 @@
 - name: "Install the correct repository"
   include: "RedHat.yml"
   when: ansible_os_family == "RedHat"
+  tags:
+    - zabbix-agent
+    - init
+    - config
+    - service
 
 - name: "Install the correct repository"
   include: "Debian.yml"
   when: ansible_os_family == "Debian"
+  tags:
+    - zabbix-agent
+    - init
+    - config
+    - service
 
 - name: "Install the correct repository"
   include: "Suse.yml"
   when: ansible_os_family == "Suse"
+  tags:
+    - zabbix-agent
+    - init
+    - config
+    - service
 
 - name: "Fail invalid specified agent_listeninterface"
   fail:
     msg: "The specified network interface does not exist"
   when: "agent_listeninterface and (agent_listeninterface not in ansible_interfaces)"
   tags:
+    - zabbix-agent
     - config
 
 - name: "Get IP of agent_listeninterface when no agent_listenip specified"
@@ -25,6 +41,7 @@
     agent_listenip: "{{ hostvars[inventory_hostname]['ansible_' + agent_listeninterface]['ipv4'].address | default('0.0.0.0') }}"
   when: "agent_listeninterface and not agent_listenip"
   tags:
+    - zabbix-agent
     - config
 
 - name: "Default agent_listenip to all when not specified"
@@ -32,6 +49,7 @@
     agent_listenip: '0.0.0.0'
   when: "not agent_listenip"
   tags:
+    - zabbix-agent
     - config
 
 - name: "Fail invalid specified agent_listenip"
@@ -39,6 +57,7 @@
     msg: "The agent_listenip does not exist"
   when: "agent_listenip != '0.0.0.0' and agent_listenip not in ansible_all_ipv4_addresses"
   tags:
+    - zabbix-agent
     - config
 
 - name: "Configure zabbix-agent"
@@ -50,6 +69,7 @@
   notify: restart zabbix-agent
   sudo: yes
   tags:
+    - zabbix-agent
     - config
     - init
 

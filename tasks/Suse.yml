@@ -7,6 +7,7 @@
   set_fact: 
       zabbix_agent_service: "zabbix-agentd"
   tags:
+    - zabbix-agent
     - init
 
 - name: "Suse | Install basic repo file"
@@ -14,6 +15,7 @@
   when: zabbix_repo == "zabbix"
   sudo: yes
   tags:
+    - zabbix-agent
     - init
 
 - name: "Suse | Install zabbix-agent"
@@ -22,5 +24,6 @@
           disable_gpg_check=yes
   sudo: yes
   tags:
+    - zabbix-agent
     - init
 

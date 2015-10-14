@@ -5,12 +5,14 @@
   set_fact:
       zabbix_agent: zabbix-agent
   tags:
+    - zabbix-agent
     - init
 
 - name: "RedHat | Set short version name"
   set_fact:
       zabbix_short_version: "{{ zabbix_version | regex_replace('\\.', '') }}"
   tags:
+    - zabbix-agent
     - init
 
 - name: "RedHat | Use EPEL package name"
@@ -18,6 +20,7 @@
       zabbix_agent_package: "zabbix{{ zabbix_short_version }}-agent"
   when: zabbix_repo == "epel"
   tags:
+    - zabbix-agent
     - init
 
 - name: "RedHat | Install basic repo file"
@@ -29,6 +32,7 @@
   when: zabbix_repo == "zabbix"
   sudo: yes
   tags:
+    - zabbix-agent
     - init
     - config
 
@@ -38,12 +42,14 @@
   sudo: yes
   tags:
     - init
+    - zabbix-agent
 
 - name: "RedHat | Enable the service"
   service: name={{ zabbix_agent_service }}
            enabled=yes
   sudo: yes
   tags:
+    - zabbix-agent
     - init
     - service
 
