@@ -24,68 +24,73 @@ DOCUMENTATION = '''
 module: zabbix_host
 short_description: Zabbix host creates/updates/deletes
 description:
-   - When the host does not exists, a new host will be created, added to any host groups and linked to any templates.
-   - When the host already exists, the host group membership will be updated, along with the template links and interfaces.
-   - Delete a host from Zabbix if the host exists.
-version_added: "1.9"
-author: Tony Minfei Ding, Harrison Gu
+   - This module allows you to create, modify and delete Zabbix host entries and associated group and template data.
+version_added: "2.0"
+author: 
+    - "(@cove)"
+    - "Tony Minfei Ding"
+    - "Harrison Gu (@harrisongu)"
 requirements:
-    - zabbix-api python module
+    - "python >= 2.6"
+    - zabbix-api
 options:
     server_url:
         description:
             - Url of Zabbix server, with protocol (http or https).
-              C(url) is an alias for C(server_url).
         required: true
-        default: null
         aliases: [ "url" ]
     login_user:
         description:
-            - Zabbix user name.
+            - Zabbix user name, used to authenticate against the server.
         required: true
-        default: null
     login_password:
         description:
             - Zabbix user password.
         required: true
-        default: null
     host_name:
         description:
-            - Technical name of the host.
-            - If the host has already been added, the host name won't be updated.
+            - Name of the host in Zabbix.
+            - host_name is the unique identifier used and cannot be updated using this module.
         required: true
     host_groups:
         description:
-            - List of host groups to add the host to.
+            - List of host groups the host is part of.
         required: false
     link_templates:
         description:
-            - List of templates to be linked to the host.
+            - List of templates linked to the host.
         required: false
         default: None
     status:
         description:
-            - Status and function of the host.
-            - Possible values are: enabled and disabled
+            - Monitoring status of the host.
         required: false
+        choices: ['enabled', 'disabled']
         default: "enabled"
     state:
         description:
-            - create/update or delete host.
-            - Possible values are: present and absent. If the host already exists, and the state is "present", just to update the host.
+            - State of the host.
+            - On C(present), it will create if host does not exist or update the host if the associated data is different.
+            - On C(absent) will remove a host if it exists.
         required: false
+        choices: ['present', 'absent']
         default: "present"
     timeout:
         description:
-            - The timeout of API request(seconds).
+            - The timeout of API request (seconds).
         default: 10
+    proxy:
+        description:
+            - The name of the Zabbix Proxy to be used
+        default: None
     interfaces:
         description:
-            - List of interfaces to be created for the host (see example).
-            - Available values are: dns, ip, main, port, type and useip.
-            - Please review the interface documentation for more information on the supported properties:
-            - https://www.zabbix.com/documentation/2.0/manual/appendix/api/hostinterface/definitions#host_interface
+            - List of interfaces to be created for the host (see example below).
+            - 'Available values are: dns, ip, main, port, type and useip.'
+            - Please review the interface documentation for more information on the supported properties
+            - 'https://www.zabbix.com/documentation/2.0/manual/appendix/api/hostinterface/definitions#host_interface'
         required: false
+        default: []
 '''
 
 EXAMPLES = '''
@@ -117,6 +122,7 @@ EXAMPLES = '''
         ip: 10.xx.xx.xx
         dns: ""
         port: 12345
+    proxy: a.zabbix.proxy
 '''
 
 import logging
@@ -173,21 +179,25 @@ class Host(object):
                 template_ids.append(template_id)
         return template_ids
 
-    def add_host(self, host_name, group_ids, status, interfaces):
+    def add_host(self, host_name, group_ids, status, interfaces, proxy_id):
         try:
             if self._module.check_mode:
                 self._module.exit_json(changed=True)
-            host_list = self._zapi.host.create({'host': host_name, 'interfaces': interfaces, 'groups': group_ids, 'status': status})
+            parameters = {'host': host_name, 'interfaces': interfaces, 'groups': group_ids, 'status': status}
+            if proxy_id:
+                parameters['proxy_hostid'] = proxy_id
+            host_list = self._zapi.host.create(parameters)
             if len(host_list) >= 1:
                 return host_list['hostids'][0]
         except Exception, e:
             self._module.fail_json(msg="Failed to create host %s: %s" % (host_name, e))
 
-    def update_host(self, host_name, group_ids, status, host_id, interfaces, exist_interface_list):
+    def update_host(self, host_name, group_ids, status, host_id, interfaces, exist_interface_list, proxy_id):
         try:
             if self._module.check_mode:
                 self._module.exit_json(changed=True)
-            self._zapi.host.update({'hostid': host_id, 'groups': group_ids, 'status': status})
+            parameters = {'hostid': host_id, 'groups': group_ids, 'status': status, 'proxy_hostid': proxy_id}
+            self._zapi.host.update(parameters)
             interface_list_copy = exist_interface_list
             if interfaces:
                 for interface in interfaces:
@@ -232,6 +242,14 @@ class Host(object):
             self._module.fail_json(msg="Host not found: %s" % host_name)
         else:
             return host_list[0]
+
+    # get proxyid by proxy name
+    def get_proxyid_by_proxy_name(self, proxy_name):
+        proxy_list = self._zapi.proxy.get({'output': 'extend', 'filter': {'host': [proxy_name]}})
+        if len(proxy_list) < 1:
+            self._module.fail_json(msg="Proxy not found: %s" % proxy_name)
+        else:
+            return proxy_list[0]['proxyid']
 
     # get group ids by group names
     def get_group_ids_by_group_names(self, group_names):
@@ -293,7 +311,7 @@ class Host(object):
 
     # check all the properties before link or clear template
     def check_all_properties(self, host_id, host_groups, status, interfaces, template_ids,
-                             exist_interfaces, host):
+                             exist_interfaces, host, proxy_id):
         # get the existing host's groups
         exist_host_groups = self.get_host_groups_by_host_id(host_id)
         if set(host_groups) != set(exist_host_groups):
@@ -311,6 +329,9 @@ class Host(object):
         # get the existing templates
         exist_template_ids = self.get_host_templates_by_host_id(host_id)
         if set(list(template_ids)) != set(exist_template_ids):
+            return True
+
+        if host['proxy_hostid'] != proxy_id:
             return True
 
         return False
@@ -339,16 +360,17 @@ class Host(object):
 def main():
     module = AnsibleModule(
         argument_spec=dict(
-            server_url=dict(required=True, default=None, aliases=['url']),
+            server_url=dict(required=True, aliases=['url']),
             login_user=dict(required=True),
-            login_password=dict(required=True),
+            login_password=dict(required=True, no_log=True),
             host_name=dict(required=True),
             host_groups=dict(required=False),
             link_templates=dict(required=False),
-            status=dict(default="enabled"),
-            state=dict(default="present"),
-            timeout=dict(default=10),
-            interfaces=dict(required=False)
+            status=dict(default="enabled", choices=['enabled', 'disabled']),
+            state=dict(default="present", choices=['present', 'absent']),
+            timeout=dict(type='int', default=10),
+            interfaces=dict(required=False),
+            proxy=dict(required=False)
         ),
         supports_check_mode=True
     )
@@ -366,6 +388,7 @@ def main():
     state = module.params['state']
     timeout = module.params['timeout']
     interfaces = module.params['interfaces']
+    proxy = module.params['proxy']
 
     # convert enabled to 0; disabled to 1
     status = 1 if status == "disabled" else 0
@@ -395,6 +418,11 @@ def main():
             if interface['type'] == 1:
                 ip = interface['ip']
 
+    proxy_id = "0"
+
+    if proxy:
+        proxy_id = host.get_proxyid_by_proxy_name(proxy)
+
     # check if host exist
     is_host_exist = host.is_host_exist(host_name)
 
@@ -420,10 +448,10 @@ def main():
 
             if len(exist_interfaces) > interfaces_len:
                 if host.check_all_properties(host_id, host_groups, status, interfaces, template_ids,
-                                             exist_interfaces, zabbix_host_obj):
+                                             exist_interfaces, zabbix_host_obj, proxy_id):
                     host.link_or_clear_template(host_id, template_ids)
                     host.update_host(host_name, group_ids, status, host_id,
-                                     interfaces, exist_interfaces)
+                                     interfaces, exist_interfaces, proxy_id)
                     module.exit_json(changed=True,
                                      result="Successfully update host %s (%s) and linked with template '%s'"
                                      % (host_name, ip, link_templates))
@@ -431,8 +459,8 @@ def main():
                     module.exit_json(changed=False)
             else:
                 if host.check_all_properties(host_id, host_groups, status, interfaces, template_ids,
-                                             exist_interfaces_copy, zabbix_host_obj):
-                    host.update_host(host_name, group_ids, status, host_id, interfaces, exist_interfaces)
+                                             exist_interfaces_copy, zabbix_host_obj, proxy_id):
+                    host.update_host(host_name, group_ids, status, host_id, interfaces, exist_interfaces, proxy_id)
                     host.link_or_clear_template(host_id, template_ids)
                     module.exit_json(changed=True,
                                      result="Successfully update host %s (%s) and linked with template '%s'"
@@ -447,11 +475,10 @@ def main():
             module.fail_json(msg="Specify at least one interface for creating host '%s'." % host_name)
 
         # create host
-        host_id = host.add_host(host_name, group_ids, status, interfaces)
+        host_id = host.add_host(host_name, group_ids, status, interfaces, proxy_id)
         host.link_or_clear_template(host_id, template_ids)
         module.exit_json(changed=True, result="Successfully added host %s (%s) and linked with template '%s'" % (
             host_name, ip, link_templates))
 
 from ansible.module_utils.basic import *
 main()
-

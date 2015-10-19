@@ -18,7 +18,7 @@ zabbix_create_host: present       # or absent
 zabbix_host_status: enabled       # or disabled
 zabbix_useuip: 1
 zabbix_host_groups:
-  - Linux servers
+  - Linux Servers
 zabbix_link_templates:
   - Template OS Linux
 
