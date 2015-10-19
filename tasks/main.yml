@@ -86,6 +86,7 @@
 - name: "Make sure the zabbix-agent service is running"
   service: name=zabbix-agent
            state=started
+  sudo: yes
   tags:
     - init
     - service
@@ -96,9 +97,9 @@
     server_url: "{{ zabbix_url }}"
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
-    host_groups: "{{ zabbix_host_groups }}"
+    host_group: zabbix_host_groups
     state: "{{ zabbix_create_hostgroup }}"
-  when: zabbix_api_use == True
+  when: zabbix_api_use
   tags:
     - api
 
@@ -109,18 +110,18 @@
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
     host_name: "{{ ansible_fqdn }}"
-    host_groups: "{{ zabbix_host_groups }}"
-    link_templates: "{{  zabbix_link_templates }}"
+    host_groups: "{{ zabbix_link_templates }}"
+    link_templates: "{{ zabbix_host_groups }}"
     status: "{{ zabbix_host_status }}"
     state: "{{ zabbix_create_host }}"
     interfaces:
       - type: 1
         main: 1
         useip: "{{ zabbix_useuip }}"
-        ip: "{{ hostvars[inventory_hostname]['ansible_'+ agent_listeninterface]['ipv4'].address }}"
+        ip: "{{ hostvars[inventory_hostname]['ansible_default_ipv4'].address }}"
         dns: "{{ ansible_fqdn }}"
         port: "{{ agent_listenport }}"
-  when: zabbix_api_use == True
+  when: zabbix_api_use
   tags:
     - api
 
@@ -134,7 +135,7 @@
     macro_name: "{{ item.macro_key }}"
     macro_value: "{{ item.macro_value }}"
   with_items: zabbix_macros
-  when: zabbix_api_use == True and zabbix_macros is defined and item.macro_key is defined
+  when: zabbix_api_use and zabbix_macros is defined and item.macro_key is defined
   tags:
     - api
 
