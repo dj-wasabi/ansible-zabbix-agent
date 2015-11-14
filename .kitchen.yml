@@ -7,7 +7,8 @@ provisioner:
   name: ansible_playbook
   ansible_yum_repo: "http://mirror.logol.ru/epel/6/x86_64/epel-release-6-8.noarch.rpm"
   hosts: localhost
-#  requirements_path: requirements.yml
+  require_chef_for_busser: false
+  require_ruby_for_busser: true
 
 platforms:
   - name: centos-6.6
@@ -17,5 +18,3 @@ verifier:
 
 suites:
   - name: default
-    run_list:
-    attributes:
