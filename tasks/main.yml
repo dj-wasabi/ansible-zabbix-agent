@@ -44,6 +44,7 @@
   tags:
     - zabbix-agent
     - config
+    - api
 
 - name: "Default agent_listenip to all when not specified"
   set_fact:
