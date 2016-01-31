@@ -11,3 +11,5 @@ install:
 script:
   - ansible-playbook test/integration/default.yml --syntax-check
   - ansible-playbook test/integration/default.yml --connection=local --sudo
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
