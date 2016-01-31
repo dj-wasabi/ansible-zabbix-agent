@@ -1,0 +1,13 @@
+---
+language: python
+python: "2.7"
+before_install:
+ - sudo apt-get update -qq
+ - sudo apt-get install -qq python-apt python-pycurl
+install:
+  - pip install ansible==1.9.4
+  - echo -e 'localhost  ansible_connection=local' > test/inventory
+  - echo -e '[defaults]\nroles_path = ../\nhostfile = ./test/inventory' > ansible.cfg
+script:
+  - ansible-playbook test/integration/default.yml --syntax-check
+  - ansible-playbook test/integration/default.yml --connection=local --sudo
