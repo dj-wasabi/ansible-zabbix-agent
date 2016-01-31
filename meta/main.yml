@@ -29,5 +29,9 @@ galaxy_info:
     - 13.2
   categories:
   - monitoring
+  galaxy_tags:
+  - zabbix
+  - zabbix-agent
+  - monitoring
 dependencies: []
 
