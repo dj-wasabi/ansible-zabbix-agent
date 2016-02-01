@@ -20,7 +20,7 @@
 
 - name: "Suse | Install zabbix-agent"
   zypper: name={{ zabbix_agent_package }}
-          state=present
+          state={{ zabbix_agent_package_state }}
           disable_gpg_check=yes
   sudo: yes
   tags:
