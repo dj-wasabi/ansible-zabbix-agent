@@ -1,13 +1,6 @@
 ---
 # Tasks specific for Debian/Ubuntu Systems
 
-- name: "Debian | Set some facts"
-  set_fact:
-      zabbix_agent: zabbix-agent
-  tags:
-    - zabbix-agent
-    - init
-
 - name: "Debian | Installing deb repository Debian"
   apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main"
                   state=present

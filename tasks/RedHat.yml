@@ -1,13 +1,6 @@
 ---
 # Tasks specific for RedHat systems
 
-- name: "RedHat | Set some facts"
-  set_fact:
-      zabbix_agent: zabbix-agent
-  tags:
-    - zabbix-agent
-    - init
-
 - name: "RedHat | Set short version name"
   set_fact:
       zabbix_short_version: "{{ zabbix_version | regex_replace('\\.', '') }}"

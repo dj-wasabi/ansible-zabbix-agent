@@ -1,6 +1,9 @@
 ---
 # tasks file for wdijkerman.zabbix
 
+- name: "Include OS-specific variables"
+  include_vars: "{{ ansible_os_family }}.yml"
+
 - name: "Install the correct repository"
   include: "RedHat.yml"
   when: ansible_os_family == "RedHat"
