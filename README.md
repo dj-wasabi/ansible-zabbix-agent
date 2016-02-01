@@ -76,6 +76,8 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 * `agent_listeninterface`: Interface zabbix-agent listens on. Leave blank for all.
 
+* `zabbix_agent_package_state`: If Zabbix-agent needs to be present or latest.
+
 
 ### Zabbix API variables
 These variables needs to be changed/overriden when you want to make use of the zabbix-api for automatically creating and or updating hosts.
