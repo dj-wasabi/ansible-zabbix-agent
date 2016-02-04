@@ -4,6 +4,11 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+0.5.0   (2016-02-??)
+
+  * Moved "set_facts" to var files.
+  * Added basic travis-si test.
+
 0.4.0   (2016-01-31)
 
   * zabbix_host_groups not working as expected #4 (By pull request: Pion (Thanks!))
@@ -15,7 +20,6 @@ Version (Release date)
   * Fixed kitchen test setup
   * Removed zabbix_group (is already in Ansible), updated zabbix_host
   * Added tag: zabbix-agent
-
 
 0.3.0   (2015-08-25)
 
