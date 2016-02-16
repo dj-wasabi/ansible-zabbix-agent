@@ -4,8 +4,9 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
-0.5.0   (2016-02-??)
+0.5.0   (2016-02-16)
 
+  * Zabbix 3.0
   * Moved "set_facts" to var files.
   * Added basic travis-si test.
 
