@@ -46,6 +46,41 @@ This role will work on the following operating systems:
 So, you'll need one of those operating systems.. :-)
 Please sent Pull Requests or suggestions when you want to use this role for other Operating systems.
 
+###Zabbix Versions
+
+See the following list of supported Operating systems with the Zabbix releases:
+
+Zabbix 3.0:
+
+  * CentOS 7.x
+  * Amazon 7.x
+  * RedHat 7.x
+  * OracleLinux 7.x
+  * Scientific Linux 7.x
+  * Ubuntu 14.04
+  * Debian 8
+
+Zabbix 2.4:
+
+  * CentOS 6.x, 7.x
+  * Amazon 6.x, 7.x
+  * RedHat 6.x, 7.x
+  * OracleLinux 6.x, 7.x
+  * Scientific Linux 6.x, 7.x
+  * Ubuntu 12.04 14.04
+  * Debian 7
+
+Zabbix 2.2:
+
+  * CentOS 5.x, 6.x
+  * RedHat 5.x, 6.x
+  * OracleLinux 5.x, 6.x
+  * Scientific Linux 5.x, 6.x
+  * Ubuntu 12.04
+  * Debian 7
+  * xenserver 6
+
+
 ### Zabbix API
 When you want to automatically create the hosts in the webinterface, you'll need on your own machine the zabbix-api package. 
 
