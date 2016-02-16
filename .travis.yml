@@ -9,7 +9,7 @@ install:
   - echo -e 'localhost  ansible_connection=local' > test/inventory
   - echo -e '[defaults]\nroles_path = ../\nhostfile = ./test/inventory' > ansible.cfg
 script:
-  - ansible-playbook test/integration/default.yml --syntax-check
-  - ansible-playbook test/integration/default.yml --connection=local --sudo
+  - ansible-playbook test/integration/travis.yml --syntax-check
+  - ansible-playbook test/integration/travis.yml --connection=local --sudo
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

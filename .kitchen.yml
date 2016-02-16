@@ -1,17 +1,19 @@
 ---
 driver:
   name: docker
-  provision_command: sed -i '/tsflags=nodocs/d' /etc/yum.conf
 
 provisioner:
   name: ansible_playbook
-  ansible_yum_repo: "http://mirror.logol.ru/epel/6/x86_64/epel-release-6-8.noarch.rpm"
+  ansible_yum_repo: "https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm"
   hosts: localhost
   require_chef_for_busser: false
   require_ruby_for_busser: true
 
 platforms:
-  - name: centos-6.6
+  - name: centos-7.2
+    driver_config:
+      privileged: true
+      run_command: /usr/sbin/init
 
 verifier:
   ruby_bindir: '/usr/bin' 

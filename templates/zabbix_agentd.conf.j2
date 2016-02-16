@@ -205,7 +205,7 @@ UnsafeUserParameters={{ agent_unsafeuserparameters }}
 # disabled. an configuration file should be placed on directory: {{ agent_include }}
 
 ####### LOADABLE MODULES #######
-{% if zabbix_version == '2.2' or zabbix_version == '2.4' %}
+{% if zabbix_version == '2.2' or zabbix_version == '2.4' or zabbix_version == '3.0' %}
 ### Option: LoadModulePath
 #       Full path to location of agent modules.
 #       Default depends on compilation options.
@@ -221,4 +221,117 @@ LoadModulePath={{ agent_loadmodulepath }}
 #
 {% if agent_loadmodule is defined and agent_loadmodule %}
 LoadModule={{ agent_loadmodule }}
+{% endif %}
+
+{% if zabbix_version == '3.0' %}
+####### TLS-RELATED PARAMETERS #######
+
+### Option: TLSConnect
+#       How the agent should connect to server or proxy. Used for active checks.
+#       Only one value can be specified:
+#               unencrypted - connect without encryption
+#               psk         - connect using TLS and a pre-shared key
+#               cert        - connect using TLS and a certificate
+#
+# Mandatory: yes, if TLS certificate or PSK parameters are defined (even for 'unencrypted' connection)
+# Default:
+# TLSConnect=unencrypted
+{% if agent_tlsconnect is defined and agent_tlsconnect %}
+TLSConnect={{ agent_tlsconnect }}
+{% endif %}
+
+### Option: TLSAccept
+#       What incoming connections to accept.
+#       Multiple values can be specified, separated by comma:
+#               unencrypted - accept connections without encryption
+#               psk         - accept connections secured with TLS and a pre-shared key
+#               cert        - accept connections secured with TLS and a certificate
+#
+# Mandatory: yes, if TLS certificate or PSK parameters are defined (even for 'unencrypted' connection)
+# Default:
+# TLSAccept=unencrypted
+{% if agent_tlsaccept is defined and agent_tlsaccept %}
+TLSAccept={{ agent_tlsaccept }}
+{% endif %}
+
+### Option: TLSCAFile
+#       Full pathname of a file containing the top-level CA(s) certificates for
+#       peer certificate verification.
+#
+# Mandatory: no
+# Default:
+# TLSCAFile=
+{% if agent_tlscafile is defined and agent_tlscafile %}
+TLSCAFile={{ agent_tlscafile }}
+{% endif %}
+
+### Option: TLSCRLFile
+#       Full pathname of a file containing revoked certificates.
+#
+# Mandatory: no
+# Default:
+# TLSCRLFile=
+{% if agent_tlscrlfile is defined and agent_tlscrlfile %}
+TLSCRLFile={{ agent_tlscrlfile }}
+{% endif %}
+
+### Option: TLSServerCertIssuer
+#      Allowed server certificate issuer.
+#
+# Mandatory: no
+# Default:
+# TLSServerCertIssuer=
+{% if agent_tlsservercertissuer is defined and agent_tlsservercertissuer %}
+TLSServerCertIssuer={{ agent_tlsservercertissuer }}
+{% endif %}
+
+### Option: TLSServerCertSubject
+#      Allowed server certificate subject.
+#
+# Mandatory: no
+# Default:
+# TLSServerCertSubject=
+{% if agent_tlsservercertsubject is defined and agent_tlsservercertsubject %}
+TLSServerCertSubject={{ agent_tlsservercertsubject }}
+{% endif %}
+
+### Option: TLSCertFile
+#       Full pathname of a file containing the agent certificate or certificate chain.
+#
+# Mandatory: no
+# Default:
+# TLSCertFile=
+{% if agent_tlscertfile is defined and agent_tlscertfile %}
+TLSCertFile={{ agent_tlscertfile }}
+{% endif %}
+
+### Option: TLSKeyFile
+#       Full pathname of a file containing the agent private key.
+#
+# Mandatory: no
+# Default:
+# TLSKeyFile=
+{% if agent_tlskeyfile is defined and agent_tlskeyfile %}
+TLSKeyFile={{ agent_tlskeyfile }}
+{% endif %}
+
+### Option: TLSPSKIdentity
+#       Unique, case sensitive string used to identify the pre-shared key.
+#
+# Mandatory: no
+# Default:
+# TLSPSKIdentity=
+{% if agent_tlspskidentity is defined and agent_tlspskidentity %}
+TLSPSKIdentity={{ agent_tlspskidentity }}
+{% endif %}
+
+### Option: TLSPSKFile
+#       Full pathname of a file containing the pre-shared key.
+#
+# Mandatory: no
+# Default:
+# TLSPSKFile=
+{% if agent_tlspskfile is defined and agent_tlspskfile %}
+TLSPSKFile={{ agent_tlspskfile }}
+{% endif %}
 {% endif %}
