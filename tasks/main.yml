@@ -69,9 +69,9 @@
 - name: "Configure zabbix-agent"
   template: src=zabbix_agentd.conf.j2
             dest=/etc/zabbix/zabbix_agentd.conf
-            owner=zabbix
-            group=zabbix
-            mode=0755
+            owner=root
+            group=root
+            mode=0644
   notify: restart zabbix-agent
   sudo: yes
   tags:
@@ -81,8 +81,8 @@
 
 - name: "Create include dir zabbix-agent"
   file: path={{ agent_include }}
-        owner=zabbix
-        group=zabbix
+        owner=root
+        group=root
         state=directory
   sudo: yes
   tags:
@@ -144,4 +144,3 @@
   when: zabbix_api_use and zabbix_macros is defined and item.macro_key is defined
   tags:
     - api
-
