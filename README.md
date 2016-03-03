@@ -1,25 +1,9 @@
-dj-wasabi.zabbix-agent
-=========
-####Table of Contents
+Table of Contents
 
-1. [Overview](#overview)
-2. [Requirements for this role](#requirements)
-   * [List of Operating systems](#operating-systems)
-   * [Zabbix API Usage](#zabbix-api)
-3. [Installing this role](#installation)
-4. [Overview of variables which can be used](#role-variables)
-   * [Main variables](#main-variables)
-   * [Zabbix API Variables](#zabbix-api-variables)
-4. [Dependencies](#dependencies)
-5. [Example of using this role](#example-playbook)
-   * [ Vars in role configuration](#vars-in-role-configuration)
-   * [Combination of group_vars and playbook](#combination-of-group_vars-and-playbook)
-6. [Test Kitchen](#test-kitchen)
-7. [Extra information](#extra-information)
-8. [License](#license)
-9. [Author Information](#author-information)
+[TOC]
 
-##Overview
+
+#Overview
 
 Build Status:
 
@@ -34,8 +18,8 @@ This is one of the 'dj-wasabi' roles which configures your whole zabbix environm
  * zabbix-javagateway (https://galaxy.ansible.com/dj-wasabi/zabbix-javagateway/)
  * zabbix-agent (https://galaxy.ansible.com/dj-wasabi/zabbix-agent/)
 
-##Requirements
-###Operating systems
+#Requirements
+##Operating systems
 This role will work on the following operating systems:
 
  * Red Hat
@@ -46,7 +30,7 @@ This role will work on the following operating systems:
 So, you'll need one of those operating systems.. :-)
 Please sent Pull Requests or suggestions when you want to use this role for other Operating systems.
 
-###Zabbix Versions
+##Zabbix Versions
 
 See the following list of supported Operating systems with the Zabbix releases:
 
@@ -81,21 +65,20 @@ Zabbix 2.2:
   * xenserver 6
 
 
-### Zabbix API
+## Zabbix API
 When you want to automatically create the hosts in the webinterface, you'll need on your own machine the zabbix-api package. 
 
 You can install this locally with the following command: `pip install zabbix-api`.
 
 This ansible role uses the modules from "Cove" found in this pull request: https://github.com/ansible/ansible-modules-extras/pull/44. So all credits goes to this guy!
 
-##Installation
+#Installation
 
 Installing this role is very simple: `ansible-galaxy install dj-wasabi.zabbix-agent`
 
+#Role Variables
 
-##Role Variables
-
-### Main variables
+## Main variables
 There are some variables in de default/main.yml which can (Or needs to) be changed/overriden:
 
 * `agent_server`: The ipaddress for the zabbix-server or zabbix-proxy.
@@ -113,8 +96,43 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 * `zabbix_agent_package_state`: If Zabbix-agent needs to be present or latest.
 
+## Zabbix 3.0
 
-### Zabbix API variables
+These variables are specific for Zabbix 3.0/
+
+* `agent_tlsconnect`: How the agent should connect to server or proxy. Used for active checks.
+
+    Possible values:
+    
+    * unencrypted
+    * psk
+    * cert
+
+* `agent_tlsaccept`: What incoming connections to accept.
+
+    Possible values:
+    
+    * unencrypted
+    * psk
+    * cert
+
+* `agent_tlscafile`: Full pathname of a file containing the top-level CA(s) certificates for peer certificate verification.
+
+* `agent_tlscrlfile`: Full pathname of a file containing revoked certificates.
+
+* `agent_tlsservercertissuer`: Allowed server certificate issuer.
+
+* `agent_tlsservercertsubject`: Allowed server certificate subject.
+
+* `agent_tlscertfile`: Full pathname of a file containing the agent certificate or certificate chain.
+
+* `agent_tlskeyfile`: Full pathname of a file containing the agent private key.
+
+* `agent_tlspskidentity`: Unique, case sensitive string used to identify the pre-shared key.
+
+* `agent_tlspskfile`: Full pathname of a file containing the pre-shared key.
+
+## Zabbix API variables
 These variables needs to be changed/overriden when you want to make use of the zabbix-api for automatically creating and or updating hosts.
 
 * `zabbix_url`: The url on which the Zabbix webpage is available. Example: http://zabbix.example.com
@@ -140,12 +158,12 @@ These variables needs to be changed/overriden when you want to make use of the z
 * `zabbix_macros`: An list with macro_key and macro_value for creating hostmacro's.
 
 
-##Dependencies
+#Dependencies
 
 There are no dependencies on other roles.
 
-##Example Playbook
-###Vars in role configuration
+#Example Playbook
+##Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: all
@@ -167,7 +185,7 @@ Including an example of how to use your role (for instance, with variables passe
              - macro_key: apache_type
                macro_value: reverse_proxy
 
-###Combination of group_vars and playbook 
+##Combination of group_vars and playbook 
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: `group_vars/all` or `host_vars/<zabbix_server>` (Where <zabbix_server> is the hostname of the machine running Zabbix Server)
 
 		agent_server: 192.168.33.30
@@ -192,11 +210,11 @@ and in the playbook only specifying:
       roles:
          - role: dj-wasabi.zabbix-agent
 
-##Test Kitchen
+#Test Kitchen
 
 This roles is configured to be tested with Test Kitchen. You can find on this page some more information regarding Test Kitchen: http://werner-dijkerman.nl/2015/08/20/using-test-kitchen-with-docker-and-serverspec-to-test-ansible-roles/
 
-##Extra Information
+#Extra Information
 
 You can install so-called userparameter files by adding the following into your roles:
 
@@ -220,11 +238,11 @@ You can extend your zabbix configuration by adding items yourself that do specif
 
 (Maybe in near future doing it with variables.)
 
-##License
+#License
 
 GPLv3
 
-##Author Information
+#Author Information
 
 Please send suggestion or pull requests to make this role better. Also let me know if you encouter any issues installing or using this role.
 
