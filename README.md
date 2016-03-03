@@ -1,7 +1,21 @@
 Table of Contents
 
-[TOC]
-
+1. [Overview](#overview)
+2. [Requirements for this role](#requirements)
+   * [List of Operating systems](#operating-systems)
+   * [Zabbix API Usage](#zabbix-api)
+3. [Installing this role](#installation)
+4. [Overview of variables which can be used](#role-variables)
+   * [Main variables](#main-variables)
+   * [Zabbix API Variables](#zabbix-api-variables)
+4. [Dependencies](#dependencies)
+5. [Example of using this role](#example-playbook)
+   * [ Vars in role configuration](#vars-in-role-configuration)
+   * [Combination of group_vars and playbook](#combination-of-group_vars-and-playbook)
+6. [Test Kitchen](#test-kitchen)
+7. [Extra information](#extra-information)
+8. [License](#license)
+9. [Author Information](#author-information)
 
 #Overview
 
