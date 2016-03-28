@@ -50,13 +50,13 @@ See the following list of supported Operating systems with the Zabbix releases:
 
 Zabbix 3.0:
 
-  * CentOS 7.x
-  * Amazon 7.x
-  * RedHat 7.x
-  * OracleLinux 7.x
-  * Scientific Linux 7.x
+  * CentOS 5.x, 6.x, 7.x
+  * Amazon 5.x, 6.x, 7.x
+  * RedHat 5.x, 6.x, 7.x
+  * OracleLinux 5.x, 6.x, 7.x
+  * Scientific Linux 5.x, 6.x, 7.x
   * Ubuntu 14.04
-  * Debian 8
+  * Debian 7, 8
 
 Zabbix 2.4:
 
