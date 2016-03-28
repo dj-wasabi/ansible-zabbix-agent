@@ -1,5 +1,14 @@
 ---
 - hosts: localhost
+  become: yes
+  pre_tasks:
+    - name: "Installing dependencies"
+      action: yum
+              name={{ item }}
+              state=installed
+      with_items:
+        - iproute
+      when: "ansible_os_family == 'RedHat'"
   roles:
     - role: ansible-zabbix-agent
       agent_server: 192.168.3.33

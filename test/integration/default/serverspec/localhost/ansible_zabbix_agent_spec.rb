@@ -21,8 +21,8 @@ end
 describe 'Zabbix Agent Configuration' do
     describe file('/etc/zabbix/zabbix_agentd.conf') do
         it { should be_file}
-        it { should be_owned_by 'zabbix'}
-        it { should be_grouped_into 'zabbix'}
+        it { should be_owned_by 'root'}
+        it { should be_grouped_into 'root'}
 
         it { should contain "ListenPort=10050" }
         it { should contain "Server=192.168.3.33" }
