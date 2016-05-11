@@ -7,5 +7,5 @@
         group=zabbix
         mode=0755
   notify: restart zabbix-agent
-  sudo: yes
+  become: yes
 
