@@ -4,6 +4,14 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+0.6.0   (2016-05-12)
+
+  * Changed sudo to become. #30 (By pull request: UnderGreen (Thanks!))
+  * No reason for zabbix to able to change its own config #25 (By pull request: burner1024 (Thanks!))
+  * Updated documentation for Zabbix 3.0
+  * Updated Zabbix 3.0 OS list
+  * Fixed tests
+
 0.5.0   (2016-02-16)
 
   * Zabbix 3.0
