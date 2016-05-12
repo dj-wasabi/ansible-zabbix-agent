@@ -5,7 +5,7 @@
   apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main"
                   state=present
   when: ansible_distribution == "Debian" and zabbix_repo == "zabbix"
-  sudo: yes
+  become: yes
   tags:
     - zabbix-agent
     - init
@@ -14,7 +14,7 @@
   apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main"
                   state=present
   when: ansible_distribution == "Debian" and zabbix_repo == "zabbix"
-  sudo: yes
+  become: yes
   tags:
     - zabbix-agent
     - init
@@ -23,7 +23,7 @@
   apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
                   state=present
   when: ansible_distribution == "Ubuntu" and zabbix_repo == "zabbix"
-  sudo: yes
+  become: yes
   tags:
     - zabbix-agent
     - init
@@ -32,7 +32,7 @@
   apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
                   state=present
   when: ansible_distribution == "Ubuntu" and zabbix_repo == "zabbix"
-  sudo: yes
+  become: yes
   tags:
     - zabbix-agent
     - init
@@ -41,7 +41,7 @@
   apt_key: id=79EA5ED4
            url=http://repo.zabbix.com/zabbix-official-repo.key
   when: zabbix_repo == "zabbix"
-  sudo: yes
+  become: yes
   tags:
     - zabbix-agent
     - init
@@ -55,7 +55,7 @@
        # else you often get 'WARNING: The following packages cannot be authenticated!
        # See also: http://askubuntu.com/questions/75565/why-am-i-getting-authentication-errors-for-packages-from-an-ubuntu-repository
 
-  sudo: yes
+  become: yes
   tags:
     - zabbix-agent
     - init
@@ -63,7 +63,7 @@
 - name: "Debian | Enable the service"
   service: name={{ zabbix_agent_service }}
            enabled=yes
-  sudo: yes
+  become: yes
   tags:
     - zabbix-agent
     - init

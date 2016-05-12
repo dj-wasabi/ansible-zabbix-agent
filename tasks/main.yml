@@ -73,7 +73,7 @@
             group=root
             mode=0644
   notify: restart zabbix-agent
-  sudo: yes
+  become: yes
   tags:
     - zabbix-agent
     - config
@@ -84,7 +84,7 @@
         owner=root
         group=root
         state=directory
-  sudo: yes
+  become: yes
   tags:
     - config
     - include
@@ -92,7 +92,7 @@
 - name: "Make sure the zabbix-agent service is running"
   service: name=zabbix-agent
            state=started
-  sudo: yes
+  become: yes
   tags:
     - init
     - service

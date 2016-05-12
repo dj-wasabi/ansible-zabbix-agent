@@ -4,7 +4,7 @@
 - name: "Suse | Install basic repo file"
   zypper_repository: repo="http://download.opensuse.org/repositories/server:monitoring/openSUSE_{{ ansible_distribution_version }}/server:monitoring.repo"
   when: zabbix_repo == "zabbix"
-  sudo: yes
+  become: yes
   tags:
     - zabbix-agent
     - init
@@ -13,7 +13,7 @@
   zypper: name={{ zabbix_agent_package }}
           state={{ zabbix_agent_package_state }}
           disable_gpg_check=yes
-  sudo: yes
+  become: yes
   tags:
     - zabbix-agent
     - init

@@ -23,7 +23,7 @@
             group=root
             mode=0644
   when: zabbix_repo == "zabbix"
-  sudo: yes
+  become: yes
   tags:
     - zabbix-agent
     - init
@@ -32,7 +32,7 @@
 - name: "RedHat | Installing zabbix-agent"
   yum:  pkg={{ zabbix_agent_package }}
         state={{ zabbix_agent_package_state }}
-  sudo: yes
+  become: yes
   tags:
     - init
     - zabbix-agent
@@ -40,7 +40,7 @@
 - name: "RedHat | Enable the service"
   service: name={{ zabbix_agent_service }}
            enabled=yes
-  sudo: yes
+  become: yes
   tags:
     - zabbix-agent
     - init
