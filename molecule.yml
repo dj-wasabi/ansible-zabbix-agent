@@ -1,0 +1,12 @@
+---
+ansible:
+  playbook: playbook.yml
+
+docker:
+  containers:
+  - name: zabbix-01
+    ansible_groups:
+      - group1
+    image: debian
+    image_version: latest
+    privileged: True

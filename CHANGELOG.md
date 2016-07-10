@@ -4,6 +4,13 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+0.7.0
+
+  * Fix for: zabbix_repo - inconsistent use between server and agent roles. #17
+  * Fix for: apache 2.2. and 2.4 #15
+  * Removed Test Kitchen tests and added Molecule tests.
+
+
 0.6.0   (2016-05-12)
 
   * Changed sudo to become. #30 (By pull request: UnderGreen (Thanks!))
