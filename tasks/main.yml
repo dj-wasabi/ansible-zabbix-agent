@@ -120,6 +120,7 @@
     link_templates: "{{ zabbix_link_templates }}"
     status: "{{ zabbix_host_status }}"
     state: "{{ zabbix_create_host }}"
+    proxy: "{{ zabbix_proxy }}"
     interfaces:
       - type: 1
         main: 1
