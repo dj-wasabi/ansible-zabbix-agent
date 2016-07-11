@@ -9,6 +9,7 @@ Version (Release date)
   * Fix for: zabbix_repo - inconsistent use between server and agent roles. #17
   * Fix for: apache 2.2. and 2.4 #15
   * Removed Test Kitchen tests and added Molecule tests.
+  * remove deprecated py scripts in library dir #32 (By pull request: mescanef (Thanks!))
 
 
 0.6.0   (2016-05-12)
