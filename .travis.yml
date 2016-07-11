@@ -6,8 +6,8 @@ before_install:
  - sudo apt-get install -qq python-apt python-pycurl
 install:
   - pip install ansible==1.9.4
-  - echo -e 'localhost  ansible_connection=local' > test/inventory
-  - echo -e '[defaults]\nroles_path = ../\nhostfile = ./test/inventory' > ansible.cfg
+  - echo -e 'localhost  ansible_connection=local' > inventory
+  - echo -e '[defaults]\nroles_path = ../\nhostfile = inventory' > ansible.cfg
 script:
   - ansible-playbook travis.yml --syntax-check
   - ansible-playbook travis.yml --connection=local --sudo
