@@ -12,7 +12,7 @@ Table of Contents
 5. [Example of using this role](#example-playbook)
    * [ Vars in role configuration](#vars-in-role-configuration)
    * [Combination of group_vars and playbook](#combination-of-group_vars-and-playbook)
-6. [Test Kitchen](#test-kitchen)
+6. [Molecule](#molecule)
 7. [Extra information](#extra-information)
 8. [License](#license)
 9. [Author Information](#author-information)
@@ -224,9 +224,9 @@ and in the playbook only specifying:
       roles:
          - role: dj-wasabi.zabbix-agent
 
-#Test Kitchen
+#Molecule
 
-This roles is configured to be tested with Test Kitchen. You can find on this page some more information regarding Test Kitchen: http://werner-dijkerman.nl/2015/08/20/using-test-kitchen-with-docker-and-serverspec-to-test-ansible-roles/
+This roles is configured to be tested with Molecule. You can find on this page some more information regarding Molecule: https://werner-dijkerman.nl/2016/07/10/testing-ansible-roles-with-molecule-testinfra-and-docker/
 
 #Extra Information
 
