@@ -4,7 +4,7 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
-0.7.0
+0.7.0   (2016-07-11)
 
   * Fix for: zabbix_repo - inconsistent use between server and agent roles. #17
   * Fix for: apache 2.2. and 2.4 #15
