@@ -16,6 +16,7 @@ zabbix_api_pass: zabbix
 zabbix_create_hostgroup: present  # or absent
 zabbix_create_host: present       # or absent
 zabbix_host_status: enabled       # or disabled
+zabbix_proxy: null
 zabbix_useuip: 1
 zabbix_host_groups:
   - Linux Servers
