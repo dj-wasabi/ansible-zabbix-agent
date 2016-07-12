@@ -106,6 +106,7 @@
     host_group: "{{ zabbix_host_groups }}"
     state: "{{ zabbix_create_hostgroup }}"
   when: zabbix_api_use
+  become: no
   tags:
     - api
 
@@ -129,6 +130,7 @@
         dns: "{{ ansible_fqdn }}"
         port: "{{ agent_listenport }}"
   when: zabbix_api_use
+  become: no
   tags:
     - api
 
@@ -143,5 +145,6 @@
     macro_value: "{{ item.macro_value }}"
   with_items: zabbix_macros
   when: zabbix_api_use and zabbix_macros is defined and item.macro_key is defined
+  become: no
   tags:
     - api
