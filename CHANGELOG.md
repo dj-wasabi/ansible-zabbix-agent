@@ -1,8 +1,15 @@
-#wdijkerman-zabbix release
+# Ansible Zabbix Agent release
 
 Below an overview of all changes in the releases.
 
 Version (Release date)
+
+0.8.0   (2016-)
+
+  * Added more tests for Molecule
+  * Configured Travis to execute the Molecule tests
+  * specified become for local tasks #33 (By pull request: kam1kaze (Thanks!))
+  * add proxy param to zabbix api #34 (By pull request: kam1kaze (Thanks!))
 
 0.7.0   (2016-07-11)
 
@@ -10,7 +17,6 @@ Version (Release date)
   * Fix for: apache 2.2. and 2.4 #15
   * Removed Test Kitchen tests and added Molecule tests.
   * remove deprecated py scripts in library dir #32 (By pull request: mescanef (Thanks!))
-
 
 0.6.0   (2016-05-12)
 
