@@ -1,15 +1,17 @@
 ---
+sudo: required
 language: python
-python: "2.7"
+services:
+  - docker
+
 before_install:
- - sudo apt-get update -qq
- - sudo apt-get install -qq python-apt python-pycurl
+- sudo apt-get -qq update
+- sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
+
 install:
-  - pip install ansible==1.9.4
-  - echo -e 'localhost  ansible_connection=local' > inventory
-  - echo -e '[defaults]\nroles_path = ../\nhostfile = inventory' > ansible.cfg
+- pip install molecule
+
 script:
-  - ansible-playbook travis.yml --syntax-check
-  - ansible-playbook travis.yml --connection=local --sudo
+- molecule test
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

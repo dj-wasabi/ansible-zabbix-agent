@@ -1,3 +1,6 @@
 localhost
 [group1]
-zabbix-01
+zabbix-agent-centos
+
+[group2]
+zabbix-agent-debian

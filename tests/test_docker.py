@@ -1,20 +1,15 @@
+
 def test_hosts_file(File):
     hosts = File('/etc/hosts')
-
     assert hosts.user == 'root'
     assert hosts.group == 'root'
 
 
-def test_zabbix_package(Package):
-    zabbixagent = Package('zabbix-agent')
-    assert zabbixagent.is_installed
-    assert zabbixagent.version.startswith("1:3.0")
-
-
-def test_zabbixagent_running_and_enabled(Service):
+def test_zabbixagent_running_and_enabled(Service, SystemInfo):
     zabbixagent = Service("zabbix-agent")
-    # assert zabbixagent.is_running
     assert zabbixagent.is_enabled
+    if SystemInfo.distribution == 'centos':
+        assert zabbixagent.is_running
 
 
 def test_zabbix_agent_dot_conf(File):
@@ -33,3 +28,13 @@ def test_zabbix_include_dir(File):
     assert zabbixagent.is_directory
     assert zabbixagent.user == "root"
     assert zabbixagent.group == "root"
+
+
+def test_zabbix_package(Package, SystemInfo):
+    zabbixagent = Package('zabbix-agent')
+    assert zabbixagent.is_installed
+
+    if SystemInfo.distribution == 'debian':
+        assert zabbixagent.version.startswith("1:3.0")
+    if SystemInfo.distribution == 'centos':
+        assert zabbixagent.version.startswith("3.0")

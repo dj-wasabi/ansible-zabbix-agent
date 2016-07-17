@@ -4,9 +4,21 @@ ansible:
 
 docker:
   containers:
-  - name: zabbix-01
+  - name: zabbix-agent-centos
     ansible_groups:
       - group1
+    image: milcom/centos7-systemd
+    image_version: latest
+    privileged: True
+  - name: zabbix-agent-debian
+    ansible_groups:
+      - group2
     image: debian
+    image_version: latest
+    privileged: True
+  - name: zabbix-agent-ubuntu
+    ansible_groups:
+      - group2
+    image: rastasheep/ubuntu-sshd
     image_version: latest
     privileged: True

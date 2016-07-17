@@ -1,10 +1,11 @@
 ---
 - hosts: all
-#  pre_tasks:
-#    - name: "Installing which"
-#      action: yum
-#              name=which
-#              state=installed
+  pre_tasks:
+    - name: "Installing which on CentOS"
+      action: yum
+              name=which
+              state=installed
+      when: ansible_distribution == 'CentOS'
   roles:
     - role: ansible-zabbix-agent
       agent_server: 192.168.3.33
