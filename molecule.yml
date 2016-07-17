@@ -1,6 +1,7 @@
 ---
 ansible:
   playbook: playbook.yml
+  timeout: 30
 
 docker:
   containers:
@@ -13,7 +14,7 @@ docker:
   - name: zabbix-agent-debian
     ansible_groups:
       - group2
-    image: debian
+    image: maint/debian-systemd
     image_version: latest
     privileged: True
   - name: zabbix-agent-ubuntu
