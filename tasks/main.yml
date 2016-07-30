@@ -105,7 +105,8 @@
     login_password: "{{ zabbix_api_pass }}"
     host_group: "{{ zabbix_host_groups }}"
     state: "{{ zabbix_create_hostgroup }}"
-  when: zabbix_api_use
+  when: zabbix_api_use and
+        zabbix_api_hostgroup
   become: no
   tags:
     - api
@@ -129,7 +130,8 @@
         ip: "{{ agent_ip }}"
         dns: "{{ ansible_fqdn }}"
         port: "{{ agent_listenport }}"
-  when: zabbix_api_use
+  when: zabbix_api_use and
+        zabbix_api_hosts
   become: no
   tags:
     - api

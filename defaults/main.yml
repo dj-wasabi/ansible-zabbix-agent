@@ -9,10 +9,11 @@ agent_server:
 agent_serveractive:
 
 # Zabbix API stuff
-zabbix_api_use: False
 zabbix_url: "http://zabbix.dj-wasabi.local"
 zabbix_api_user: Admin
 zabbix_api_pass: zabbix
+zabbix_api_create_hostgroup: False
+zabbix_api_create_hosts: False
 zabbix_create_hostgroup: present  # or absent
 zabbix_create_host: present       # or absent
 zabbix_host_status: enabled       # or disabled

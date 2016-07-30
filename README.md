@@ -1,12 +1,14 @@
 Table of Contents
 
 1. [Overview](#overview)
+   * [Upgrade](#zabbix-versions)
 2. [Requirements for this role](#requirements)
-   * [List of Operating systems](#operating-systems)
+   * [List of Operating systems](#zabbix-versions)
    * [Zabbix API Usage](#zabbix-api)
 3. [Installing this role](#installation)
 4. [Overview of variables which can be used](#role-variables)
    * [Main variables](#main-variables)
+   * [Zabbix 3.x](#zabbix-30)
    * [Zabbix API Variables](#zabbix-api-variables)
 4. [Dependencies](#dependencies)
 5. [Example of using this role](#example-playbook)
@@ -31,6 +33,12 @@ This is one of the 'dj-wasabi' roles which configures your whole zabbix environm
  * zabbix-proxy (https://galaxy.ansible.com/dj-wasabi/zabbix-proxy/)
  * zabbix-javagateway (https://galaxy.ansible.com/dj-wasabi/zabbix-javagateway/)
  * zabbix-agent (https://galaxy.ansible.com/dj-wasabi/zabbix-agent/)
+
+## Upgrade
+
+### 0.8.0
+
+As of version 0.8.0, the property `zabbix_api_use` isn't available anymore. It is replaced by the properties `zabbix_api_create_hostgroup` and `zabbix_api_create_hosts`
 
 #Requirements
 ##Operating systems
@@ -101,7 +109,7 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 * `zabbix_version`: This is the version of zabbix. Default it is 2.4, but can be overriden to 2.2 or 2.0.
 
-* `zabbix_repo`: Default: _epel_
+* `zabbix_repo`: Default: _zabbix_
   * _epel_ (default) install agent from EPEL repo
   * _zabbix_ install agent from Zabbix repo
   * _other_ install agent from pre-existing or other repo
@@ -151,17 +159,19 @@ These variables needs to be changed/overriden when you want to make use of the z
 
 * `zabbix_url`: The url on which the Zabbix webpage is available. Example: http://zabbix.example.com
 
-* `zabbix_api_use`: When you want to make use of the Zabbix-API. Default: False
+* `zabbix_api_create_hosts`: When you want to enable the Zabbix API to create/delete the host. This has to be set to `True` if you want to make use of `zabbix_create_host`. Default: `False`
+
+* `zabbix_api_create_hostgroup`: When you want to enable the Zabbix API to create/delete the hostgroups. This has to be set to `True` if you want to make use of `zabbix_create_hostgroup`.Default: `False`
 
 * `zabbix_api_user`: Username of user which has API access.
 
 * `zabbix_api_pass`: Password for the user which has API access.
 
-* `zabbix_create_hostgroup`: present (Default) if you want to create hostgroups or absent if you not. 
+* `zabbix_create_hostgroup`: present (Default) if the hostgroup needs to be created or absent if you want to delete it. This only works when `zabbix_api_create_hostgroup` is set to `True`.
 
 * `zabbix_host_status`: enabled (Default) when host in monitored, disabled when host is disabled for monitoring.
 
-* `zabbix_create_host`: present  # or absent
+* `zabbix_create_host`: present (Default) if the host needs to be created or absent is you want to delete it. This only works when `zabbix_api_create_hosts` is set to `True`.
 
 * `zabbix_useuip`: 1 if connection to zabbix-agent is made via ip, 0 for fqdn.
 
