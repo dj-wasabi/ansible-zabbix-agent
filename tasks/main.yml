@@ -105,8 +105,7 @@
     login_password: "{{ zabbix_api_pass }}"
     host_group: "{{ zabbix_host_groups }}"
     state: "{{ zabbix_create_hostgroup }}"
-  when: zabbix_api_use and
-        zabbix_api_hostgroup
+  when: zabbix_api_hostgroup
   become: no
   tags:
     - api
@@ -130,8 +129,7 @@
         ip: "{{ agent_ip }}"
         dns: "{{ ansible_fqdn }}"
         port: "{{ agent_listenport }}"
-  when: zabbix_api_use and
-        zabbix_api_hosts
+  when: zabbix_api_hosts
   become: no
   tags:
     - api
@@ -146,7 +144,8 @@
     macro_name: "{{ item.macro_key }}"
     macro_value: "{{ item.macro_value }}"
   with_items: zabbix_macros
-  when: zabbix_api_use and zabbix_macros is defined and item.macro_key is defined
+  when: zabbix_macros is defined and
+        item.macro_key is defined
   become: no
   tags:
     - api

@@ -1,7 +1,7 @@
 Table of Contents
 
 1. [Overview](#overview)
-   * [Upgrade](#zabbix-versions)
+   * [Upgrade](#upgrade)
 2. [Requirements for this role](#requirements)
    * [List of Operating systems](#zabbix-versions)
    * [Zabbix API Usage](#zabbix-api)
