@@ -4,4 +4,5 @@
 - name: restart zabbix-agent
   service: name={{ zabbix_agent_service }}
            state=restarted
+           enabled=yes
   become: yes

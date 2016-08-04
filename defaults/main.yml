@@ -20,9 +20,17 @@ zabbix_host_status: enabled       # or disabled
 zabbix_proxy: null
 zabbix_useuip: 1
 zabbix_host_groups:
-  - Linux Servers
+  - Linux servers
 zabbix_link_templates:
   - Template OS Linux
+
+agent_interfaces:
+  - type: 1
+    main: 1
+    useip: "{{ zabbix_useuip }}"
+    ip: "{{ agent_ip }}"
+    dns: "{{ ansible_fqdn }}"
+    port: "{{ agent_listenport }}"
 
 # Zabbix configuration variables
 agent_pidfile: /var/run/zabbix/zabbix_agentd.pid
