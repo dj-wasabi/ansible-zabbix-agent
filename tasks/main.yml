@@ -92,6 +92,7 @@
 - name: "Make sure the zabbix-agent service is running"
   service: name=zabbix-agent
            state=started
+           enabled=yes
   become: yes
   tags:
     - init
@@ -122,13 +123,7 @@
     status: "{{ zabbix_host_status }}"
     state: "{{ zabbix_create_host }}"
     proxy: "{{ zabbix_proxy }}"
-    interfaces:
-      - type: 1
-        main: 1
-        useip: "{{ zabbix_useuip }}"
-        ip: "{{ agent_ip }}"
-        dns: "{{ ansible_fqdn }}"
-        port: "{{ agent_listenport }}"
+    interfaces: "{{ agent_interfaces }}"
   when: zabbix_api_create_hosts
   become: no
   tags:
