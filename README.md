@@ -118,6 +118,8 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 * `zabbix_agent_package_state`: If Zabbix-agent needs to be present or latest.
 
+* `agent_interfaces`: A list that configured the interfaces you can use when configuring via API.
+
 ## Zabbix 3.0
 
 These variables are specific for Zabbix 3.0/
@@ -187,6 +189,45 @@ These variables needs to be changed/overriden when you want to make use of the z
 There are no dependencies on other roles.
 
 #Example Playbook
+
+## agent_interfaces
+
+This will configure the Zabbix Agent interface on the host. 
+```
+agent_interfaces:
+  - type: 1
+    main: 1
+    useip: "{{ zabbix_useuip }}"
+    ip: "{{ agent_ip }}"
+    dns: "{{ ansible_fqdn }}"
+    port: "{{ agent_listenport }}"
+```
+
+## Other interfaces
+
+You can also configure the `agent_interfaces` to add/configure snmp, jmx and ipmi interfaces.
+
+You'll have to use one of the following type numbers when configuring it:
+
+| Type Interface  |  Nr   |
+|-----------------|-------|
+| Zabbix Agent  | 1  |
+| snmp | 2  |
+| jmx  | 3  |
+| ipmi | 4  |
+
+Configuring a snmp interface will look like this:
+
+```
+agent_interfaces:
+  - type: 2
+    main: 1
+    useip: "{{ zabbix_useuip }}"
+    ip: "{{ agent_ip }}"
+    dns: "{{ ansible_fqdn }}"
+    port: "{{ agent_listenport }}"
+```
+
 ##Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
