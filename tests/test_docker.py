@@ -1,4 +1,8 @@
+from testinfra.utils.ansible_runner import AnsibleRunner
 import pytest
+
+testinfra_hosts = AnsibleRunner('.molecule/ansible_inventory').get_hosts('all')
+
 
 def test_zabbixagent_running_and_enabled(Service, SystemInfo):
     zabbixagent = Service("zabbix-agent")

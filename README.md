@@ -278,6 +278,14 @@ and in the playbook only specifying:
 #Molecule
 
 This roles is configured to be tested with Molecule. You can find on this page some more information regarding Molecule: https://werner-dijkerman.nl/2016/07/10/testing-ansible-roles-with-molecule-testinfra-and-docker/
+Molecule will boot 3 docker containers, containing the following OS:
+
+* Debian 8
+* CentOS 7
+* Ubuntu 14.04
+
+On these containers, this Ansible role is executed. After this, a idempotence check is run.
+When all is executed correctly, TestInfra is executed to validate the installation/configuration.
 
 #Extra Information
 

@@ -4,12 +4,14 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
-0.8.0   (2016-)
+0.8.0   (2016-08-24)
 
   * Added more tests for Molecule
   * Configured Travis to execute the Molecule tests
   * specified become for local tasks #33 (By pull request: kam1kaze (Thanks!))
   * add proxy param to zabbix api #34 (By pull request: kam1kaze (Thanks!))
+  * Fix for: zabbix 3 JMX interface Added property `agent_interfaces` to configure the interfaces via the API.
+  * Fix for: skip zabbix_group module (Replaced `zabbix_api_use` by the properties `zabbix_api_create_hostgroup` and `zabbix_api_create_hosts`)
 
 0.7.0   (2016-07-11)
 
