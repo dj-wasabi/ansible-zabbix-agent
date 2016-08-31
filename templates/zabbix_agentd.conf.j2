@@ -99,7 +99,9 @@ ServerActive={{ agent_serveractive }}
 #       required for active checks and must match hostname as configured on the server.
 #       value is acquired from hostnameitem if undefined.
 #
-Hostname={{ inventory_hostname }}
+{% if agent_hostname is defined and agent_hostname %}
+Hostname={{ agent_hostname }}
+{% endif %}
 
 ### option: hostnameitem
 #       item used for generating hostname if it is undefined.
