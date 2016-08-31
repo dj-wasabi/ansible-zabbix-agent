@@ -117,7 +117,7 @@
     server_url: "{{ zabbix_url }}"
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
-    host_name: "{{ ansible_fqdn }}"
+    host_name: "{{ agent_hostname }}"
     host_groups: "{{ zabbix_host_groups }}"
     link_templates: "{{ zabbix_link_templates }}"
     status: "{{ zabbix_host_status }}"
