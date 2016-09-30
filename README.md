@@ -56,6 +56,16 @@ Please sent Pull Requests or suggestions when you want to use this role for othe
 
 See the following list of supported Operating systems with the Zabbix releases:
 
+Zabbix 3.2:
+
+  * CentOS 7.x
+  * Amazon 7.x
+  * RedHat 7.x
+  * OracleLinux 7.x
+  * Scientific Linux 7.x
+  * Ubuntu 14.04, 16.04
+  * Debian 7, 8
+
 Zabbix 3.0:
 
   * CentOS 5.x, 6.x, 7.x
@@ -107,7 +117,7 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 * `agent_serveractive`: The ipaddress for the zabbix-server or zabbix-proxy for active checks.
 
-* `zabbix_version`: This is the version of zabbix. Default it is 2.4, but can be overriden to 2.2 or 2.0.
+* `zabbix_version`: This is the version of zabbix. Default it is 3.2, but can be overriden to 3.0, 2.4, 2.2 or 2.0.
 
 * `zabbix_repo`: Default: _zabbix_
   * _epel_ (default) install agent from EPEL repo
