@@ -1,6 +1,12 @@
 ---
 # Tasks specific for Debian/Ubuntu Systems
 
+- include_vars: zabbix.yml
+
+- name: "Set short version name"
+  set_fact:
+      zabbix_short_version: "{{ zabbix_version | regex_replace('\\.', '') }}"
+
 - name: "Debian | Installing deb repository Debian"
   apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main"
                   state=present
@@ -38,7 +44,7 @@
     - init
 
 - name: "Debian | Install gpg key"
-  apt_key: id=79EA5ED4
+  apt_key: id="{{ sign_keys[zabbix_short_version][ansible_distribution_release]['sign_key'] }}"
            url=http://repo.zabbix.com/zabbix-official-repo.key
   when: zabbix_repo == "zabbix"
   become: yes
