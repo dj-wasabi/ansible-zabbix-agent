@@ -1,0 +1,41 @@
+---
+
+sign_keys:
+  "32":
+    wheezy:
+      sign_key: 79EA5ED4
+    jessie:
+      sign_key: 79EA5ED4
+    trusty:
+      sign_key: 79EA5ED4
+    xenial:
+      sign_key: E709712C
+  "30":
+    wheezy:
+      sign_key: 79EA5ED4
+    jessie:
+      sign_key: 79EA5ED4
+    trusty:
+      sign_key: 79EA5ED4
+    xenial:
+      sign_key: E709712C
+  "24":
+    wheezy:
+      sign_key: 79EA5ED4
+    jessie:
+      sign_key: 79EA5ED4
+    precise:
+      sign_key: 79EA5ED4
+    trusty:
+      sign_key: 79EA5ED4
+  "22":
+    squeeze:
+      sign_key: 79EA5ED4
+    jessie:
+      sign_key: 79EA5ED4
+    precise:
+      sign_key: 79EA5ED4
+    trusty:
+      sign_key: 79EA5ED4
+    lucid:
+      sign_key: 79EA5ED4
