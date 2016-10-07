@@ -4,7 +4,7 @@ sign_keys:
   "32":
     wheezy:
       sign_key: E709712C
-    jessy:
+    jessie:
       sign_key: E709712C
     trusty:
       sign_key: E709712C
@@ -13,7 +13,7 @@ sign_keys:
   "30":
     wheezy:
       sign_key: 79EA5ED4
-    jessy:
+    jessie:
       sign_key: E709712C
     trusty:
       sign_key: 79EA5ED4
@@ -22,7 +22,7 @@ sign_keys:
   "24":
     wheezy:
       sign_key: 79EA5ED4
-    jessy:
+    jessie:
       sign_key: 79EA5ED4
     precise:
       sign_key: 79EA5ED4
@@ -31,7 +31,7 @@ sign_keys:
   "22":
     squeeze:
       sign_key: 79EA5ED4
-    wheezy:
+    jessie:
       sign_key: 79EA5ED4
     precise:
       sign_key: 79EA5ED4
