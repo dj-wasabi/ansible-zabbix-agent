@@ -15,7 +15,7 @@
               state=installed
       with_items:
         - net-tools
-      when: ansible_distribution != 'CentOS'
+      when: ansible_distribution == 'Debian'
   roles:
     - role: ansible-zabbix-agent
       agent_server: 192.168.3.33

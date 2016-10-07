@@ -23,3 +23,10 @@ docker:
     image: rastasheep/ubuntu-sshd
     image_version: latest
     privileged: True
+  - name: zabbix-agent-suse
+    ansible_groups:
+      - group3
+    image: opensuse/amd64
+    image_version: latest
+    privileged: True
+    command: /bin/bash

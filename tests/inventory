@@ -4,3 +4,7 @@ zabbix-agent-centos
 
 [group2]
 zabbix-agent-debian
+zabbix-agent-ubuntu
+
+[group3]
+zabbix-agent-suse

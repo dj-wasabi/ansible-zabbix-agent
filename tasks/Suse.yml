@@ -1,8 +1,17 @@
 ---
 # Tasks specific for OpenSuse Systems
 
+- name: "Include Zabbix gpg ids"
+  include_vars: zabbix.yml
+
+- name: "Install zypper repo dependency"
+  zypper: name=python-xml
+  register: dependency
+
 - name: "Suse | Install basic repo file"
-  zypper_repository: repo="http://download.opensuse.org/repositories/server:monitoring/openSUSE_{{ ansible_distribution_version }}/server:monitoring.repo"
+  zypper_repository: repo={{ suse[ansible_distribution][ansible_distribution_major_version]['url'] }}
+                     name={{ suse[ansible_distribution][ansible_distribution_major_version]['name'] }}
+                     state=present
   when: zabbix_repo == "zabbix"
   become: yes
   tags:
