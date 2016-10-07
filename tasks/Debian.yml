@@ -1,7 +1,8 @@
 ---
 # Tasks specific for Debian/Ubuntu Systems
 
-- include_vars: zabbix.yml
+- name: "Include Zabbix gpg ids"
+  include_vars: zabbix.yml
 
 - name: "Set short version name"
   set_fact:
