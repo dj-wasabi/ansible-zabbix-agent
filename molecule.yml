@@ -3,6 +3,19 @@ ansible:
   playbook: playbook.yml
   timeout: 30
 
+molecule:
+  test:
+    sequence:
+      - destroy
+      - syntax
+      - create
+      - converge
+      - verify
+#      - idempotence
+
+driver:
+  name: docker
+
 docker:
   containers:
   - name: zabbix-agent-centos
@@ -23,3 +36,6 @@ docker:
     image: rastasheep/ubuntu-sshd
     image_version: latest
     privileged: True
+
+verifier:
+  name: testinfra
