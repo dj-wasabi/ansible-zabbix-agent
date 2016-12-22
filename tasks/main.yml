@@ -140,7 +140,7 @@
     host_name: "{{ ansible_fqdn }}"
     macro_name: "{{ item.macro_key }}"
     macro_value: "{{ item.macro_value }}"
-  with_items: "{{ zabbix_macros }}"
+  with_items: "{{ zabbix_macros | default([]) }}"
   when: zabbix_macros is defined and
         item.macro_key is defined
   become: no
