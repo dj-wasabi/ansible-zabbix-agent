@@ -137,7 +137,7 @@
     server_url: "{{ zabbix_url }}"
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
-    host_name: "{{ ansible_fqdn }}"
+    host_name: "{{ inventory_hostname }}"
     macro_name: "{{ item.macro_key }}"
     macro_value: "{{ item.macro_value }}"
   with_items: "{{ zabbix_macros | default([]) }}"
