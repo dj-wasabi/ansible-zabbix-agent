@@ -4,6 +4,15 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+0.9.0   (2016-12-30)
+
+  * Fix hostname mistmatch when updating macros #54 (By pull request: tahajahangir (Thanks!))
+  * Update main.yml #52 (By pull request: envrm (Thanks!))
+  * Added zabbix.yml vars for correct apt_key id #48
+  * Updated to Zabbix 3.2.0 #47
+  * Fix missed tag #43 (By pull request: leominov (Thanks!))
+  * Set everything the same with agent_hostname
+
 0.8.0   (2016-08-24)
 
   * Added more tests for Molecule
