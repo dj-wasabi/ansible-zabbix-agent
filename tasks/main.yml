@@ -1,6 +1,12 @@
 ---
 # tasks file for wdijkerman.zabbix
 
+- name: "Set short version name"
+  set_fact:
+      zabbix_short_version: "{{ zabbix_version | regex_replace('\\.', '') }}"
+  tags:
+    - always
+
 - name: "Include OS-specific variables"
   include_vars: "{{ ansible_os_family }}.yml"
   tags:
