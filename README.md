@@ -223,8 +223,8 @@ You'll have to use one of the following type numbers when configuring it:
 |-----------------|-------|
 | Zabbix Agent  | 1  |
 | snmp | 2  |
-| jmx  | 3  |
-| ipmi | 4  |
+| ipmi | 3  |
+| jmx | 4  |
 
 Configuring a snmp interface will look like this:
 
