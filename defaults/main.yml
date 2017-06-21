@@ -7,6 +7,7 @@ zabbix_agent_package: zabbix-agent
 zabbix_agent_package_state: present # or latest
 agent_server:
 agent_serveractive:
+zabbix_selinux: False
 
 # Zabbix API stuff
 zabbix_url: "http://zabbix.dj-wasabi.local"

@@ -74,6 +74,12 @@
     - zabbix-agent
     - config
 
+- name: "Allow zabbix_agent to start (SELinux)"
+  selinux_permissive:
+    name: zabbix_agent_t
+    permissive: true
+  when: zabbix_selinux
+
 - name: "Configure zabbix-agent"
   template: src=zabbix_agentd.conf.j2
             dest=/etc/zabbix/zabbix_agentd.conf
