@@ -67,6 +67,13 @@
     - zabbix-agent
     - init
 
+- name: "Install policycoreutils-python"
+  yum: pkg=policycoreutils-python-utils
+       state=installed
+       update_cache=yes
+       cache_valid_time=0
+  when: zabbix_selinux
+
 - name: "Debian | Enable the service"
   service: name={{ zabbix_agent_service }}
            enabled=yes
