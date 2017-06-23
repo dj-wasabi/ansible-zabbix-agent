@@ -98,7 +98,7 @@ Zabbix 2.2:
 
 
 ## Zabbix API
-When you want to automatically create the hosts in the webinterface, you'll need on your own machine the zabbix-api package. 
+When you want to automatically create the hosts in the webinterface, you'll need on your own machine the zabbix-api package.
 
 You can install this locally with the following command: `pip install zabbix-api`.
 
@@ -130,6 +130,8 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 * `agent_interfaces`: A list that configured the interfaces you can use when configuring via API.
 
+* `zabbix_selinux`: Enables an SELinux policy so that the agent will run. Default: False.
+
 ## Zabbix 3.0
 
 These variables are specific for Zabbix 3.0/
@@ -137,7 +139,7 @@ These variables are specific for Zabbix 3.0/
 * `agent_tlsconnect`: How the agent should connect to server or proxy. Used for active checks.
 
     Possible values:
-    
+
     * unencrypted
     * psk
     * cert
@@ -145,7 +147,7 @@ These variables are specific for Zabbix 3.0/
 * `agent_tlsaccept`: What incoming connections to accept.
 
     Possible values:
-    
+
     * unencrypted
     * psk
     * cert
@@ -202,7 +204,7 @@ There are no dependencies on other roles.
 
 ## agent_interfaces
 
-This will configure the Zabbix Agent interface on the host. 
+This will configure the Zabbix Agent interface on the host.
 ```
 agent_interfaces:
   - type: 1
@@ -238,7 +240,7 @@ agent_interfaces:
     port: "{{ agent_listenport }}"
 ```
 
-## Vars in role configuration 
+## Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: all
@@ -260,7 +262,7 @@ Including an example of how to use your role (for instance, with variables passe
              - macro_key: apache_type
                macro_value: reverse_proxy
 
-## Combination of group_vars and playbook 
+## Combination of group_vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: `group_vars/all` or `host_vars/<zabbix_server>` (Where <zabbix_server> is the hostname of the machine running Zabbix Server)
 
 		agent_server: 192.168.33.30
@@ -317,7 +319,7 @@ Example of the "sample.conf" file:
 UserParameter=mysql.ping_to,mysqladmin -uroot ping | grep -c alive
 ```
 
-You can extend your zabbix configuration by adding items yourself that do specific checks which aren't in the zabbix core itself. You can change offcourse the name of the file to whatever you want (Same for the UserParameter line(s) ;-) 
+You can extend your zabbix configuration by adding items yourself that do specific checks which aren't in the zabbix core itself. You can change offcourse the name of the file to whatever you want (Same for the UserParameter line(s) ;-)
 
 (Maybe in near future doing it with variables.)
 
