@@ -121,6 +121,7 @@
     host_group: "{{ zabbix_host_groups }}"
     state: "{{ zabbix_create_hostgroup }}"
   when: zabbix_api_create_hostgroup
+  run_once: True
   become: no
   tags:
     - api
