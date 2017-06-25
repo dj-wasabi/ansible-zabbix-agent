@@ -68,7 +68,7 @@
     - init
 
 - name: "Install policycoreutils-python"
-  yum: pkg=policycoreutils-python-utils
+  apt: pkg=policycoreutils-python-utils
        state=installed
        update_cache=yes
        cache_valid_time=0
