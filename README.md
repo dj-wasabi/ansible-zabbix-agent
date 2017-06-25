@@ -120,8 +120,8 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 * `zabbix_version`: This is the version of zabbix. Default it is 3.2, but can be overriden to 3.0, 2.4, 2.2 or 2.0.
 
 * `zabbix_repo`: Default: _zabbix_
-  * _epel_ (default) install agent from EPEL repo
-  * _zabbix_ install agent from Zabbix repo
+  * _epel_ install agent from EPEL repo
+  * _zabbix_ (default) install agent from Zabbix repo
   * _other_ install agent from pre-existing or other repo
 
 * `agent_listeninterface`: Interface zabbix-agent listens on. Leave blank for all.
