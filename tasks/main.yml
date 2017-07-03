@@ -1,6 +1,12 @@
 ---
 # tasks file for wdijkerman.zabbix
 
+- name: "Set short version name"
+  set_fact:
+      zabbix_short_version: "{{ zabbix_version | regex_replace('\\.', '') }}"
+  tags:
+    - always
+
 - name: "Include OS-specific variables"
   include_vars: "{{ ansible_os_family }}.yml"
   tags:
@@ -68,6 +74,12 @@
     - zabbix-agent
     - config
 
+- name: "Allow zabbix_agent to start (SELinux)"
+  selinux_permissive:
+    name: zabbix_agent_t
+    permissive: true
+  when: zabbix_selinux
+
 - name: "Configure zabbix-agent"
   template: src=zabbix_agentd.conf.j2
             dest=/etc/zabbix/zabbix_agentd.conf
@@ -109,6 +121,7 @@
     host_group: "{{ zabbix_host_groups }}"
     state: "{{ zabbix_create_hostgroup }}"
   when: zabbix_api_create_hostgroup
+  run_once: True
   become: no
   tags:
     - api
@@ -137,10 +150,10 @@
     server_url: "{{ zabbix_url }}"
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
-    host_name: "{{ ansible_fqdn }}"
+    host_name: "{{ agent_hostname }}"
     macro_name: "{{ item.macro_key }}"
     macro_value: "{{ item.macro_value }}"
-  with_items: "{{ zabbix_macros }}"
+  with_items: "{{ zabbix_macros | default([]) }}"
   when: zabbix_macros is defined and
         item.macro_key is defined
   become: no

@@ -37,6 +37,14 @@
     - init
     - zabbix-agent
 
+- name: "Install policycoreutils-python"
+  yum: name=policycoreutils-python
+       state=installed
+  when: zabbix_selinux
+  tags:
+    - init
+    - zabbix-agent
+
 - name: "RedHat | Enable the service"
   service: name={{ zabbix_agent_service }}
            enabled=yes

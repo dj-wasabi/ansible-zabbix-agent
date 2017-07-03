@@ -4,6 +4,26 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+0.10.0  (2016-12-30)
+
+  * Added run_once to only execute the task once #77
+  * Adds zabbix_selinux variable to README #75
+  * Adding tasks for selinux #74
+  * Fix type number of jmx/ipmi #65 (By pull request: fazelgh (Thanks!))
+  * zabbix_hostmacro fix #64 (By pull request: dguihal (Thanks!))
+  * Does not confuse with zabbix_api_use setting. #61 (By pull request: i5513 (Thanks!))
+  * get gpg key over https #60 (By pull request: sjugge (Thanks!))
+  * Using the same version handling as with the zabbix-server #59
+
+0.9.0   (2016-12-30)
+
+  * Fix hostname mistmatch when updating macros #54 (By pull request: tahajahangir (Thanks!))
+  * Update main.yml #52 (By pull request: envrm (Thanks!))
+  * Added zabbix.yml vars for correct apt_key id #48
+  * Updated to Zabbix 3.2.0 #47
+  * Fix missed tag #43 (By pull request: leominov (Thanks!))
+  * Set everything the same with agent_hostname
+
 0.8.0   (2016-08-24)
 
   * Added more tests for Molecule

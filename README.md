@@ -19,7 +19,7 @@ Table of Contents
 8. [License](#license)
 9. [Author Information](#author-information)
 
-#Overview
+# Overview
 
 Build Status:
 
@@ -40,8 +40,8 @@ This is one of the 'dj-wasabi' roles which configures your whole zabbix environm
 
 As of version 0.8.0, the property `zabbix_api_use` isn't available anymore. It is replaced by the properties `zabbix_api_create_hostgroup` and `zabbix_api_create_hosts`
 
-#Requirements
-##Operating systems
+# Requirements
+## Operating systems
 This role will work on the following operating systems:
 
  * Red Hat
@@ -52,7 +52,7 @@ This role will work on the following operating systems:
 So, you'll need one of those operating systems.. :-)
 Please sent Pull Requests or suggestions when you want to use this role for other Operating systems.
 
-##Zabbix Versions
+## Zabbix Versions
 
 See the following list of supported Operating systems with the Zabbix releases:
 
@@ -98,17 +98,17 @@ Zabbix 2.2:
 
 
 ## Zabbix API
-When you want to automatically create the hosts in the webinterface, you'll need on your own machine the zabbix-api package. 
+When you want to automatically create the hosts in the webinterface, you'll need on your own machine the zabbix-api package.
 
 You can install this locally with the following command: `pip install zabbix-api`.
 
 This ansible role uses the modules from "Cove" found in this pull request: https://github.com/ansible/ansible-modules-extras/pull/44. So all credits goes to this guy!
 
-#Installation
+# Installation
 
 Installing this role is very simple: `ansible-galaxy install dj-wasabi.zabbix-agent`
 
-#Role Variables
+# Role Variables
 
 ## Main variables
 There are some variables in de default/main.yml which can (Or needs to) be changed/overriden:
@@ -120,8 +120,8 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 * `zabbix_version`: This is the version of zabbix. Default it is 3.2, but can be overriden to 3.0, 2.4, 2.2 or 2.0.
 
 * `zabbix_repo`: Default: _zabbix_
-  * _epel_ (default) install agent from EPEL repo
-  * _zabbix_ install agent from Zabbix repo
+  * _epel_ install agent from EPEL repo
+  * _zabbix_ (default) install agent from Zabbix repo
   * _other_ install agent from pre-existing or other repo
 
 * `agent_listeninterface`: Interface zabbix-agent listens on. Leave blank for all.
@@ -130,6 +130,8 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 * `agent_interfaces`: A list that configured the interfaces you can use when configuring via API.
 
+* `zabbix_selinux`: Enables an SELinux policy so that the agent will run. Default: False.
+
 ## Zabbix 3.0
 
 These variables are specific for Zabbix 3.0/
@@ -137,7 +139,7 @@ These variables are specific for Zabbix 3.0/
 * `agent_tlsconnect`: How the agent should connect to server or proxy. Used for active checks.
 
     Possible values:
-    
+
     * unencrypted
     * psk
     * cert
@@ -145,7 +147,7 @@ These variables are specific for Zabbix 3.0/
 * `agent_tlsaccept`: What incoming connections to accept.
 
     Possible values:
-    
+
     * unencrypted
     * psk
     * cert
@@ -194,15 +196,15 @@ These variables needs to be changed/overriden when you want to make use of the z
 * `zabbix_macros`: An list with macro_key and macro_value for creating hostmacro's.
 
 
-#Dependencies
+# Dependencies
 
 There are no dependencies on other roles.
 
-#Example Playbook
+# Example Playbook
 
 ## agent_interfaces
 
-This will configure the Zabbix Agent interface on the host. 
+This will configure the Zabbix Agent interface on the host.
 ```
 agent_interfaces:
   - type: 1
@@ -223,8 +225,8 @@ You'll have to use one of the following type numbers when configuring it:
 |-----------------|-------|
 | Zabbix Agent  | 1  |
 | snmp | 2  |
-| jmx  | 3  |
-| ipmi | 4  |
+| ipmi | 3  |
+| jmx | 4  |
 
 Configuring a snmp interface will look like this:
 
@@ -238,7 +240,7 @@ agent_interfaces:
     port: "{{ agent_listenport }}"
 ```
 
-##Vars in role configuration
+## Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: all
@@ -247,7 +249,7 @@ Including an example of how to use your role (for instance, with variables passe
            agent_server: 192.168.33.30
            agent_serveractive: 192.168.33.30
            zabbix_url: http://zabbix.example.com
-           zabbix_api_use: true
+           zabbix_api_use: true # use zabbix_api_create_host and/or zabbix_api_create_hostgroup from 0.8.0
            zabbix_api_user: Admin
            zabbix_api_pass: zabbix
            zabbix_create_host: present
@@ -260,13 +262,13 @@ Including an example of how to use your role (for instance, with variables passe
              - macro_key: apache_type
                macro_value: reverse_proxy
 
-##Combination of group_vars and playbook 
+## Combination of group_vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: `group_vars/all` or `host_vars/<zabbix_server>` (Where <zabbix_server> is the hostname of the machine running Zabbix Server)
 
 		agent_server: 192.168.33.30
         agent_serveractive: 192.168.33.30
         zabbix_url: http://zabbix.example.com
-        zabbix_api_use: true
+        zabbix_api_use: true # use zabbix_api_create_host and/or zabbix_api_create_hostgroup from 0.8.0
         zabbix_api_user: Admin
         zabbix_api_pass: zabbix
         zabbix_create_host: present
@@ -285,7 +287,7 @@ and in the playbook only specifying:
       roles:
          - role: dj-wasabi.zabbix-agent
 
-#Molecule
+# Molecule
 
 This roles is configured to be tested with Molecule. You can find on this page some more information regarding Molecule: https://werner-dijkerman.nl/2016/07/10/testing-ansible-roles-with-molecule-testinfra-and-docker/
 Molecule will boot 3 docker containers, containing the following OS:
@@ -297,7 +299,7 @@ Molecule will boot 3 docker containers, containing the following OS:
 On these containers, this Ansible role is executed. After this, a idempotence check is run.
 When all is executed correctly, TestInfra is executed to validate the installation/configuration.
 
-#Extra Information
+# Extra Information
 
 You can install so-called userparameter files by adding the following into your roles:
 
@@ -317,15 +319,15 @@ Example of the "sample.conf" file:
 UserParameter=mysql.ping_to,mysqladmin -uroot ping | grep -c alive
 ```
 
-You can extend your zabbix configuration by adding items yourself that do specific checks which aren't in the zabbix core itself. You can change offcourse the name of the file to whatever you want (Same for the UserParameter line(s) ;-) 
+You can extend your zabbix configuration by adding items yourself that do specific checks which aren't in the zabbix core itself. You can change offcourse the name of the file to whatever you want (Same for the UserParameter line(s) ;-)
 
 (Maybe in near future doing it with variables.)
 
-#License
+# License
 
 GPLv3
 
-#Author Information
+# Author Information
 
 Please send suggestion or pull requests to make this role better. Also let me know if you encouter any issues installing or using this role.
 

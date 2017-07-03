@@ -46,7 +46,7 @@
 
 - name: "Debian | Install gpg key"
   apt_key: id="{{ sign_keys[zabbix_short_version][ansible_distribution_release]['sign_key'] }}"
-           url=http://repo.zabbix.com/zabbix-official-repo.key
+           url=https://repo.zabbix.com/zabbix-official-repo.key
   when: zabbix_repo == "zabbix"
   become: yes
   tags:
@@ -66,6 +66,13 @@
   tags:
     - zabbix-agent
     - init
+
+- name: "Install policycoreutils-python"
+  apt: pkg=policycoreutils-python-utils
+       state=installed
+       update_cache=yes
+       cache_valid_time=0
+  when: zabbix_selinux
 
 - name: "Debian | Enable the service"
   service: name={{ zabbix_agent_service }}
