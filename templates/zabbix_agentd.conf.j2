@@ -207,7 +207,7 @@ UnsafeUserParameters={{ agent_unsafeuserparameters }}
 # disabled. an configuration file should be placed on directory: {{ agent_include }}
 
 ####### LOADABLE MODULES #######
-{% if zabbix_short_version >= '22' %}
+{% if zabbix_version | version_compare('2.2', '>=') %}
 ### Option: LoadModulePath
 #       Full path to location of agent modules.
 #       Default depends on compilation options.
@@ -225,7 +225,7 @@ LoadModulePath={{ agent_loadmodulepath }}
 LoadModule={{ agent_loadmodule }}
 {% endif %}
 
-{% if zabbix_short_version >= '30' %}
+{% if zabbix_version | version_compare('3.0', '>=') %}
 ####### TLS-RELATED PARAMETERS #######
 
 ### Option: TLSConnect
