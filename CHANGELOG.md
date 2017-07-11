@@ -4,7 +4,11 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
-0.10.0  (2016-12-30)
+0.1?.?  (2017-??-??)
+
+  * Used yum instead of apt #78
+
+0.10.0  (2017-07-25)
 
   * Added run_once to only execute the task once #77
   * Adds zabbix_selinux variable to README #75
