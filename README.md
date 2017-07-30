@@ -249,7 +249,7 @@ Including an example of how to use your role (for instance, with variables passe
            agent_server: 192.168.33.30
            agent_serveractive: 192.168.33.30
            zabbix_url: http://zabbix.example.com
-           zabbix_api_use: true # use zabbix_api_create_host and/or zabbix_api_create_hostgroup from 0.8.0
+           zabbix_api_use: true # use zabbix_api_create_hosts and/or zabbix_api_create_hostgroup from 0.8.0
            zabbix_api_user: Admin
            zabbix_api_pass: zabbix
            zabbix_create_host: present
@@ -268,7 +268,7 @@ You can also use the group_vars or the host_vars files for setting the variables
 		agent_server: 192.168.33.30
         agent_serveractive: 192.168.33.30
         zabbix_url: http://zabbix.example.com
-        zabbix_api_use: true # use zabbix_api_create_host and/or zabbix_api_create_hostgroup from 0.8.0
+        zabbix_api_use: true # use zabbix_api_create_hosts and/or zabbix_api_create_hostgroup from 0.8.0
         zabbix_api_user: Admin
         zabbix_api_pass: zabbix
         zabbix_create_host: present
