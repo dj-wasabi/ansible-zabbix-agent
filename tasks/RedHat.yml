@@ -48,6 +48,7 @@
 - name: "RedHat | Enable the service"
   service: name={{ zabbix_agent_service }}
            enabled=yes
+           use=service
   become: yes
   tags:
     - zabbix-agent
