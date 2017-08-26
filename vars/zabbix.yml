@@ -50,3 +50,17 @@ sign_keys:
       sign_key: 79EA5ED4
     lucid:
       sign_key: 79EA5ED4
+
+suse:
+  "openSUSE Leap":
+    "42":
+      name: server:monitoring
+      url: http://download.opensuse.org/repositories/server:/monitoring/openSUSE_Leap_{{ ansible_distribution_version }}/
+  "openSUSE":
+    "12":
+      name: server_monitoring
+      url: http://download.opensuse.org/repositories/server:/monitoring/openSUSE_{{ ansible_distribution_version }}
+  "SLES":
+    "11":
+      name: server_monitoring
+      url: http://download.opensuse.org/repositories/server:/monitoring/SLE_11_SP3/

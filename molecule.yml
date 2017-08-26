@@ -48,6 +48,17 @@ docker:
     image: vcatechnology/linux-mint
     image_version: latest
     privileged: True
+  - name: zabbix-agent-suse
+    ansible_groups:
+      - group3
+    image: reszelaz/leap-systemd
+    image_version: latest
+    privileged: True
+    environment:
+      docker: container
+    volume_mounts:
+      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+#    command: /bin/systemd
 
 verifier:
   name: testinfra
