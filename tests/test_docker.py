@@ -5,7 +5,8 @@ testinfra_hosts = AnsibleRunner('.molecule/ansible_inventory').get_hosts('all')
 
 def test_zabbixagent_running_and_enabled(Service, SystemInfo):
     zabbixagent = Service("zabbix-agent")
-    assert zabbixagent.is_running
+    if SystemInfo.distribution != 'linuxmint':
+        assert zabbixagent.is_running
     # Find out why it fails on debian
     if SystemInfo.distribution != 'debian':
         assert zabbixagent.is_enabled
@@ -21,6 +22,7 @@ def test_zabbix_agent_dot_conf(File):
     assert passwd.contains("ServerActive=192.168.3.33")
     assert passwd.contains("ListenIP=0.0.0.0")
     assert passwd.contains("DebugLevel=3")
+    assert passwd.contains("# TLSAccept=unencrypted")
 
 
 def test_zabbix_include_dir(File):
@@ -30,8 +32,9 @@ def test_zabbix_include_dir(File):
     assert zabbixagent.group == "root"
 
 
-def test_socker(Socket):
-    assert Socket("tcp://0.0.0.0:10050").is_listening
+def test_socker(Socket, SystemInfo):
+    if SystemInfo.distribution != 'linuxmint':
+        assert Socket("tcp://0.0.0.0:10050").is_listening
 
 
 def test_zabbix_package(Package, SystemInfo):
@@ -39,6 +42,6 @@ def test_zabbix_package(Package, SystemInfo):
     assert zabbixagent.is_installed
 
     if SystemInfo.distribution == 'debian':
-        assert zabbixagent.version.startswith("1:3.2")
+        assert zabbixagent.version.startswith("1:3.4")
     if SystemInfo.distribution == 'centos':
-        assert zabbixagent.version.startswith("3.2")
+        assert zabbixagent.version.startswith("3.4")

@@ -5,23 +5,29 @@
   include_vars: zabbix.yml
 
 - name: "Install zypper repo dependency"
-  zypper: name=python-xml
+  zypper:
+    name: python-xml
+    state: present
   register: dependency
 
 - name: "Suse | Install basic repo file"
-  zypper_repository: repo={{ suse[ansible_distribution][ansible_distribution_major_version]['url'] }}
-                     name={{ suse[ansible_distribution][ansible_distribution_major_version]['name'] }}
-                     state=present
+  zypper_repository:
+    repo: "{{ suse[ansible_distribution][ansible_distribution_major_version]['url'] }}"
+    name: "{{ suse[ansible_distribution][ansible_distribution_major_version]['name'] }}"
+    state: present
   when: zabbix_repo == "zabbix"
+  when:
+    - zabbix_repo == "zabbix"
   become: yes
   tags:
     - zabbix-agent
     - init
 
 - name: "Suse | Install zabbix-agent"
-  zypper: name={{ zabbix_agent_package }}
-          state={{ zabbix_agent_package_state }}
-          disable_gpg_check=yes
+  zypper:
+    name: "{{ zabbix_agent_package }}"
+    state: "{{ zabbix_agent_package_state }}"
+    disable_gpg_check: yes
   become: yes
   tags:
     - zabbix-agent

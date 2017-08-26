@@ -5,20 +5,20 @@
 
 ### option: pidfile
 #       name of pid file.
-#
-PidFile={{ agent_pidfile }}
+#w
+PidFile={{ zabbix_agent_pidfile }}
 
 ### option: logfile
 #       name of log file.
 #       if not set, syslog is used.
 #
-LogFile={{ agent_logfile }}
+LogFile={{ zabbix_agent_logfile }}
 
 ### option: logfilesize
 #       maximum size of log file in mb.
 #       0 - disable automatic log rotation.
 #
-LogFileSize={{ agent_logfilesize }}
+LogFileSize={{ zabbix_agent_logfilesize }}
 
 ### option: debuglevel
 #       specifies debug level
@@ -28,14 +28,14 @@ LogFileSize={{ agent_logfilesize }}
 #       3 - warnings
 #       4 - for debugging (produces lots of information)
 #
-DebugLevel={{ agent_debuglevel }}
+DebugLevel={{ zabbix_agent_debuglevel }}
 
 
 ### option: sourceip
 #       source ip address for outgoing connections.
 #
-{% if agent_sourceip is defined and agent_sourceip %}
-sourceip={{ agent_sourceip }}
+{% if zabbix_agent_sourceip is defined and zabbix_agent_sourceip %}
+sourceip={{ zabbix_agent_sourceip }}
 {% endif %}
 
 ### option: enableremotecommands
@@ -43,14 +43,14 @@ sourceip={{ agent_sourceip }}
 #       0 - not allowed
 #       1 - allowed
 #
-EnableRemoteCommands={{ agent_enableremotecommands }}
+EnableRemoteCommands={{ zabbix_agent_enableremotecommands }}
 
 ### option: logremotecommands
 #       enable logging of executed shell commands as warnings.
 #       0 - disabled
 #       1 - enabled
 #
-LogRemoteCommands={{ agent_logremotecommands }}
+LogRemoteCommands={{ zabbix_agent_logremotecommands }}
 
 ##### passive checks related
 
@@ -63,25 +63,25 @@ LogRemoteCommands={{ agent_logremotecommands }}
 # mandatory: yes
 # default:
 # server=
-Server={{ agent_server }}
+Server={{ zabbix_agent_server }}
 
 ### option: listenport
 #       agent will listen on this port for connections from the server.
 #
-ListenPort={{ agent_listenport }}
+ListenPort={{ zabbix_agent_listenport }}
 
 
 ### option: listenip
 #       list of comma delimited ip addresses that the agent should listen on.
 #       first ip address is sent to zabbix server if connecting to it to retrieve list of active checks.
 #
-ListenIP={{ agent_listenip }}
+ListenIP={{ zabbix_agent_listenip }}
 
 ### option: startagents
 #       number of pre-forked instances of zabbix_agentd that process passive checks.
 #       if set to 0, disables passive checks and the agent will not listen on any tcp port.
 #
-StartAgents={{ agent_startagents }}
+StartAgents={{ zabbix_agent_startagents }}
 
 ##### active checks related
 ### option: serveractive
@@ -92,23 +92,23 @@ StartAgents={{ agent_startagents }}
 #       if this parameter is not specified, active checks are disabled.
 #       example: serveractive=127.0.0.1:20051,zabbix.domain,[::1]:30051,::1,[12fc::1]
 #
-ServerActive={{ agent_serveractive }}
+ServerActive={{ zabbix_agent_serveractive }}
 
 ### option: hostname
 #       unique, case sensitive hostname.
 #       required for active checks and must match hostname as configured on the server.
 #       value is acquired from hostnameitem if undefined.
 #
-{% if agent_hostname is defined and agent_hostname %}
-Hostname={{ agent_hostname }}
+{% if zabbix_agent_hostname is defined and zabbix_agent_hostname %}
+Hostname={{ zabbix_agent_hostname }}
 {% endif %}
 
 ### option: hostnameitem
 #       item used for generating hostname if it is undefined.
 #       ignored if hostname is defined.
 #
-{% if agent_hostnameitem is defined and agent_hostnameitem %}
-HostnameItem={{ agent_hostnameitem }}
+{% if zabbix_agent_hostnameitem is defined and zabbix_agent_hostnameitem %}
+HostnameItem={{ zabbix_agent_hostnameitem }}
 {% endif %}
 
 ### option: hostmetadata
@@ -117,8 +117,8 @@ HostnameItem={{ agent_hostnameitem }}
 #	an agent will issue an error and not start if the value is over limit of 255 characters.
 #	if not defined, value will be acquired from hostmetadataitem.
 #
-{% if agent_hostmetadata is defined and agent_hostmetadata %}
-HostMetadata={{ agent_hostmetadata }}
+{% if zabbix_agent_hostmetadata is defined and zabbix_agent_hostmetadata %}
+HostMetadata={{ zabbix_agent_hostmetadata }}
 {% endif %}
 
 ### option: hostmetadataitem
@@ -128,25 +128,25 @@ HostMetadata={{ agent_hostmetadata }}
 #	the value returned by specified item is over limit of 255 characters.
 #	this option is only used when hostmetadata is not defined.
 #
-{% if agent_hostmetadataitem is defined and agent_hostmetadataitem %}
-HostMetadataItem={{ agent_hostmetadataitem }}
+{% if zabbix_agent_hostmetadataitem is defined and zabbix_agent_hostmetadataitem %}
+HostMetadataItem={{ zabbix_agent_hostmetadataitem }}
 {% endif %}
 
 ### option: refreshactivechecks
 #       how often list of active checks is refreshed, in seconds.
 #
-RefreshActiveChecks={{ agent_refreshactivechecks }}
+RefreshActiveChecks={{ zabbix_agent_refreshactivechecks }}
 
 ### option: buffersend
 #       do not keep data longer than n seconds in buffer.
 #
-BufferSend={{ agent_buffersend }}
+BufferSend={{ zabbix_agent_buffersend }}
 
 ### option: buffersize
 #       maximum number of values in a memory buffer. the agent will send
 #       all collected data to zabbix server or proxy if the buffer is full.
 #
-BufferSize={{ agent_buffersize }}
+BufferSize={{ zabbix_agent_buffersize }}
 
 ### option: maxlinespersecond
 #       maximum number of new lines the agent will send per second to zabbix server
@@ -154,21 +154,21 @@ BufferSize={{ agent_buffersize }}
 #       the provided value will be overridden by the parameter 'maxlines',
 #       provided in 'log' or 'logrt' item keys.
 #
-MaxLinesPerSecond={{ agent_maxlinespersecond }}
+MaxLinesPerSecond={{ zabbix_agent_maxlinespersecond }}
 
 ############ advanced parameters #################
 
 ### option: alias
 #       sets an alias for parameter. it can be useful to substitute long and complex parameter name with a smaller and simpler one.
 #
-{% if agent_zabbix_alias is defined and agent_zabbix_alias %}
-Alias={{ agent_zabbix_alias }}
+{% if zabbix_agent_zabbix_alias is defined and zabbix_agent_zabbix_alias %}
+Alias={{ zabbix_agent_zabbix_alias }}
 {% endif %}
 
 ### option: timeout
 #       spend no more than timeout seconds on processing
 #
-Timeout={{ agent_timeout }}
+Timeout={{ zabbix_agent_timeout }}
 
 ### option: allowroot
 #       allow the agent to run as 'root'. if disabled and the agent is started by 'root', the agent
@@ -176,13 +176,13 @@ Timeout={{ agent_timeout }}
 #       0 - do not allow
 #       1 - allow
 #
-AllowRoot={{ agent_allowroot }}
+AllowRoot={{ zabbix_agent_allowroot }}
 
 ### option: include
 #       you may include individual files or all files in a directory in the configuration file.
 #       installing zabbix will create include directory in /usr/local/etc, unless modified during the compile time.
 #
-Include={{ agent_include }}
+Include={{ zabbix_agent_include }}
 
 
 ####### user-defined monitored parameters #######
@@ -192,7 +192,7 @@ Include={{ agent_include }}
 #       0 - do not allow
 #       1 - allow
 #
-UnsafeUserParameters={{ agent_unsafeuserparameters }}
+UnsafeUserParameters={{ zabbix_agent_unsafeuserparameters }}
 
 ### option: userparameter
 #       user-defined parameter to monitor. there can be several user-defined parameters.
@@ -204,15 +204,15 @@ UnsafeUserParameters={{ agent_unsafeuserparameters }}
 # default:
 # userparameter=
 
-# disabled. an configuration file should be placed on directory: {{ agent_include }}
+# disabled. an configuration file should be placed on directory: {{ zabbix_agent_include }}
 
 ####### LOADABLE MODULES #######
-{% if zabbix_version == '2.2' or zabbix_version == '2.4' or zabbix_version == '3.0' %}
+{% if zabbix_version | version_compare('2.2', '>=') %}
 ### Option: LoadModulePath
 #       Full path to location of agent modules.
 #       Default depends on compilation options.
 #
-LoadModulePath={{ agent_loadmodulepath }}
+LoadModulePath={{ zabbix_agent_loadmodulepath }}
 {% endif %}
 
 ### Option: LoadModule
@@ -221,11 +221,11 @@ LoadModulePath={{ agent_loadmodulepath }}
 #       The modules must be located in directory specified by LoadModulePath.
 #       It is allowed to include multiple LoadModule parameters.
 #
-{% if agent_loadmodule is defined and agent_loadmodule %}
-LoadModule={{ agent_loadmodule }}
+{% if zabbix_agent_loadmodule is defined and zabbix_agent_loadmodule %}
+LoadModule={{ zabbix_agent_loadmodule }}
 {% endif %}
 
-{% if zabbix_version == '3.0' %}
+{% if zabbix_version | version_compare('3.0', '>=') %}
 ####### TLS-RELATED PARAMETERS #######
 
 ### Option: TLSConnect
@@ -238,8 +238,8 @@ LoadModule={{ agent_loadmodule }}
 # Mandatory: yes, if TLS certificate or PSK parameters are defined (even for 'unencrypted' connection)
 # Default:
 # TLSConnect=unencrypted
-{% if agent_tlsconnect is defined and agent_tlsconnect %}
-TLSConnect={{ agent_tlsconnect }}
+{% if zabbix_agent_tlsconnect is defined and zabbix_agent_tlsconnect %}
+TLSConnect={{ zabbix_agent_tlsconnect }}
 {% endif %}
 
 ### Option: TLSAccept
@@ -252,8 +252,8 @@ TLSConnect={{ agent_tlsconnect }}
 # Mandatory: yes, if TLS certificate or PSK parameters are defined (even for 'unencrypted' connection)
 # Default:
 # TLSAccept=unencrypted
-{% if agent_tlsaccept is defined and agent_tlsaccept %}
-TLSAccept={{ agent_tlsaccept }}
+{% if zabbix_agent_tlsaccept is defined and zabbix_agent_tlsaccept %}
+TLSAccept={{ zabbix_agent_tlsaccept }}
 {% endif %}
 
 ### Option: TLSCAFile
@@ -263,8 +263,8 @@ TLSAccept={{ agent_tlsaccept }}
 # Mandatory: no
 # Default:
 # TLSCAFile=
-{% if agent_tlscafile is defined and agent_tlscafile %}
-TLSCAFile={{ agent_tlscafile }}
+{% if zabbix_agent_tlscafile is defined and zabbix_agent_tlscafile %}
+TLSCAFile={{ zabbix_agent_tlscafile }}
 {% endif %}
 
 ### Option: TLSCRLFile
@@ -273,8 +273,8 @@ TLSCAFile={{ agent_tlscafile }}
 # Mandatory: no
 # Default:
 # TLSCRLFile=
-{% if agent_tlscrlfile is defined and agent_tlscrlfile %}
-TLSCRLFile={{ agent_tlscrlfile }}
+{% if zabbix_agent_tlscrlfile is defined and zabbix_agent_tlscrlfile %}
+TLSCRLFile={{ zabbix_agent_tlscrlfile }}
 {% endif %}
 
 ### Option: TLSServerCertIssuer
@@ -283,8 +283,8 @@ TLSCRLFile={{ agent_tlscrlfile }}
 # Mandatory: no
 # Default:
 # TLSServerCertIssuer=
-{% if agent_tlsservercertissuer is defined and agent_tlsservercertissuer %}
-TLSServerCertIssuer={{ agent_tlsservercertissuer }}
+{% if zabbix_agent_tlsservercertissuer is defined and zabbix_agent_tlsservercertissuer %}
+TLSServerCertIssuer={{ zabbix_agent_tlsservercertissuer }}
 {% endif %}
 
 ### Option: TLSServerCertSubject
@@ -293,8 +293,8 @@ TLSServerCertIssuer={{ agent_tlsservercertissuer }}
 # Mandatory: no
 # Default:
 # TLSServerCertSubject=
-{% if agent_tlsservercertsubject is defined and agent_tlsservercertsubject %}
-TLSServerCertSubject={{ agent_tlsservercertsubject }}
+{% if zabbix_agent_tlsservercertsubject is defined and zabbix_agent_tlsservercertsubject %}
+TLSServerCertSubject={{ zabbix_agent_tlsservercertsubject }}
 {% endif %}
 
 ### Option: TLSCertFile
@@ -303,8 +303,8 @@ TLSServerCertSubject={{ agent_tlsservercertsubject }}
 # Mandatory: no
 # Default:
 # TLSCertFile=
-{% if agent_tlscertfile is defined and agent_tlscertfile %}
-TLSCertFile={{ agent_tlscertfile }}
+{% if zabbix_agent_tlscertfile is defined and zabbix_agent_tlscertfile %}
+TLSCertFile={{ zabbix_agent_tlscertfile }}
 {% endif %}
 
 ### Option: TLSKeyFile
@@ -313,8 +313,8 @@ TLSCertFile={{ agent_tlscertfile }}
 # Mandatory: no
 # Default:
 # TLSKeyFile=
-{% if agent_tlskeyfile is defined and agent_tlskeyfile %}
-TLSKeyFile={{ agent_tlskeyfile }}
+{% if zabbix_agent_tlskeyfile is defined and zabbix_agent_tlskeyfile %}
+TLSKeyFile={{ zabbix_agent_tlskeyfile }}
 {% endif %}
 
 ### Option: TLSPSKIdentity
@@ -323,8 +323,8 @@ TLSKeyFile={{ agent_tlskeyfile }}
 # Mandatory: no
 # Default:
 # TLSPSKIdentity=
-{% if agent_tlspskidentity is defined and agent_tlspskidentity %}
-TLSPSKIdentity={{ agent_tlspskidentity }}
+{% if zabbix_agent_tlspskidentity is defined and zabbix_agent_tlspskidentity %}
+TLSPSKIdentity={{ zabbix_agent_tlspskidentity }}
 {% endif %}
 
 ### Option: TLSPSKFile
@@ -333,7 +333,7 @@ TLSPSKIdentity={{ agent_tlspskidentity }}
 # Mandatory: no
 # Default:
 # TLSPSKFile=
-{% if agent_tlspskfile is defined and agent_tlspskfile %}
-TLSPSKFile={{ agent_tlspskfile }}
+{% if zabbix_agent_tlspskfile is defined and zabbix_agent_tlspskfile %}
+TLSPSKFile={{ zabbix_agent_tlspskfile }}
 {% endif %}
 {% endif %}

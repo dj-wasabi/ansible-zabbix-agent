@@ -1,23 +1,23 @@
 ---
 - hosts: all
   pre_tasks:
-    - name: "Installing which on CentOS"
-      action: yum
-              name={{ item }}
-              state=installed
+    - name: "Installing packages on CentOS"
+      yum:
+        name: "{{ item }}"
+        state: installed
       with_items:
         - net-tools
         - which
       when: ansible_distribution == 'CentOS'
-    - name: "Installing which on NON-CentOS"
-      action: apt
-              name={{ item }}
-              state=installed
+    - name: "Installing packages on NON-CentOS"
+      apt:
+        name: "{{ item }}"
+        state: installed
       with_items:
         - net-tools
-      when: ansible_distribution == 'Debian'
+      when: ansible_os_family == 'Debian'
   roles:
     - role: ansible-zabbix-agent
-      agent_server: 192.168.3.33
-      agent_serveractive: 192.168.3.33
-      agent_listenip: 0.0.0.0
+      zabbix_agent_server: 192.168.3.33
+      zabbix_agent_serveractive: 192.168.3.33
+      zabbix_agent_listenip: 0.0.0.0
