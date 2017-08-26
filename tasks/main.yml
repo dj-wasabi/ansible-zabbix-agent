@@ -4,6 +4,7 @@
 - name: "Fix facts for linuxmint - distribution release"
   set_fact:
     ansible_distribution_release: xenial
+
   when:
     - ansible_os_family == "Linuxmint"
     - ansible_distribution_release == "sonya" or ansible_distribution_release == "serena"
