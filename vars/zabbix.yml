@@ -2,6 +2,8 @@
 
 sign_keys:
   "34":
+    stretch:
+      sign_key: A14FE591
     wheezy:
       sign_key: 79EA5ED4
     jessie:
