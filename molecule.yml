@@ -12,6 +12,12 @@ molecule:
       - converge
       - verify
 #      - idempotence
+  ignore_paths:
+    - .git
+    - .vagrant
+    - .molecule
+    - .env
+    - .virtualenv
 
 driver:
   name: docker
@@ -33,7 +39,7 @@ docker:
   - name: zabbix-agent-ubuntu
     ansible_groups:
       - group2
-    image: rastasheep/ubuntu-sshd
+    image: solita/ubuntu-systemd
     image_version: latest
     privileged: True
 

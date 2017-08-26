@@ -5,3 +5,6 @@ tests/.cache
 __pycache__
 *.retry
 
+.env
+.virtualenv
+*.pyc
