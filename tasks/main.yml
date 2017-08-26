@@ -74,7 +74,6 @@
 - name: "Default agent_listenip to all when not specified"
   set_fact:
     zabbix_agent_listenip: '0.0.0.0'
-#    zabbix_agent_ip: "{{ hostvars[inventory_hostname]['ansible_default_ipv4'].address }}"
   when:
     - not zabbix_agent_listenip
   tags:
@@ -86,7 +85,6 @@
     msg: "The agent_listenip does not exist"
   when:
     - zabbix_agent_listenip != '0.0.0.0'
-    - zabbix_agent_listenip not in ansible_all_ipv4_addresses"
   tags:
     - zabbix-agent
     - config
