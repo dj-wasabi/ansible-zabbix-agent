@@ -23,7 +23,7 @@
 - name: "Debian | Install gpg key"
   apt_key:
     id: "{{ sign_keys[zabbix_short_version][ansible_distribution_release]['sign_key'] }}"
-    url: https://repo.zabbix.com/zabbix-official-repo.key
+    url: http://repo.zabbix.com/zabbix-official-repo.key
   when:
     - zabbix_repo == "zabbix"
   become: yes
