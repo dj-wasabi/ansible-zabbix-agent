@@ -1,21 +1,28 @@
 ---
 - hosts: all
   pre_tasks:
-    - name: "Installing packages on CentOS"
+    - name: "Installing packages on CentOS family"
       yum:
         name: "{{ item }}"
         state: installed
       with_items:
         - net-tools
         - which
-      when: ansible_distribution == 'CentOS'
-    - name: "Installing packages on NON-CentOS"
+      when: ansible_os_family == 'CentOS'
+    - name: "Installing packages on Debian family"
       apt:
         name: "{{ item }}"
         state: installed
       with_items:
         - net-tools
       when: ansible_os_family == 'Debian'
+    - name: "Installing packages on Suse family"
+      shell: zypper install -y python-xml python-libxml2 net-tools which
+      changed_when: False
+      when: ansible_os_family == 'Suse'
+      tags:
+        - skip_ansible_lint
+
   roles:
     - role: ansible-zabbix-agent
       zabbix_agent_server: 192.168.3.33

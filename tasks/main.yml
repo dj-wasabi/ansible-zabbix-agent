@@ -100,7 +100,7 @@
 - name: "Configure zabbix-agent"
   template:
     src: zabbix_agentd.conf.j2
-    dest: /etc/zabbix/zabbix_agentd.conf
+    dest: /etc/zabbix/{{ zabbix_agent_conf }}
     owner: root
     group: root
     mode: 0644
@@ -125,7 +125,7 @@
 
 - name: "Make sure the zabbix-agent service is running"
   service:
-    name: zabbix-agent
+    name: "{{ zabbix_agent_service }}"
     state: started
     enabled: yes
   become: yes
