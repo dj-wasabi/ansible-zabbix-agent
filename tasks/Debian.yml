@@ -8,76 +8,92 @@
   set_fact:
       zabbix_short_version: "{{ zabbix_version | regex_replace('\\.', '') }}"
 
-- name: "Debian | Installing deb repository Debian"
-  apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main"
-                  state=present
-  when: ansible_distribution == "Debian" and zabbix_repo == "zabbix"
-  become: yes
-  tags:
-    - zabbix-agent
-    - init
-
-- name: "Debian | Installing deb-src repository Debian"
-  apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main"
-                  state=present
-  when: ansible_distribution == "Debian" and zabbix_repo == "zabbix"
-  become: yes
-  tags:
-    - zabbix-agent
-    - init
-
-- name: "Debian | Installing deb repository Ubuntu"
-  apt_repository: repo="deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
-                  state=present
-  when: ansible_distribution == "Ubuntu" and zabbix_repo == "zabbix"
-  become: yes
-  tags:
-    - zabbix-agent
-    - init
-
 - name: "Debian | Installing deb-src repository Ubuntu"
-  apt_repository: repo="deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
-                  state=present
-  when: ansible_distribution == "Ubuntu" and zabbix_repo == "zabbix"
+  apt_repository:
+    repo: "deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
+    state: present
+  when:
+    - ansible_distribution == "Ubuntu"
+    - zabbix_repo == "zabbix"
   become: yes
   tags:
     - zabbix-agent
     - init
 
 - name: "Debian | Install gpg key"
-  apt_key: id="{{ sign_keys[zabbix_short_version][ansible_distribution_release]['sign_key'] }}"
-           url=https://repo.zabbix.com/zabbix-official-repo.key
-  when: zabbix_repo == "zabbix"
+  apt_key:
+    id: "{{ sign_keys[zabbix_short_version][ansible_distribution_release]['sign_key'] }}"
+    url: http://repo.zabbix.com/zabbix-official-repo.key
+  when:
+    - zabbix_repo == "zabbix"
+  become: yes
+  tags:
+    - zabbix-agent
+    - init
+
+- name: "Debian | Installing deb repository Debian"
+  apt_repository:
+    repo: "deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main"
+    state: present
+  when:
+    - ansible_distribution == "Debian"
+    - zabbix_repo == "zabbix"
+  become: yes
+  tags:
+    - zabbix-agent
+    - init
+
+- name: "Debian | Installing deb-src repository Debian"
+  apt_repository:
+    repo: "deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main"
+    state: present
+  when:
+    - ansible_distribution == "Debian"
+    - zabbix_repo == "zabbix"
+  become: yes
+  tags:
+    - zabbix-agent
+    - init
+
+- name: "Debian | Installing deb repository Ubuntu"
+  apt_repository:
+    repo: "deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
+    state: present
+  when:
+    - ansible_distribution == "Ubuntu"
+    - zabbix_repo == "zabbix"
   become: yes
   tags:
     - zabbix-agent
     - init
 
 - name: "Debian | Installing zabbix-agent"
-  apt: pkg={{ zabbix_agent_package }}
-       state={{ zabbix_agent_package_state }}
-       update_cache=yes
-       cache_valid_time=0
+  apt:
+    pkg: "{{ zabbix_agent_package }}"
+    state: "{{ zabbix_agent_package_state }}"
+    update_cache: yes
+    cache_valid_time: 0
        # Note: set cache_valid_time=0 to ensure that an apt-get update after the added repo-key
        # else you often get 'WARNING: The following packages cannot be authenticated!
        # See also: http://askubuntu.com/questions/75565/why-am-i-getting-authentication-errors-for-packages-from-an-ubuntu-repository
-
   become: yes
   tags:
     - zabbix-agent
     - init
 
 - name: "Install policycoreutils-python"
-  apt: pkg=policycoreutils-python-utils
-       state=installed
-       update_cache=yes
-       cache_valid_time=0
+  apt:
+    pkg: policycoreutils-python-utils
+    state: installed
+    update_cache: yes
+    cache_valid_time: 0
   when: zabbix_selinux
 
 - name: "Debian | Enable the service"
-  service: name={{ zabbix_agent_service }}
-           enabled=yes
-           use=service
+  service:
+    name: "{{ zabbix_agent_service }}"
+    enabled: yes
+    use: service
   become: yes
   tags:
     - zabbix-agent

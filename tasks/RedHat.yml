@@ -1,54 +1,50 @@
 ---
 # Tasks specific for RedHat systems
 
-- name: "RedHat | Set short version name"
-  set_fact:
-      zabbix_short_version: "{{ zabbix_version | regex_replace('\\.', '') }}"
-  tags:
-    - zabbix-agent
-    - init
-
 - name: "RedHat | Use EPEL package name"
   set_fact:
-      zabbix_agent_package: "zabbix{{ zabbix_short_version }}-agent"
-  when: zabbix_repo == "epel"
+    zabbix_agent_package: "zabbix{{ zabbix_short_version }}-agent"
+  when:
+    - zabbix_repo == "epel"
   tags:
     - zabbix-agent
     - init
 
 - name: "RedHat | Install basic repo file"
-  template: src=rhel.repo.j2
-            dest=/etc/yum.repos.d/zabbix.repo
-            owner=root
-            group=root
-            mode=0644
-  when: zabbix_repo == "zabbix"
-  become: yes
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.baseurl }}"
+    gpgcheck: "{{ item.gpgcheck }}"
+    gpgkey: "{{ item.gpgkey }}"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ zabbix_repo_yum }}"
   tags:
     - zabbix-agent
-    - init
-    - config
 
 - name: "RedHat | Installing zabbix-agent"
-  yum:  pkg={{ zabbix_agent_package }}
-        state={{ zabbix_agent_package_state }}
+  yum:
+    pkg: "{{ zabbix_agent_package }}"
+    state: "{{ zabbix_agent_package_state }}"
   become: yes
   tags:
     - init
     - zabbix-agent
 
 - name: "Install policycoreutils-python"
-  yum: name=policycoreutils-python
-       state=installed
+  yum:
+    name: policycoreutils-python
+    state: installed
   when: zabbix_selinux
   tags:
     - init
     - zabbix-agent
 
 - name: "RedHat | Enable the service"
-  service: name={{ zabbix_agent_service }}
-           enabled=yes
-           use=service
+  service:
+    name: "{{ zabbix_agent_service }}"
+    enabled: yes
+    use: service
   become: yes
   tags:
     - zabbix-agent

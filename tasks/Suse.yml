@@ -2,17 +2,20 @@
 # Tasks specific for OpenSuse Systems
 
 - name: "Suse | Install basic repo file"
-  zypper_repository: repo="http://download.opensuse.org/repositories/server:monitoring/openSUSE_{{ ansible_distribution_version }}/server:monitoring.repo"
-  when: zabbix_repo == "zabbix"
+  zypper_repository:
+    repo: "http://download.opensuse.org/repositories/server:monitoring/openSUSE_{{ ansible_distribution_version }}/server:monitoring.repo"
+  when:
+    - zabbix_repo == "zabbix"
   become: yes
   tags:
     - zabbix-agent
     - init
 
 - name: "Suse | Install zabbix-agent"
-  zypper: name={{ zabbix_agent_package }}
-          state={{ zabbix_agent_package_state }}
-          disable_gpg_check=yes
+  zypper:
+    name: "{{ zabbix_agent_package }}"
+    state: "{{ zabbix_agent_package_state }}"
+    disable_gpg_check: yes
   become: yes
   tags:
     - zabbix-agent
