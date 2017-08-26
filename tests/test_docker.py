@@ -11,7 +11,7 @@ def test_zabbixagent_running_and_enabled(Service, SystemInfo):
 
 
 def test_zabbix_agent_dot_conf(File, SystemInfo):
-    if SystemInfo.distribution in ['Suse']:
+    if SystemInfo.distribution in ['opensuse']:
         passwd = File("/etc/zabbix/zabbix-agentd.conf")
     else:
         passwd = File("/etc/zabbix/zabbix_agentd.conf")
