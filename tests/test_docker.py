@@ -5,7 +5,8 @@ testinfra_hosts = AnsibleRunner('.molecule/ansible_inventory').get_hosts('all')
 
 def test_zabbixagent_running_and_enabled(Service, SystemInfo):
     zabbixagent = Service("zabbix-agent")
-    assert zabbixagent.is_running
+    if SystemInfo.distribution != 'linuxmint':
+        assert zabbixagent.is_running
     # Find out why it fails on debian
     if SystemInfo.distribution != 'debian':
         assert zabbixagent.is_enabled
@@ -31,8 +32,9 @@ def test_zabbix_include_dir(File):
     assert zabbixagent.group == "root"
 
 
-def test_socker(Socket):
-    assert Socket("tcp://0.0.0.0:10050").is_listening
+def test_socker(Socket, SystemInfo):
+    if SystemInfo.distribution != 'linuxmint':
+        assert Socket("tcp://0.0.0.0:10050").is_listening
 
 
 def test_zabbix_package(Package, SystemInfo):

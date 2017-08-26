@@ -42,6 +42,12 @@ docker:
     image: solita/ubuntu-systemd
     image_version: latest
     privileged: True
+  - name: zabbix-agent-mint
+    ansible_groups:
+      - group2
+    image: vcatechnology/linux-mint
+    image_version: latest
+    privileged: True
 
 verifier:
   name: testinfra

@@ -1,6 +1,19 @@
 ---
 # tasks file for wdijkerman.zabbix
 
+- name: "Fix facts for linuxmint - distribution release"
+  set_fact:
+    ansible_distribution_release: xenial
+
+  when:
+    - ansible_os_family == "Linuxmint"
+    - ansible_distribution_release == "sonya" or ansible_distribution_release == "serena"
+
+- name: "Fix facts for linuxmint - family"
+  set_fact:
+    ansible_os_family: Debian
+  when: ansible_os_family == "Linuxmint"
+
 - name: "Include OS-specific variables"
   include_vars: "{{ ansible_os_family }}.yml"
   tags:
