@@ -112,6 +112,28 @@
     - config
     - init
 
+- name: "Create directory for PSK file if not exist."
+  file:
+    path: "{{ zabbix_agent_tlspskfile | dirname }}"
+    mode: 0755
+    state: directory
+  when:
+    - zabbix_agent_tlspskfile is defined
+    - zabbix_agent_tlspskfile != ''
+
+- name: "Place TLS PSK File"
+  copy:
+    dest: "{{ zabbix_agent_tlspskfile }}"
+    content: "{{ zabbix_agent_tlspsk_secret }}"
+    owner: zabbix
+    group: zabbix
+    mode: 0400
+  when:
+    - zabbix_agent_tlspskfile is defined
+    - zabbix_agent_tlspsk_secret is defined
+    - zabbix_agent_tlspskfile != ''
+    - zabbix_agent_tlspsk_secret != ''
+
 - name: "Create include dir zabbix-agent"
   file:
     path: "{{ zabbix_agent_include }}"

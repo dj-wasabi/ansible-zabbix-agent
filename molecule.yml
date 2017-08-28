@@ -58,7 +58,6 @@ docker:
       docker: container
     volume_mounts:
       - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-#    command: /bin/systemd
 
 verifier:
   name: testinfra
