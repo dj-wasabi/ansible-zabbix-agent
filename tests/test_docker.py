@@ -24,7 +24,17 @@ def test_zabbix_agent_dot_conf(File, SystemInfo):
     assert passwd.contains("ServerActive=192.168.3.33")
     assert passwd.contains("ListenIP=0.0.0.0")
     assert passwd.contains("DebugLevel=3")
-    assert passwd.contains("# TLSAccept=unencrypted")
+    assert passwd.contains("TLSAccept=psk")
+    assert passwd.contains("TLSPSKIdentity=my_Identity")
+    assert passwd.contains("TLSPSKFile=/data/certs/zabbix.psk")
+
+
+def test_zabbix_agent_psk(File):
+    psk_file = File("/data/certs/zabbix.psk")
+    assert psk_file.user == "zabbix"
+    assert psk_file.group == "zabbix"
+    assert psk_file.mode == 0o400
+    assert psk_file.contains("97defd6bd126d5ba7fa5f296595f82eac905d5eda270207a580ab7c0cb9e8eab")
 
 
 def test_zabbix_include_dir(File):

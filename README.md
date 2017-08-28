@@ -168,6 +168,8 @@ These variables are specific for Zabbix 3.0/
 
 * `agent_tlspskfile`: Full pathname of a file containing the pre-shared key.
 
+* `zabbix_agent_tlspsk_secret`: The pre-shared secret key that should be placed in the file configured with `agent_tlspskfile`.
+
 ## Zabbix API variables
 These variables needs to be changed/overriden when you want to make use of the zabbix-api for automatically creating and or updating hosts.
 
@@ -294,7 +296,9 @@ Molecule will boot 3 docker containers, containing the following OS:
 
 * Debian 8
 * CentOS 7
-* Ubuntu 14.04
+* Ubuntu 16.04
+* Mint
+* OpenSuse
 
 On these containers, this Ansible role is executed. After this, a idempotence check is run.
 When all is executed correctly, TestInfra is executed to validate the installation/configuration.
