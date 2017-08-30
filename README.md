@@ -1,23 +1,33 @@
 Table of Contents
 
-1. [Overview](#overview)
-   * [Upgrade](#upgrade)
-2. [Requirements for this role](#requirements)
-   * [List of Operating systems](#zabbix-versions)
-   * [Zabbix API Usage](#zabbix-api)
-3. [Installing this role](#installation)
-4. [Overview of variables which can be used](#role-variables)
-   * [Main variables](#main-variables)
-   * [Zabbix 3.x](#zabbix-30)
-   * [Zabbix API Variables](#zabbix-api-variables)
-4. [Dependencies](#dependencies)
-5. [Example of using this role](#example-playbook)
-   * [ Vars in role configuration](#vars-in-role-configuration)
-   * [Combination of group_vars and playbook](#combination-of-group_vars-and-playbook)
-6. [Molecule](#molecule)
-7. [Extra information](#extra-information)
-8. [License](#license)
-9. [Author Information](#author-information)
+- [Overview](#overview)
+  * [Upgrade](#upgrade)
+    + [1.0.0](#100)
+    + [0.8.0](#080)
+- [Requirements](#requirements)
+  * [Operating systems](#operating-systems)
+  * [Zabbix Versions](#zabbix-versions)
+    + [Zabbix 3.4](#zabbix-34)
+    + [Zabbix 3.2:](#zabbix-32-)
+    + [Zabbix 3.0:](#zabbix-30-)
+    + [Zabbix 2.4:](#zabbix-24-)
+    + [Zabbix 2.2:](#zabbix-22-)
+  * [Zabbix API](#zabbix-api)
+- [Installation](#installation)
+- [Role Variables](#role-variables)
+  * [Main variables](#main-variables)
+  * [Zabbix 3.0](#zabbix-30)
+  * [Zabbix API variables](#zabbix-api-variables)
+- [Dependencies](#dependencies)
+- [Example Playbook](#example-playbook)
+  * [agent_interfaces](#agent-interfaces)
+  * [Other interfaces](#other-interfaces)
+  * [Vars in role configuration](#vars-in-role-configuration)
+  * [Combination of group_vars and playbook](#combination-of-group-vars-and-playbook)
+- [Molecule](#molecule)
+- [Extra Information](#extra-information)
+- [License](#license)
+- [Author Information](#author-information)
 
 # Overview
 
@@ -35,6 +45,12 @@ This is one of the 'dj-wasabi' roles which configures your whole zabbix environm
  * zabbix-agent (https://galaxy.ansible.com/dj-wasabi/zabbix-agent/)
 
 ## Upgrade
+
+### 1.0.0
+
+With this 1.0.0 release, the following is changed:
+
+* All configuration properties starts with `zabbix_` now. Example, property named `agent_tlsaccept` is now `zabbix_agent_tlsaccept`.
 
 ### 0.8.0
 
@@ -56,7 +72,7 @@ Please sent Pull Requests or suggestions when you want to use this role for othe
 
 See the following list of supported Operating systems with the Zabbix releases:
 
-Zabbix 3.2:
+### Zabbix 3.4
 
   * CentOS 7.x
   * Amazon 7.x
@@ -66,7 +82,17 @@ Zabbix 3.2:
   * Ubuntu 14.04, 16.04
   * Debian 7, 8
 
-Zabbix 3.0:
+### Zabbix 3.2:
+
+  * CentOS 7.x
+  * Amazon 7.x
+  * RedHat 7.x
+  * OracleLinux 7.x
+  * Scientific Linux 7.x
+  * Ubuntu 14.04, 16.04
+  * Debian 7, 8
+
+### Zabbix 3.0:
 
   * CentOS 5.x, 6.x, 7.x
   * Amazon 5.x, 6.x, 7.x
@@ -76,7 +102,7 @@ Zabbix 3.0:
   * Ubuntu 14.04
   * Debian 7, 8
 
-Zabbix 2.4:
+### Zabbix 2.4:
 
   * CentOS 6.x, 7.x
   * Amazon 6.x, 7.x
@@ -86,7 +112,7 @@ Zabbix 2.4:
   * Ubuntu 12.04 14.04
   * Debian 7
 
-Zabbix 2.2:
+### Zabbix 2.2:
 
   * CentOS 5.x, 6.x
   * RedHat 5.x, 6.x
