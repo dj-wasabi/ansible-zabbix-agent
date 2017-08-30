@@ -56,8 +56,6 @@ docker:
     privileged: True
     environment:
       docker: container
-#    volume_mounts:
-#      - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
 
 verifier:
   name: testinfra
