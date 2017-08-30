@@ -4,9 +4,19 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
-0.1?.?  (2017-??-??)
+1.0.0  (2017-08-30)
 
+  * From ini to yml style.
   * Used yum instead of apt #78
+  * Installing default 3.4.
+  * Prefixed all properties that started with `agent_` with the value `zabbix_`.
+  * [DOCS] Fix readme for zabbix_api_create_hosts #82 (By pull request: Logan2211 (Thanks!))
+  * Workaround https://github.com/ansible/ansible-modules-core/issues/3764 #85 (By pull request: ma-tty (Thanks!))
+  * Added Mint #88
+  * Include Debian stretch in 3.4 #89  (By pull request: rtgibbons (Thanks!))
+  * Add creation of PSK file #90
+  * Fix for: Key-dependent repository installed before the key #80
+  * Set Molecule to V1 for now since V2 is released.
 
 0.10.0  (2017-07-25)
 
