@@ -43,9 +43,9 @@ zabbix_agent_interfaces:
   - type: 1
     main: 1
     useip: "{{ zabbix_useuip }}"
-    ip: "{{ agent_ip }}"
+    ip: "{{ zabbix_agent_ip }}"
     dns: "{{ ansible_fqdn }}"
-    port: "{{ agent_listenport }}"
+    port: "{{ zabbix_agent_listenport }}"
 
 # Zabbix configuration variables
 zabbix_agent_pidfile: /var/run/zabbix/zabbix_agentd.pid
