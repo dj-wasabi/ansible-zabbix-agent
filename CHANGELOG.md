@@ -4,6 +4,10 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+1.0.1  (2017-08-31)
+
+  * Fix for: Error in: Create directory for PSK file if not exist
+
 1.0.0  (2017-08-30)
 
   * From ini to yml style.
