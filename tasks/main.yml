@@ -176,13 +176,13 @@
     server_url: "{{ zabbix_url }}"
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
-    host_name: "{{ agent_hostname }}"
+    host_name: "{{ zabbix_agent_hostname }}"
     host_groups: "{{ zabbix_host_groups }}"
     link_templates: "{{ zabbix_link_templates }}"
     status: "{{ zabbix_host_status }}"
     state: "{{ zabbix_create_host }}"
     proxy: "{{ zabbix_proxy }}"
-    interfaces: "{{ agent_interfaces }}"
+    interfaces: "{{ zabbix_agent_interfaces }}"
   when:
     - zabbix_api_create_hosts
   become: no
@@ -195,7 +195,7 @@
     server_url: "{{ zabbix_url }}"
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
-    host_name: "{{ agent_hostname }}"
+    host_name: "{{ zabbix_agent_hostname }}"
     macro_name: "{{ item.macro_key }}"
     macro_value: "{{ item.macro_value }}"
   with_items: "{{ zabbix_macros | default([]) }}"
