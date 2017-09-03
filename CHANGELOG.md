@@ -4,6 +4,12 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+1.0.2  (2017-09-03)
+
+  * Fix for: zabbix_agent_listenip not working as expected #98
+  * Fix for: s/agent_interfaces/zabbix_agent_interfaces #95 && 'agent_interfaces' is undefined #94
+  * Forgot to update documentation with the new variable names (Added the `zabbix_` prefixes.)
+
 1.0.1  (2017-08-31)
 
   * Fix for: Error in: Create directory for PSK file if not exist
