@@ -49,6 +49,13 @@
     - config
     - service
 
+- name: "Set default ip address for zabbix_agent_ip"
+  set_fact:
+    zabbix_agent_ip: "{{ hostvars[inventory_hostname]['ansible_default_ipv4'].address }}"
+  when:
+    - zabbix_agent_ip is not defined
+    - "'ansible_default_ipv4' in hostvars[inventory_hostname]"
+
 - name: "Fail invalid specified agent_listeninterface"
   fail:
     msg: "The specified network interface does not exist"
