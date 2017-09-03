@@ -61,7 +61,7 @@
     msg: "The specified network interface does not exist"
   when:
     - zabbix_agent_listeninterface
-    - (zabbix_agent_listeninterface not in ansible_interfaces)
+    - (zabbix_agent_listeninterface not in ansible_all_ipv4_addresses)
   tags:
     - zabbix-agent
     - config
