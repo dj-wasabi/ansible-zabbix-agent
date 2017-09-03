@@ -139,9 +139,9 @@ Installing this role is very simple: `ansible-galaxy install dj-wasabi.zabbix-ag
 ## Main variables
 There are some variables in de default/main.yml which can (Or needs to) be changed/overriden:
 
-* `agent_server`: The ipaddress for the zabbix-server or zabbix-proxy.
+* `zabbix_agent_server`: The ipaddress for the zabbix-server or zabbix-proxy.
 
-* `agent_serveractive`: The ipaddress for the zabbix-server or zabbix-proxy for active checks.
+* `zabbix_agent_serveractive`: The ipaddress for the zabbix-server or zabbix-proxy for active checks.
 
 * `zabbix_version`: This is the version of zabbix. Default it is 3.2, but can be overriden to 3.0, 2.4, 2.2 or 2.0.
 
@@ -150,11 +150,11 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
   * _zabbix_ (default) install agent from Zabbix repo
   * _other_ install agent from pre-existing or other repo
 
-* `agent_listeninterface`: Interface zabbix-agent listens on. Leave blank for all.
+* `zabbix_agent_listeninterface`: Interface zabbix-agent listens on. Leave blank for all.
 
 * `zabbix_agent_package_state`: If Zabbix-agent needs to be present or latest.
 
-* `agent_interfaces`: A list that configured the interfaces you can use when configuring via API.
+* `zabbix_agent_interfaces`: A list that configured the interfaces you can use when configuring via API.
 
 * `zabbix_selinux`: Enables an SELinux policy so that the agent will run. Default: False.
 
@@ -162,7 +162,7 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 These variables are specific for Zabbix 3.0/
 
-* `agent_tlsconnect`: How the agent should connect to server or proxy. Used for active checks.
+* `zabbix_agent_tlsconnect`: How the agent should connect to server or proxy. Used for active checks.
 
     Possible values:
 
@@ -170,7 +170,7 @@ These variables are specific for Zabbix 3.0/
     * psk
     * cert
 
-* `agent_tlsaccept`: What incoming connections to accept.
+* `zabbix_agent_tlsaccept`: What incoming connections to accept.
 
     Possible values:
 
@@ -178,21 +178,21 @@ These variables are specific for Zabbix 3.0/
     * psk
     * cert
 
-* `agent_tlscafile`: Full pathname of a file containing the top-level CA(s) certificates for peer certificate verification.
+* `zabbix_agent_tlscafile`: Full pathname of a file containing the top-level CA(s) certificates for peer certificate verification.
 
-* `agent_tlscrlfile`: Full pathname of a file containing revoked certificates.
+* `zabbix_agent_tlscrlfile`: Full pathname of a file containing revoked certificates.
 
-* `agent_tlsservercertissuer`: Allowed server certificate issuer.
+* `zabbix_agent_tlsservercertissuer`: Allowed server certificate issuer.
 
-* `agent_tlsservercertsubject`: Allowed server certificate subject.
+* `zabbix_agent_tlsservercertsubject`: Allowed server certificate subject.
 
-* `agent_tlscertfile`: Full pathname of a file containing the agent certificate or certificate chain.
+* `zabbix_agent_tlscertfile`: Full pathname of a file containing the agent certificate or certificate chain.
 
-* `agent_tlskeyfile`: Full pathname of a file containing the agent private key.
+* `zabbix_agent_tlskeyfile`: Full pathname of a file containing the agent private key.
 
-* `agent_tlspskidentity`: Unique, case sensitive string used to identify the pre-shared key.
+* `zabbix_agent_tlspskidentity`: Unique, case sensitive string used to identify the pre-shared key.
 
-* `agent_tlspskfile`: Full pathname of a file containing the pre-shared key.
+* `zabbix_agent_tlspskfile`: Full pathname of a file containing the pre-shared key.
 
 * `zabbix_agent_tlspsk_secret`: The pre-shared secret key that should be placed in the file configured with `agent_tlspskfile`.
 
@@ -234,18 +234,18 @@ There are no dependencies on other roles.
 
 This will configure the Zabbix Agent interface on the host.
 ```
-agent_interfaces:
+zabbix_agent_interfaces:
   - type: 1
     main: 1
     useip: "{{ zabbix_useuip }}"
-    ip: "{{ agent_ip }}"
+    ip: "{{ zabbix_agent_ip }}"
     dns: "{{ ansible_fqdn }}"
-    port: "{{ agent_listenport }}"
+    port: "{{ zabbix_agent_listenport }}"
 ```
 
 ## Other interfaces
 
-You can also configure the `agent_interfaces` to add/configure snmp, jmx and ipmi interfaces.
+You can also configure the `zabbix_agent_interfaces` to add/configure snmp, jmx and ipmi interfaces.
 
 You'll have to use one of the following type numbers when configuring it:
 
@@ -259,7 +259,7 @@ You'll have to use one of the following type numbers when configuring it:
 Configuring a snmp interface will look like this:
 
 ```
-agent_interfaces:
+zabbix_agent_interfaces:
   - type: 2
     main: 1
     useip: "{{ zabbix_useuip }}"
@@ -274,8 +274,8 @@ Including an example of how to use your role (for instance, with variables passe
     - hosts: all
       roles:
          - role: dj-wasabi.zabbix-agent
-           agent_server: 192.168.33.30
-           agent_serveractive: 192.168.33.30
+           zabbix_agent_server: 192.168.33.30
+           zabbix_agent_serveractive: 192.168.33.30
            zabbix_url: http://zabbix.example.com
            zabbix_api_use: true # use zabbix_api_create_hosts and/or zabbix_api_create_hostgroup from 0.8.0
            zabbix_api_user: Admin
@@ -293,8 +293,8 @@ Including an example of how to use your role (for instance, with variables passe
 ## Combination of group_vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: `group_vars/all` or `host_vars/<zabbix_server>` (Where <zabbix_server> is the hostname of the machine running Zabbix Server)
 
-		agent_server: 192.168.33.30
-        agent_serveractive: 192.168.33.30
+		zabbix_agent_server: 192.168.33.30
+        zabbix_agent_serveractive: 192.168.33.30
         zabbix_url: http://zabbix.example.com
         zabbix_api_use: true # use zabbix_api_create_hosts and/or zabbix_api_create_hostgroup from 0.8.0
         zabbix_api_user: Admin
