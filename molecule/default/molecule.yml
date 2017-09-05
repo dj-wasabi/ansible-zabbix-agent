@@ -14,21 +14,21 @@ platforms:
     groups:
       - group1
     privileged: True
-#  - name: zabbix-agent-debian
-#    image: maint/debian-systemd:latest
-#    groups:
-#      - group1
-#    privileged: True
-#  - name: zabbix-agent-ubuntu
-#    image: solita/ubuntu-systemd:latest
-#    groups:
-#      - group1
-#    privileged: True
-#  - name: zabbix-agent-mint
-#    image: vcatechnology/linux-mint
-#    groups:
-#      - group1
-#    privileged: True
+  - name: zabbix-agent-debian
+    image: maint/debian-systemd:latest
+    groups:
+      - group1
+    privileged: True
+  - name: zabbix-agent-ubuntu
+    image: solita/ubuntu-systemd:latest
+    groups:
+      - group1
+    privileged: True
+  - name: zabbix-agent-mint
+    image: vcatechnology/linux-mint
+    groups:
+      - group1
+    privileged: True
 provisioner:
   name: ansible
   lint:
