@@ -4,6 +4,11 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+1.0.3  (2017-09-07)
+
+  * Fix attempt two for: zabbix_agent_listenip not working as expected #98
+  * Updated Molecule V1 test to Molecule V2. 
+
 1.0.2  (2017-09-03)
 
   * Fix for: zabbix_agent_listenip not working as expected #98
