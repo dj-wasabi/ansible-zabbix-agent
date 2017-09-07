@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: Converge
+  hosts: all
   pre_tasks:
     - name: "Installing packages on CentOS family"
       yum:

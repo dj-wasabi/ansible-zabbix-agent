@@ -6,31 +6,31 @@ galaxy_info:
   license: license (GPLv3)
   min_ansible_version: 1.9
   platforms:
-  - name: EL
-    versions:
-    - 5
-    - 6
-    - 7
-  - name: Ubuntu
-    versions:
-    - lucid
-    - precise
-    - trusty
-  - name: Debian
-    versions:
-    - squeeze
-    - wheezy
-  - name: opensuse
-    versions:
-    - 12.1
-    - 12.2
-    - 12.3
-    - 13.1
-    - 13.2
+    - name: EL
+      versions:
+        - 5
+        - 6
+        - 7
+    - name: Ubuntu
+      versions:
+        - lucid
+        - precise
+        - trusty
+    - name: Debian
+      versions:
+        - squeeze
+        - wheezy
+    - name: opensuse
+      versions:
+        - 12.1
+        - 12.2
+        - 12.3
+        - 13.1
+        - 13.2
   categories:
-  - monitoring
+    - monitoring
   galaxy_tags:
-  - zabbix
-  - zabbix-agent
-  - monitoring
+    - zabbix
+    - zabbix-agent
+    - monitoring
 dependencies: []

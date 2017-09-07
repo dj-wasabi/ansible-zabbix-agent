@@ -1,12 +1,15 @@
-from testinfra.utils.ansible_runner import AnsibleRunner
+import os
 
-testinfra_hosts = AnsibleRunner('.molecule/ansible_inventory').get_hosts('all')
+import testinfra.utils.ansible_runner
+
+testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
+    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
 def test_zabbixagent_running_and_enabled(Service, SystemInfo):
     zabbixagent = Service("zabbix-agent")
-    # Find out why this is not working for linuxmint and opensus
-    if SystemInfo.distribution not in ['linuxmint', 'opensuse']:
+    # Find out why this is not working for linuxmint and opensuse
+    if SystemInfo.distribution not in ['linuxmint', 'opensuse', 'ubuntu']:
         assert zabbixagent.is_running
         assert zabbixagent.is_enabled
 
