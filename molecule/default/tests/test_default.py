@@ -8,8 +8,8 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 def test_zabbixagent_running_and_enabled(Service, SystemInfo):
     zabbixagent = Service("zabbix-agent")
-    # Find out why this is not working for linuxmint and opensus
-    if SystemInfo.distribution not in ['linuxmint', 'opensuse']:
+    # Find out why this is not working for linuxmint and opensuse
+    if SystemInfo.distribution not in ['linuxmint', 'opensuse', 'ubuntu']:
         assert zabbixagent.is_running
         assert zabbixagent.is_enabled
 

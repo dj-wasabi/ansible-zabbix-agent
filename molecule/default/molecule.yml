@@ -29,6 +29,7 @@ platforms:
     groups:
       - group1
     privileged: True
+
 provisioner:
   name: ansible
   lint:
