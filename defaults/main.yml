@@ -5,8 +5,8 @@ zabbix_version: 3.4
 zabbix_repo: zabbix
 zabbix_agent_package: zabbix-agent
 zabbix_agent_package_state: present
-agent_server:
-agent_serveractive:
+zabbix_agent_server:
+zabbix_agent_serveractive:
 zabbix_selinux: False
 
 zabbix_repo_yum:
