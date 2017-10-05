@@ -223,6 +223,8 @@ These variables needs to be changed/overriden when you want to make use of the z
 
 * `zabbix_macros`: An list with macro_key and macro_value for creating hostmacro's.
 
+* `zabbix_inventory_mode`: Configure Zabbix inventory mode. Needed for building inventory data, manually when configuring a host or automatically by using some automatic population options. This has to be set to `automatic` if you want to make automatically building inventory data.
+     
 
 # Dependencies
 
