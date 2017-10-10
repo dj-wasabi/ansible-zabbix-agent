@@ -2,6 +2,8 @@
 
 sign_keys:
   "34":
+    serena:
+      sign_key: A14FE591
     stretch:
       sign_key: A14FE591
     wheezy:
@@ -13,6 +15,8 @@ sign_keys:
     xenial:
       sign_key: E709712C
   "32":
+    serena:
+      sign_key: 79EA5ED4
     wheezy:
       sign_key: 79EA5ED4
     jessie:

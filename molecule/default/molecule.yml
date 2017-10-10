@@ -37,10 +37,10 @@ provisioner:
 scenario:
   name: default
   test_sequence:
+    - lint
     - destroy
     - create
     - converge
-    - lint
     - verify
     - destroy
 verifier:
