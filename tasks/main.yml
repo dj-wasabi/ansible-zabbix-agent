@@ -190,6 +190,7 @@
     status: "{{ zabbix_host_status }}"
     state: "{{ zabbix_create_host }}"
     proxy: "{{ zabbix_proxy }}"
+    inventory_mode: "{{ zabbix_inventory_mode }}"
     interfaces: "{{ zabbix_agent_interfaces }}"
   when:
     - zabbix_api_create_hosts
