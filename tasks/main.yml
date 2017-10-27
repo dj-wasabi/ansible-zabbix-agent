@@ -195,6 +195,7 @@
   when:
     - zabbix_api_create_hosts
   become: no
+  changed_when: false
   tags:
     - api
 
