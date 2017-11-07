@@ -26,9 +26,10 @@
 
 - name: "RedHat | Installing zabbix-agent"
   yum:
-    pkg: "{{ zabbix_agent_package }}"
+    pkg: "{{ item }}"
     state: "{{ zabbix_agent_package_state }}"
   become: yes
+  with_items: "{{ zabbix_agent_packages }}"
   tags:
     - init
     - zabbix-agent

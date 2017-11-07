@@ -3,7 +3,11 @@
 
 zabbix_version: 3.4
 zabbix_repo: zabbix
-zabbix_agent_package: zabbix-agent
+zabbix_agent_packages:
+  - zabbix-agent
+  - zabbix-sender
+  - zabbix-get
+
 zabbix_agent_package_state: present
 zabbix_agent_server:
 zabbix_agent_serveractive:
