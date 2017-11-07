@@ -48,6 +48,7 @@ zabbix_agent_interfaces:
     dns: "{{ ansible_fqdn }}"
     port: "{{ zabbix_agent_listenport }}"
 
+zabbix_agent_firewall_enable: False
 # Zabbix configuration variables
 zabbix_agent_pidfile: /var/run/zabbix/zabbix_agentd.pid
 zabbix_agent_logfile: /var/log/zabbix/zabbix_agentd.log
