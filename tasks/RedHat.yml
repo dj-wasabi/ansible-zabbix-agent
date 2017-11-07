@@ -19,6 +19,8 @@
     gpgkey: "{{ item.gpgkey }}"
     state: "{{ item.state | default('present') }}"
   with_items: "{{ zabbix_repo_yum }}"
+  when:
+    zabbix_repo == "zabbix"
   tags:
     - zabbix-agent
 
