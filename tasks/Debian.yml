@@ -83,7 +83,7 @@
     - zabbix-agent
     - init
 
-- name: "Debian | Installing zabbix-agent"
+- name: "Mint | Installing zabbix-agent"
   apt:
     pkg: "zabbix-agent"
     state: "{{ zabbix_agent_package_state }}"
