@@ -4,7 +4,6 @@
 - name: "Fix facts for linuxmint - distribution release"
   set_fact:
     ansible_distribution_release: xenial
-
   when:
     - ansible_os_family == "Linuxmint"
     - ansible_distribution_release == "sonya" or ansible_distribution_release == "serena"
@@ -153,6 +152,13 @@
     - config
     - include
 
+- name: "Configure IPTables"
+  iptables:
+    destination_port: "{{ zabbix_agent_listenport }}"
+    source: "{{ zabbix_agent_firewall_source | default(omit) }}"
+    protocol: tcp
+  when: zabbix_agent_firewall_enable
+
 - name: "Make sure the zabbix-agent service is running"
   service:
     name: "{{ zabbix_agent_service }}"
@@ -195,6 +201,7 @@
   when:
     - zabbix_api_create_hosts
   become: no
+  changed_when: false
   tags:
     - api
 

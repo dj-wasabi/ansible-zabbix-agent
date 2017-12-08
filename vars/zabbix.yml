@@ -17,6 +17,8 @@ sign_keys:
   "32":
     serena:
       sign_key: 79EA5ED4
+    stretch:
+      sign_key: A14FE591
     wheezy:
       sign_key: 79EA5ED4
     jessie:

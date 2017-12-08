@@ -72,10 +72,24 @@
 # See also: http://askubuntu.com/questions/75565/why-am-i-getting-authentication-errors-for-packages-from-an-ubuntu-repository
 - name: "Debian | Installing zabbix-agent"
   apt:
-    pkg: "{{ zabbix_agent_package }}"
+    pkg: "{{ item }}"
     state: "{{ zabbix_agent_package_state }}"
     update_cache: yes
     cache_valid_time: 0
+  with_items: "{{ zabbix_agent_packages }}"
+  when: ansible_distribution in ['Ubuntu', 'Debian']
+  become: yes
+  tags:
+    - zabbix-agent
+    - init
+
+- name: "Mint | Installing zabbix-agent"
+  apt:
+    pkg: "zabbix-agent"
+    state: "{{ zabbix_agent_package_state }}"
+    update_cache: yes
+    cache_valid_time: 0
+  when: ansible_distribution not in ['Ubuntu', 'Debian']
   become: yes
   tags:
     - zabbix-agent

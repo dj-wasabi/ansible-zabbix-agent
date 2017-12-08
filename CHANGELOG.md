@@ -4,6 +4,18 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+1.1.0  (2017-11-13)
+
+  * Add zabbix_ to agent_serveractive and agent_server #101 (By pull request: asosso (Thanks!))
+  * Fix typo #102 (By pull request: asosso (Thanks!))
+  * Added support for Zabbix host inventory mode #103 (By pull request: mgornikov (Thanks!))
+  * Trying to fix mint #105
+  * Do not report as change when update an existing host's info #107 (By pull request: asosso (Thanks!))
+  * Add default value for zabbix_inventory_mode #108 (By pull request: asosso (Thanks!))
+  * Added IPtables #111
+  * Added when for enabling repo when zabbix_repo==zabbix #112
+  * Added stretch for Zabbix 3.2 #115
+
 1.0.3  (2017-09-07)
 
   * Fix attempt two for: zabbix_agent_listenip not working as expected #98

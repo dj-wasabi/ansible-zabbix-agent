@@ -27,9 +27,10 @@
 
 - name: "Suse | Install zabbix-agent"
   zypper:
-    name: "{{ zabbix_agent_package }}"
+    name: "{{ item }}"
     state: "{{ zabbix_agent_package_state }}"
     disable_gpg_check: yes
+  with_items: "{{ zabbix_agent_packages }}"
   become: yes
   tags:
     - zabbix-agent

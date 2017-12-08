@@ -1,4 +1,5 @@
 import os
+import pytest
 
 import testinfra.utils.ansible_runner
 
@@ -53,8 +54,11 @@ def test_socker(Socket, SystemInfo):
         assert Socket("tcp://0.0.0.0:10050").is_listening
 
 
-def test_zabbix_package(Package, SystemInfo):
-    zabbixagent = Package('zabbix-agent')
+@pytest.mark.parametrize("zabbix_packages", [
+    ("zabbix-agent"),
+])
+def test_zabbix_package(Package, SystemInfo, zabbix_packages):
+    zabbixagent = Package(zabbix_packages)
     assert zabbixagent.is_installed
 
     if SystemInfo.distribution == 'debian':

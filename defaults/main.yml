@@ -3,7 +3,11 @@
 
 zabbix_version: 3.4
 zabbix_repo: zabbix
-zabbix_agent_package: zabbix-agent
+zabbix_agent_packages:
+  - zabbix-agent
+  - zabbix-sender
+  - zabbix-get
+
 zabbix_agent_package_state: present
 zabbix_agent_server:
 zabbix_agent_serveractive:
@@ -33,7 +37,7 @@ zabbix_create_hostgroup: present  # or absent
 zabbix_create_host: present       # or absent
 zabbix_host_status: enabled       # or disabled
 zabbix_proxy: null
-zabbix_inventory_mode:
+zabbix_inventory_mode: disabled
 zabbix_useuip: 1
 zabbix_host_groups:
   - Linux servers
@@ -48,6 +52,7 @@ zabbix_agent_interfaces:
     dns: "{{ ansible_fqdn }}"
     port: "{{ zabbix_agent_listenport }}"
 
+zabbix_agent_firewall_enable: False
 # Zabbix configuration variables
 zabbix_agent_pidfile: /var/run/zabbix/zabbix_agentd.pid
 zabbix_agent_logfile: /var/log/zabbix/zabbix_agentd.log
