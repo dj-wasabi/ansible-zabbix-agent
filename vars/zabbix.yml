@@ -2,6 +2,8 @@
 
 sign_keys:
   "34":
+    sonya:
+      sign_key: A14FE591
     serena:
       sign_key: A14FE591
     stretch:
@@ -15,6 +17,8 @@ sign_keys:
     xenial:
       sign_key: E709712C
   "32":
+    sonya:
+      sign_key: 79EA5ED4
     serena:
       sign_key: 79EA5ED4
     stretch:
