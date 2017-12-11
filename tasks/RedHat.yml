@@ -19,6 +19,7 @@
     gpgkey: "{{ item.gpgkey }}"
     state: "{{ item.state | default('present') }}"
   with_items: "{{ zabbix_repo_yum }}"
+  become: yes
   when:
     zabbix_repo == "zabbix"
   tags:
@@ -39,6 +40,7 @@
     name: policycoreutils-python
     state: installed
   when: zabbix_selinux
+  become: yes
   tags:
     - init
     - zabbix-agent
