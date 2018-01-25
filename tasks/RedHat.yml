@@ -33,7 +33,7 @@
     - skip_ansible_lint
 
 - name: "RedHat | Installing zabbix-agent"
-  yum:
+  package:
     pkg: "{{ item }}"
     state: "{{ zabbix_agent_package_state }}"
   become: yes
@@ -43,7 +43,7 @@
     - zabbix-agent
 
 - name: "Install policycoreutils-python"
-  yum:
+  package:
     name: policycoreutils-python
     state: installed
   when: zabbix_selinux
