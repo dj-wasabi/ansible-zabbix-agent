@@ -216,6 +216,7 @@
     proxy: "{{ zabbix_proxy }}"
     inventory_mode: "{{ zabbix_inventory_mode }}"
     interfaces: "{{ zabbix_agent_interfaces }}"
+    visible_name: "{{ zabbix_visible_hostname|default(zabbix_agent_hostname) }}"
   when:
     - zabbix_api_create_hosts
   become: no
