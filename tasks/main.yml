@@ -158,6 +158,8 @@
     destination_port: "{{ zabbix_agent_listenport }}"
     source: "{{ zabbix_agent_firewall_source | default(omit) }}"
     protocol: tcp
+    chain: INPUT
+    source: "{{ zabbix_agent_server }}"
   when: zabbix_agent_firewall_enable
 
 - name: "Make sure the zabbix-agent service is running"
