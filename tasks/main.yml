@@ -160,6 +160,7 @@
     protocol: tcp
     chain: INPUT
     source: "{{ zabbix_agent_server }}"
+    jump: ACCEPT
   when: zabbix_agent_firewall_enable
 
 - name: "Make sure the zabbix-agent service is running"
