@@ -159,7 +159,6 @@
     source: "{{ zabbix_agent_firewall_source | default(omit) }}"
     protocol: tcp
     chain: INPUT
-    source: "{{ zabbix_agent_server }}"
     jump: ACCEPT
   when: zabbix_agent_firewall_enable
 
