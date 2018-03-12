@@ -4,6 +4,19 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+1.2.0  (2018-01-25)
+
+  * Fix for: Some RedHat subtask are missing become option #116
+  * Delete option "run_once" from task "Create hostgroups" #119 (By pull request: mgornikov (Thanks!))
+  * Fix the CI Travis build again.
+  * Fix for: Changing zabbix_version breaks role #117
+  * Added sonya #120
+  * Add clean all #121
+  * allow 127.0.0.1 for listenip #124 (By pull request: blodone (Thanks!))
+  * Get selinux status #125 (By pull request: andreagrax (Thanks!))
+  * Add new variable zabbix_visible_hostname #126 (By pull request: samyscoub (Thanks!))
+  * Replaced `yum` with `package` #127  (By pull request: average-joe (Thanks!))
+
 1.1.0  (2017-11-13)
 
   * Add zabbix_ to agent_serveractive and agent_server #101 (By pull request: asosso (Thanks!))
