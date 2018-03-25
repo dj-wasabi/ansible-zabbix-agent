@@ -101,6 +101,7 @@
     state: installed
     update_cache: yes
     cache_valid_time: 0
+  become: yes
   when: zabbix_selinux
 
 - name: "Debian | Enable the service"

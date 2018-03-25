@@ -28,7 +28,8 @@
 
 - name: "Do a yum clean"
   shell: yum clean all
-  when: yum_repo_installed
+  when: yum_repo_installed.changed
+  become: yes
   tags:
     - skip_ansible_lint
 
