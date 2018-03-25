@@ -143,6 +143,7 @@
     path: "{{ zabbix_agent_tlspskfile | dirname }}"
     mode: 0755
     state: directory
+  become: yes
   when:
     - zabbix_agent_tlspskfile is defined
     - zabbix_agent_tlspskfile != ''
@@ -154,6 +155,7 @@
     owner: zabbix
     group: zabbix
     mode: 0400
+  become: yes
   when:
     - zabbix_agent_tlspskfile is defined
     - zabbix_agent_tlspsk_secret is defined
@@ -178,6 +180,7 @@
     protocol: tcp
     chain: INPUT
     jump: ACCEPT
+  become: yes
   when: zabbix_agent_firewall_enable
 
 - name: "Make sure the zabbix-agent service is running"

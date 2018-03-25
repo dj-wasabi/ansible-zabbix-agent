@@ -11,6 +11,7 @@
   with_items:
     - python-libxml2
     - python-xml
+  become: yes
   register: dependency
 
 - name: "Suse | Install basic repo file"
