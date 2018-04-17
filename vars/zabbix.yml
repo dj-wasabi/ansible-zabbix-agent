@@ -36,6 +36,8 @@ sign_keys:
       sign_key: 79EA5ED4
     jessie:
       sign_key: 79EA5ED4
+    stretch:
+      sign_key: A14FE591
     trusty:
       sign_key: 79EA5ED4
     xenial:
