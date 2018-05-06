@@ -29,16 +29,16 @@ platforms:
     groups:
       - group1
     privileged: True
-  - name: zabbix-agent-ubuntu-bionic
-    image: solita/ubuntu-systemd:bionic
-    groups:
-      - group1
-    privileged: True
   - name: zabbix-agent-mint
     image: vcatechnology/linux-mint
     groups:
       - group1
     privileged: True
+#  - name: zabbix-agent-ubuntu-bionic
+#    image: solita/ubuntu-systemd:bionic
+#    groups:
+#      - group1
+#    privileged: True
 
 provisioner:
   name: ansible
