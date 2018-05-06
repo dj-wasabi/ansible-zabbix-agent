@@ -4,6 +4,15 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+1.3.0
+
+  * fixes issue "Configure iptables task fail" #128 #129 (By pull request: andreagrax (Thanks!))
+  * Fix travis docker #131
+  * Added several 'become: yes' to tasks #133
+  * Added gpg key id for agent version 3.0 in Debian Stretch #135 (By pull request: hatifnatt (Thanks!))
+  * Upgrade minimum Ansible version from 1.9 --> 2.4
+  
+
 1.2.0  (2018-01-25)
 
   * Fix for: Some RedHat subtask are missing become option #116

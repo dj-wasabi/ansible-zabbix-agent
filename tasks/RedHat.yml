@@ -3,7 +3,9 @@
 
 - name: "RedHat | Use EPEL package name"
   set_fact:
-    zabbix_agent_package: "zabbix{{ zabbix_short_version }}-agent"
+    zabbix_agent_package: "zabbix{{ zabbix_version | regex_replace('\\.', '') }}-agent"
+    zabbix_sender_package: "zabbix{{ zabbix_version | regex_replace('\\.', '') }}-sender"
+    zabbix_get_package: "zabbix{{ zabbix_version | regex_replace('\\.', '') }}-get"
   when:
     - zabbix_repo == "epel"
   tags:
@@ -30,6 +32,7 @@
   shell: yum clean all
   when: yum_repo_installed.changed
   become: yes
+  warn: False
   tags:
     - skip_ansible_lint
 
@@ -39,6 +42,23 @@
     state: "{{ zabbix_agent_package_state }}"
   become: yes
   with_items: "{{ zabbix_agent_packages }}"
+  when:
+    - zabbix_repo == "zabbix"
+  tags:
+    - init
+    - zabbix-agent
+
+- name: "RedHat | Installing zabbix-agent"
+  package:
+    pkg: "{{ item }}"
+    state: "{{ zabbix_agent_package_state }}"
+  become: yes
+  with_items:
+    - "{{ zabbix_agent_package }}"
+    - "{{ zabbix_sender_package }}"
+    - "{{ zabbix_get_package }}"
+  when:
+    - zabbix_repo == "epel"
   tags:
     - init
     - zabbix-agent
