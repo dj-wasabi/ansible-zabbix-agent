@@ -14,13 +14,18 @@ platforms:
     groups:
       - group1
     privileged: True
-  - name: zabbix-agent-debian
+  - name: zabbix-agent-debian-jessie
     image: maint/debian-systemd:latest
     groups:
       - group1
     privileged: True
-  - name: zabbix-agent-ubuntu
-    image: solita/ubuntu-systemd:latest
+  - name: zabbix-agent-debian-stretch
+    image: jrei/systemd-debian:latest
+    groups:
+      - group1
+    privileged: True
+  - name: zabbix-agent-ubuntu-xenial
+    image: solita/ubuntu-systemd:xenial
     groups:
       - group1
     privileged: True
@@ -29,11 +34,17 @@ platforms:
     groups:
       - group1
     privileged: True
+#  - name: zabbix-agent-ubuntu-bionic
+#    image: solita/ubuntu-systemd:bionic
+#    groups:
+#      - group1
+#    privileged: True
 
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
+
 scenario:
   name: default
   test_sequence:

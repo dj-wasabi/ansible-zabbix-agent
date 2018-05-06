@@ -96,7 +96,8 @@
   tags:
     - zabbix-agent
     - config
-#straight to getenforce binary , workaround for missing python_selinux library
+
+# straight to getenforce binary , workaround for missing python_selinux library
 - name: "Get getenforce binary"
   stat:
     path: /usr/sbin/getenforce

@@ -5,18 +5,22 @@
     - name: "Installing packages on CentOS family"
       yum:
         name: "{{ item }}"
-        state: installed
+        state: present
       with_items:
         - net-tools
         - which
-      when: ansible_os_family == 'RedHat'
+      when:
+        - ansible_os_family == 'RedHat'
+
     - name: "Installing packages on Debian family"
       apt:
         name: "{{ item }}"
-        state: installed
+        state: present
       with_items:
         - net-tools
-      when: ansible_os_family == 'Debian'
+      when:
+        - ansible_os_family == 'Debian'
+
     - name: "Installing packages on Suse family"
       shell: zypper install -y python-xml python-libxml2 net-tools which
       changed_when: False
