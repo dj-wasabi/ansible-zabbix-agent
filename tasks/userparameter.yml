@@ -3,7 +3,7 @@
 - name: "Installing sample file"
   copy:
     src: sample.conf
-    dest: "{{ agent_include }}/mysql.conf"
+    dest: "{{ zabbix_agent_include }}/mysql.conf"
     owner: zabbix
     group: zabbix
     mode: 0755
