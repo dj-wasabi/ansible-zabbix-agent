@@ -6,6 +6,6 @@
     dest: "{{ zabbix_agent_include }}/mysql.conf"
     owner: zabbix
     group: zabbix
-    mode: 0755
+    mode: 0644
   notify: restart zabbix-agent
   become: yes
