@@ -34,11 +34,11 @@ platforms:
     groups:
       - group1
     privileged: True
-#  - name: zabbix-agent-ubuntu-bionic
-#    image: solita/ubuntu-systemd:bionic
-#    groups:
-#      - group1
-#    privileged: True
+  - name: zabbix-agent-ubuntu-bionic
+    image: solita/ubuntu-systemd:bionic
+    groups:
+      - group1
+    privileged: True
 
 provisioner:
   name: ansible
