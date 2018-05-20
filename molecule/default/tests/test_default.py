@@ -26,7 +26,6 @@ def test_zabbix_agent_dot_conf(File, SystemInfo):
 
     assert passwd.contains("Server=192.168.3.33")
     assert passwd.contains("ServerActive=192.168.3.33")
-    assert passwd.contains("ListenIP=0.0.0.0")
     assert passwd.contains("DebugLevel=3")
     assert passwd.contains("TLSAccept=psk")
     assert passwd.contains("TLSPSKIdentity=my_Identity")
