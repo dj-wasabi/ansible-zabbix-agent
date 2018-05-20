@@ -76,7 +76,9 @@ ListenPort={{ zabbix_agent_listenport }}
 #       list of comma delimited ip addresses that the agent should listen on.
 #       first ip address is sent to zabbix server if connecting to it to retrieve list of active checks.
 #
+{% if zabbix_agent_listenip !='0.0.0.0' %}
 ListenIP={{ zabbix_agent_listenip }}
+{% endif %}
 
 ### option: startagents
 #       number of pre-forked instances of zabbix_agentd that process passive checks.
