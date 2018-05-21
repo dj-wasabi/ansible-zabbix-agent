@@ -11,7 +11,7 @@ Version (Release date)
   * Added several 'become: yes' to tasks #133
   * Added gpg key id for agent version 3.0 in Debian Stretch #135 (By pull request: hatifnatt (Thanks!))
   * Upgrade minimum Ansible version from 1.9 --> 2.4
-  
+  * Added a License, Code of Conduct and some more files
 
 1.2.0  (2018-01-25)
 

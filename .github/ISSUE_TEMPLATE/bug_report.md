@@ -1,20 +1,27 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Help to improve this Ansible role.
 
 ---
 
 **Describe the bug**
-<!--- A clear and concise description of what the bug is.--->
+<!--- A clear and concise description of what the bug is. -->
 
-**Installation method**
-<!--- Please provide the installation method of the role. --->
+**Installation method/version**
+<!--- Please provide the installation method and version of the role. -->
 
-* Github
-* Ansible Galaxy
+* Github / latest
+* Ansible Galaxy / 1.1.0
+
+**Ansible Version**
+
+```
+<!--- Paste output from "ansible --version" -->
+```
 
 **Targetted hosts**
-<!--- Please provide the operating system. --->
+Concerns the following OS(es):
+<!--- Pick one below and delete the rest -->
 
 * Ubuntu
 * Debian
@@ -22,7 +29,7 @@ about: Create a report to help us improve
 * Mint
 
 **Expected behavior**
-<!--- A clear and concise description of what you expected to happen. --->
+<!--- A clear and concise description of what you expected to happen. -->
 
 **Additional context**
-<!--- Add any other context about the problem here. Configuration of the role/group_vars information etc. --->
+<!--- Add any other context about the problem here. Configuration of the role/group_vars information etc. -->
