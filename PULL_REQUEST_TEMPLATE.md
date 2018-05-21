@@ -5,7 +5,6 @@
 <!--- Pick one below and delete the rest: -->
 
 Feature Pull Request
-New Module Pull Request
 Bugfix Pull Request
 Docs Pull Request
 
