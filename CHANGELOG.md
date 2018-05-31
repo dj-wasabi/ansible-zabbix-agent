@@ -4,14 +4,18 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
-1.3.0
+1.3.0  (2018-06-??)
 
-  * fixes issue "Configure iptables task fail" #128 #129 (By pull request: andreagrax (Thanks!))
+  * fixes issue "Configure iptables task fail" #128 (By pull request: andreagrax (Thanks!))
   * Fix travis docker #131
   * Added several 'become: yes' to tasks #133
   * Added gpg key id for agent version 3.0 in Debian Stretch #135 (By pull request: hatifnatt (Thanks!))
   * Upgrade minimum Ansible version from 1.9 --> 2.4
   * Added a License, Code of Conduct and some more files
+  * Fix for Misleading repo name #147
+  * fixes for the userparameter task #138 (By pull request: HNKNTA (Thanks!))
+  * Support for Debian 9 and Ubuntu 18.04
+  * Added fix for: Host autoregistered in zabbix with IP 0.0.0.0 when Lis… #141
 
 1.2.0  (2018-01-25)
 
