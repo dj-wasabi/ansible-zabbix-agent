@@ -4,7 +4,7 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
-1.3.0  (2018-06-??)
+1.3.0  (2018-06-23)
 
   * fixes issue "Configure iptables task fail" #128 (By pull request: andreagrax (Thanks!))
   * Fix travis docker #131
