@@ -215,6 +215,8 @@ These variables needs to be changed/overriden when you want to make use of the z
 
 * `zabbix_create_host`: present (Default) if the host needs to be created or absent is you want to delete it. This only works when `zabbix_api_create_hosts` is set to `True`.
 
+* `zabbix_update_host`: yes (Default) if the host should be updated if already present. This only works when `zabbix_api_create_hosts` is set to `True`.
+
 * `zabbix_useuip`: 1 if connection to zabbix-agent is made via ip, 0 for fqdn.
 
 * `zabbix_host_groups`: An list of hostgroups which this host belongs to.
@@ -226,7 +228,7 @@ These variables needs to be changed/overriden when you want to make use of the z
 * `zabbix_inventory_mode`: Configure Zabbix inventory mode. Needed for building inventory data, manually when configuring a host or automatically by using some automatic population options. This has to be set to `automatic` if you want to make automatically building inventory data.
 
 * `zabbix_visible_hostname` : Configure Zabbix visible name inside zabbix web UI for the node.
-     
+
 ## Other variables
 
 * `zabbix_agent_firewall_enable`: If IPtables needs to be updated by opening an TCP port for port configured in `zabbix_agent_listenport`.
