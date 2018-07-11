@@ -199,6 +199,8 @@ These variables are specific for Zabbix 3.0/
 ## Zabbix API variables
 These variables needs to be changed/overriden when you want to make use of the zabbix-api for automatically creating and or updating hosts.
 
+Host encryption configuration will be set to match agent configuration.
+
 * `zabbix_url`: The url on which the Zabbix webpage is available. Example: http://zabbix.example.com
 
 * `zabbix_api_create_hosts`: When you want to enable the Zabbix API to create/delete the host. This has to be set to `True` if you want to make use of `zabbix_create_host`. Default: `False`
@@ -226,7 +228,7 @@ These variables needs to be changed/overriden when you want to make use of the z
 * `zabbix_inventory_mode`: Configure Zabbix inventory mode. Needed for building inventory data, manually when configuring a host or automatically by using some automatic population options. This has to be set to `automatic` if you want to make automatically building inventory data.
 
 * `zabbix_visible_hostname` : Configure Zabbix visible name inside zabbix web UI for the node.
-     
+
 ## Other variables
 
 * `zabbix_agent_firewall_enable`: If IPtables needs to be updated by opening an TCP port for port configured in `zabbix_agent_listenport`.
