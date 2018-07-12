@@ -219,6 +219,7 @@
     link_templates: "{{ zabbix_link_templates }}"
     status: "{{ zabbix_host_status }}"
     state: "{{ zabbix_create_host }}"
+    force: "{{ zabbix_update_host }}"
     proxy: "{{ zabbix_proxy }}"
     inventory_mode: "{{ zabbix_inventory_mode }}"
     interfaces: "{{ zabbix_agent_interfaces }}"
