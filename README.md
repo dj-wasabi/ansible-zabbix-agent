@@ -160,7 +160,7 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 ## Zabbix 3.x
 
-These variables are specific for Zabbix 3.0/
+These variables are specific for Zabbix 3.0:
 
 * `zabbix_agent_tlsconnect`: How the agent should connect to server or proxy. Used for active checks.
 
