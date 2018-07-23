@@ -2,3 +2,4 @@ ansible==2.6.1
 docker==3.4.1
 molecule==2.16.0
 testinfra==1.14.0
+zabbix-api==0.5.3
