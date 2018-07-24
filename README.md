@@ -326,6 +326,16 @@ and in the playbook only specifying:
       roles:
          - role: dj-wasabi.zabbix-agent
 
+## Example for TLS PSK encrypted agent communication
+
+Variables e.g. in the playbook or in `host_vars/myhost`:
+
+    zabbix_agent_tlsaccept: psk
+    zabbix_agent_tlsconnect: psk
+    zabbix_agent_tlspskidentity: "myhost PSK"
+    zabbix_agent_tlspsk_secret: b7e3d380b9d400676d47198ecf3592ccd4795a59668aa2ade29f0003abbbd40d
+    zabbix_agent_tlspskfile: /etc/zabbix/zabbix_agent_pskfile.psk
+
 # Molecule
 
 This roles is configured to be tested with Molecule. You can find on this page some more information regarding Molecule: https://werner-dijkerman.nl/2016/07/10/testing-ansible-roles-with-molecule-testinfra-and-docker/
