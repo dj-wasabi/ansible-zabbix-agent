@@ -49,9 +49,8 @@
 
   roles:
     - role: geerlingguy.mysql
-      when: inventory_hostname in groups['mysql']
     - role: dj-wasabi.zabbix-server
-    - role: ansible-zabbix-web
+    - role: dj-wasabi.zabbix-web
 
 - name: Prepare
   hosts: all:!zabbix_server

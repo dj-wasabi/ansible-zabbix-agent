@@ -63,13 +63,7 @@ provisioner:
 
 scenario:
   name: with-server
-#  test_sequence:
-#    - lint
-#    - destroy
-#    - create
-#    - converge
-#    - verify
-#    - destroy
+
 verifier:
   name: testinfra
   lint:
