@@ -37,9 +37,10 @@ Build Status:
 
 This is an role for installing and maintaining the zabbix-agent.
 
-This is one of the 'dj-wasabi' roles which configures your whole zabbix environment. See an list for the complete list:
+This is one of the 'dj-wasabi' roles which configures your whole Zabbix environment. See an list for the complete list:
 
  * zabbix-server (https://galaxy.ansible.com/dj-wasabi/zabbix-server/)
+ * zabbix-web (https://galaxy.ansible.com/dj-wasabi/zabbix-web/)
  * zabbix-proxy (https://galaxy.ansible.com/dj-wasabi/zabbix-proxy/)
  * zabbix-javagateway (https://galaxy.ansible.com/dj-wasabi/zabbix-javagateway/)
  * zabbix-agent (https://galaxy.ansible.com/dj-wasabi/zabbix-agent/)
@@ -124,11 +125,10 @@ See the following list of supported Operating systems with the Zabbix releases:
 
 
 ## Zabbix API
+
 When you want to automatically create the hosts in the webinterface, you'll need on your own machine the zabbix-api package.
 
 You can install this locally with the following command: `pip install zabbix-api`.
-
-This ansible role uses the modules from "Cove" found in this pull request: https://github.com/ansible/ansible-modules-extras/pull/44. So all credits goes to this guy!
 
 # Installation
 
@@ -137,6 +137,7 @@ Installing this role is very simple: `ansible-galaxy install dj-wasabi.zabbix-ag
 # Role Variables
 
 ## Main variables
+
 There are some variables in de default/main.yml which can (Or needs to) be changed/overriden:
 
 * `zabbix_agent_server`: The ipaddress for the zabbix-server or zabbix-proxy.
@@ -197,6 +198,7 @@ These variables are specific for Zabbix 3.0:
 * `zabbix_agent_tlspsk_secret`: The pre-shared secret key that should be placed in the file configured with `agent_tlspskfile`.
 
 ## Zabbix API variables
+
 These variables needs to be changed/overriden when you want to make use of the zabbix-api for automatically creating and or updating hosts.
 
 Host encryption configuration will be set to match agent configuration.
@@ -229,7 +231,7 @@ Host encryption configuration will be set to match agent configuration.
 
 * `zabbix_inventory_mode`: Configure Zabbix inventory mode. Needed for building inventory data, manually when configuring a host or automatically by using some automatic population options. This has to be set to `automatic` if you want to make automatically building inventory data.
 
-* `zabbix_visible_hostname` : Configure Zabbix visible name inside zabbix web UI for the node.
+* `zabbix_visible_hostname` : Configure Zabbix visible name inside Zabbix web UI for the node.
 
 ## Other variables
 
@@ -340,17 +342,38 @@ Variables e.g. in the playbook or in `host_vars/myhost`:
 
 # Molecule
 
-This roles is configured to be tested with Molecule. You can find on this page some more information regarding Molecule: https://werner-dijkerman.nl/2016/07/10/testing-ansible-roles-with-molecule-testinfra-and-docker/
-Molecule will boot 3 docker containers, containing the following OS:
+This role is configured to be tested with Molecule. You can find on this page some more information regarding Molecule: https://werner-dijkerman.nl/2016/07/10/testing-ansible-roles-with-molecule-testinfra-and-docker/
+
+With each Pull Request, Molecule will be executed via travis.ci. Pull Requests will only be merged once these tests run successfully.
+
+There are 2 scenarios that are executed with Travis.
+
+## default
+
+With the first scenario, Molecule will boot 5 Docker containers with the following OS'es:
 
 * Debian 8
 * CentOS 7
 * Ubuntu 16.04
+* Ubuntu 18.04
 * Mint
-* OpenSuse
 
-On these containers, this Ansible role is executed. After this, a idempotence check is run.
-When all is executed correctly, TestInfra is executed to validate the installation/configuration.
+This scenario will be doing a basic installation/configuration, without registering the host via the Zabbix API to the server.
+
+## with-server
+
+The 2nd scenario will boot 4 Docker containers with the following OS'es:
+
+* CentOS 7 (Zabbix Server)
+* Debian 8
+* CentOS 7
+* Ubuntu 18.04
+
+First, a Zabbix Server will be installed on a container. This installation make uses of other dj-wasabi roles to install/configure a Zabbix Server. Once this instance is running, the 3 other agents are installed.
+
+Each host will register itself on the Zabbix Server and the status should be 0 (This means the Zabbix Server and Zabbix Agent are connected).
+
+The Ubuntu agent will register itself via a PSK, so that communication between the Zabbix Server and Zabbix Agent is encrypted with e Pre-Shared Key.
 
 # Extra Information
 
@@ -358,12 +381,14 @@ You can install so-called userparameter files by adding the following into your 
 
 ```
 - name: "Installing sample file"
-  copy: src=sample.conf
-        dest="{{ agent_include }}/mysql.conf"
-        owner=zabbix
-        group=zabbix
-        mode=0755
-  notify: restart zabbix-agent
+  copy:
+    src: sample.conf
+    dest: "{{ agent_include }}/mysql.conf"
+    owner: zabbix
+    group: zabbix
+    mode: 0755
+  notify:
+    - restart zabbix-agent
 ```
 
 Example of the "sample.conf" file:
@@ -372,7 +397,7 @@ Example of the "sample.conf" file:
 UserParameter=mysql.ping_to,mysqladmin -uroot ping | grep -c alive
 ```
 
-You can extend your zabbix configuration by adding items yourself that do specific checks which aren't in the zabbix core itself. You can change offcourse the name of the file to whatever you want (Same for the UserParameter line(s) ;-)
+You can extend your Zabbix configuration by adding items yourself that do specific checks which aren't in the Zabbix core itself. You can change offcourse the name of the file to whatever you want (Same for the UserParameter line(s) ;-)
 
 (Maybe in near future doing it with variables.)
 
@@ -382,7 +407,7 @@ GPLv3
 
 # Author Information
 
-Please send suggestion or pull requests to make this role better. Also let me know if you encouter any issues installing or using this role.
+Please send suggestion or pull requests to make this role better. Also let me know if you encounter any issues installing or using this role.
 
 Github: https://github.com/dj-wasabi/ansible-zabbix-agent
 

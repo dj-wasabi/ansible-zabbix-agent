@@ -4,12 +4,18 @@ language: python
 services:
   - docker
 
+addons:
+  hosts:
+    - zabbix-server-centos
+
 install:
   - pip install -r requirements.txt
 
 script:
   - molecule --version
   - ansible --version
-  - molecule test
+  - molecule test -s default
+  - molecule test -s with-server
+
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

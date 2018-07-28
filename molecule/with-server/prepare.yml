@@ -1,0 +1,75 @@
+---
+- name: Prepare
+  hosts: zabbix_server
+  pre_tasks:
+    - name: "Installing EPEL"
+      yum:
+        name: epel-release
+        state: present
+      when: ansible_distribution == 'CentOS'
+
+    - name: "Installing packages"
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - net-tools
+        - which
+        - libselinux-python
+        - python-pip
+      register: installation_dependencies
+      when: ansible_distribution == 'CentOS'
+
+    - name: "Installing which on NON-CentOS"
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - net-tools
+        - python-pip
+        - curl
+      when: ansible_distribution != 'CentOS'
+
+    - name: "Configure SUDO."
+      lineinfile:
+        dest: /etc/sudoers
+        line: "Defaults    !requiretty"
+        state: present
+
+    - name: "Make sure the docs are installed."
+      lineinfile:
+        dest: /etc/yum.conf
+        line: "tsflags=nodocs"
+        state: absent
+
+    - name: "Installing some python dependencies"
+      pip:
+        name: py-zabbix
+        state: present
+
+  roles:
+    - role: geerlingguy.mysql
+    - role: dj-wasabi.zabbix-server
+    - role: dj-wasabi.zabbix-web
+
+- name: Prepare
+  hosts: all:!zabbix_server
+  tasks:
+    - name: "Installing packages on CentOS family"
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - net-tools
+        - which
+      when:
+        - ansible_os_family == 'RedHat'
+
+    - name: "Installing packages on Debian family"
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - net-tools
+      when:
+        - ansible_os_family == 'Debian'
