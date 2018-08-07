@@ -1,11 +1,12 @@
 ---
 
-- name: "Installing sample file"
-  copy:
-    src: sample.conf
-    dest: "{{ zabbix_agent_include }}/mysql.conf"
+- name: "Installing user-defined userparameters"
+  template:
+    src: "userparameters/{{ item }}.j2"
+    dest: "{{ zabbix_agent_include }}/userparameter_{{ item }}.conf"
     owner: zabbix
     group: zabbix
     mode: 0644
   notify: restart zabbix-agent
   become: yes
+  with_items: "{{ zabbix_agent_userparameters }}"

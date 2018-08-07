@@ -80,6 +80,7 @@ zabbix_agent_timeout: 3
 zabbix_agent_include: /etc/zabbix/zabbix_agentd.d
 zabbix_agent_unsafeuserparameters: 0
 zabbix_agent_userparameter:
+zabbix_agent_userparameters: []
 zabbix_agent_loadmodulepath: ${libdir}/modules
 zabbix_agent_loadmodule:
 
