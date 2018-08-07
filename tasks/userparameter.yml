@@ -10,3 +10,15 @@
   notify: restart zabbix-agent
   become: yes
   with_items: "{{ zabbix_agent_userparameters }}"
+
+- name: "Installing user-defined scripts"
+  copy:
+    src: "scripts/{{ item }}"
+    dest: "/etc/zabbix/scripts/{{ item }}"
+    owner: zabbix
+    group: zabbix
+    mode: 0644
+  notify: restart zabbix-agent
+  become: yes
+  with_items: "{{ zabbix_agent_userparameters }}"
+  when: zabbix_agent_custom_scripts
