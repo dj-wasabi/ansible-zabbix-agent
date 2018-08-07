@@ -14,7 +14,7 @@
 - name: "Installing user-defined scripts"
   copy:
     src: "scripts/{{ item }}"
-    dest: "/etc/zabbix/scripts/{{ item }}"
+    dest: "/etc/zabbix/scripts/"
     owner: zabbix
     group: zabbix
     mode: 0644
