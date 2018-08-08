@@ -2,8 +2,8 @@
 
 - name: "Installing user-defined userparameters"
   template:
-    src: "userparameters/{{ item }}.j2"
-    dest: "{{ zabbix_agent_include }}/userparameter_{{ item }}.conf"
+    src: "userparameters/{{ item.name }}.j2"
+    dest: "{{ zabbix_agent_include }}/userparameter_{{ item.name }}.conf"
     owner: zabbix
     group: zabbix
     mode: 0644
@@ -13,7 +13,7 @@
 
 - name: "Installing user-defined scripts"
   copy:
-    src: "scripts/{{ item }}"
+    src: "scripts/{{ item.scripts_dir }}"
     dest: "/etc/zabbix/scripts/"
     owner: zabbix
     group: zabbix
@@ -21,4 +21,4 @@
   notify: restart zabbix-agent
   become: yes
   with_items: "{{ zabbix_agent_userparameters }}"
-  when: zabbix_agent_custom_scripts
+  when: item.scripts_dir is defined
