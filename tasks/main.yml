@@ -253,3 +253,10 @@
   become: no
   tags:
     - api
+
+- name: "Including userparameters"
+  include: "userparameter.yml"
+  when: zabbix_agent_userparameters|length > 0
+  tags:
+    - zabbix-agent
+    - userparameter

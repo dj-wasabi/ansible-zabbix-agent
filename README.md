@@ -25,7 +25,7 @@ Table of Contents
   * [Vars in role configuration](#vars-in-role-configuration)
   * [Combination of group_vars and playbook](#combination-of-group-vars-and-playbook)
 - [Molecule](#molecule)
-- [Extra Information](#extra-information)
+- [Deploying Userparameters](#deploying-userparameters)
 - [License](#license)
 - [Author Information](#author-information)
 
@@ -158,6 +158,10 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 * `zabbix_agent_interfaces`: A list that configured the interfaces you can use when configuring via API.
 
 * `zabbix_selinux`: Enables an SELinux policy so that the agent will run. Default: False.
+
+* `zabbix_agent_userparameters`: List of userparameter names and scripts (if any). Detailed description is given in the [Deploying Userparameters](#deploying-userparameters) section. Default: `[]` (Empty list).
+    * `name`: Userparameter name (should be the same with userparameter template file name)
+    * `scripts_dir`: Directory name of the custom scripts needed for userparameters
 
 ## Zabbix 3.x
 
@@ -375,31 +379,35 @@ Each host will register itself on the Zabbix Server and the status should be 0 (
 
 The Ubuntu agent will register itself via a PSK, so that communication between the Zabbix Server and Zabbix Agent is encrypted with e Pre-Shared Key.
 
-# Extra Information
+# Deploying Userparameters
 
-You can install so-called userparameter files by adding the following into your roles:
+The following steps are required to install custom userparameters and/or scripts:
+
+* Put the desired userparameter file in the `templates/userparameters` directory and name it as `<userparameter_name>.j2`. For example: `templates/userparameters/mysql.j2`
+* Put the scripts directory (if any) in the `files/scripts` directory. For example: `files/scripts/mysql`
+* Add `zabbix_agent_userparameters` variable to the playbook as a list of dictionaries and define userparameter name and scripts directory name (if there are no scripts just no not specify the `scripts_dir` variable).
+
+Example:
 
 ```
-- name: "Installing sample file"
-  copy:
-    src: sample.conf
-    dest: "{{ agent_include }}/mysql.conf"
-    owner: zabbix
-    group: zabbix
-    mode: 0755
-  notify:
-    - restart zabbix-agent
+- hosts: mysql_servers
+  tasks:
+    - include_role:
+        name: dj-wasabi.zabbix-agent
+      vars:
+        zabbix_agent_server: zabbix.mydomain.com
+        zabbix_agent_userparameters:
+          - name: mysql
+            scripts_dir: mysql
+          - name: galera
+
 ```
 
-Example of the "sample.conf" file:
+Example of the "templates/userparameters/mysql.j2" file:
 
 ```
 UserParameter=mysql.ping_to,mysqladmin -uroot ping | grep -c alive
 ```
-
-You can extend your Zabbix configuration by adding items yourself that do specific checks which aren't in the Zabbix core itself. You can change offcourse the name of the file to whatever you want (Same for the UserParameter line(s) ;-)
-
-(Maybe in near future doing it with variables.)
 
 # License
 
