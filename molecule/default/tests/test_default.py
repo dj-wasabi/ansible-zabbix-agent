@@ -47,7 +47,7 @@ def test_zabbix_include_dir(File):
     assert zabbixagent.group == "root"
 
 
-def test_socker(Socket, SystemInfo):
+def test_socket(Socket, SystemInfo):
     # Find out why this is not working for linuxmint and opensus
     if SystemInfo.distribution not in ['linuxmint', 'opensuse']:
         assert Socket("tcp://0.0.0.0:10050").is_listening
