@@ -6,11 +6,8 @@
 
 - name: "Install zypper repo dependency"
   zypper:
-    name: "{{ item }}"
+    name: ["python-libxml2", "python-xml"]
     state: present
-  with_items:
-    - python-libxml2
-    - python-xml
   become: yes
   register: dependency
 
@@ -28,10 +25,9 @@
 
 - name: "Suse | Install zabbix-agent"
   zypper:
-    name: "{{ item }}"
+    name: "{{ zabbix_agent_packages }}"
     state: "{{ zabbix_agent_package_state }}"
     disable_gpg_check: yes
-  with_items: "{{ zabbix_agent_packages }}"
   become: yes
   tags:
     - zabbix-agent
