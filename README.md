@@ -411,7 +411,7 @@ UserParameter=mysql.ping_to,mysqladmin -uroot ping | grep -c alive
 
 # License
 
-GPLv3
+MIT
 
 # Author Information
 
