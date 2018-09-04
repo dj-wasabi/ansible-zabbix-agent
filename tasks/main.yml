@@ -115,6 +115,7 @@
   set_fact:
     zabbix_selinux: "{{ true }}"
   when: 'getenforce_bin.stat.exists and ("Enforcing" in sestatus.stdout or "Permissive" in sestatus.stdout)'
+  check_mode: no  
 
 - name: "Allow zabbix_agent to start (SELinux)"
   selinux_permissive:
