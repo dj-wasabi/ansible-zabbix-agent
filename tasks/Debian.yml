@@ -78,6 +78,7 @@
     cache_valid_time: 0
   when: ansible_distribution in ['Ubuntu', 'Debian']
   become: yes
+  check_mode: no
   tags:
     - zabbix-agent
     - init
