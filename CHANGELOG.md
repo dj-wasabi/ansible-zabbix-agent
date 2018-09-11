@@ -4,6 +4,19 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+1.4.0  (2018-09-11)
+
+  * Add configuration to prevent host updating via zabbix api #150 (By pull request: sblaisot (Thanks!))
+  * Handle encryption when adding host to zabbix server #151 (By pull request: sblaisot (Thanks!))
+  * Removed the warning message #156
+  * Updating versions to be installed #157
+  * Added 2nd Molecule Scenario #158
+  * Parameterizing userparameter deployment #159 (By pull request: rubentsirunyan (Thanks!))
+  * fix typo #160 (By pull request: kmonticolo (Thanks!))
+  * Reflect changed license in README #161 (By pull request: stephankn (Thanks!))
+  * remove deprecated loop #162 (By pull request: stephankn (Thanks!))
+  * Fix when running ansible in --check mode #163 (By pull request: AlbanAndrieu (Thanks!))
+
 1.3.0  (2018-06-23)
 
   * fixes issue "Configure iptables task fail" #128 (By pull request: andreagrax (Thanks!))
