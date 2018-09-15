@@ -185,6 +185,17 @@
   become: yes
   when: zabbix_agent_firewall_enable
 
+- name: "Configure firewalld"
+  firewalld:
+    rich_rule: 'rule family="ipv4" source address="{{ zabbix_agent_firewalld_source }}" port protocol="tcp" port="{{ zabbix_agent_listenport }}" accept'
+    permanent: true
+    state: enabled
+  become: yes
+  when: zabbix_agent_firewalld_enable
+  notify:
+    - firewalld-reload
+  tags: zabbix_agent_firewalld_enable
+
 - name: "Make sure the zabbix-agent service is running"
   service:
     name: "{{ zabbix_agent_service }}"
