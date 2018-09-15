@@ -1,0 +1,34 @@
+---
+
+- name: "Create directory structure"
+  win_file:
+    path: "{{ zabbix_win_install_dir }}"
+    state: directory
+
+- name: Download earthrise.jpg to specified path
+  win_get_url:
+    url: "{{ zabbix_win_download_link }}"
+    dest: '{{ zabbix_win_install_dir }}\zabbix_agents_{{ zabbix_version_long }}.win.zip'
+
+- name: Unzip a bz2 (BZip) file
+  win_unzip:
+    src: '{{ zabbix_win_install_dir }}\zabbix_agents_{{ zabbix_version_long }}.win.zip'
+    dest: "{{ zabbix_win_install_dir }}"
+    creates: '{{ zabbix_win_install_dir }}\bin\win64\zabbix_agentd.exe'
+
+- name: "Configure zabbix-agent"
+  win_template:
+    src: zabbix_agentd.conf.j2
+    dest: '{{ zabbix_win_install_dir }}\zabbix_agentd.conf'
+
+- name: Save the result of 'whoami' in 'whoami_out'
+  win_command: '{{ zabbix_win_install_dir }}\bin\win64\zabbix_agentd.exe --config {{ zabbix_win_install_dir }}\zabbix_agentd.conf --install'
+  register: zabbix_windows_install
+  args:
+    creates: '{{ zabbix_win_install_dir }}\.installed'
+
+- name: "Create directory structure"
+  win_file:
+    path: '{{ zabbix_win_install_dir }}\.installed'
+    state: touch
+  when: zabbix_windows_install is changed

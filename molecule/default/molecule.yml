@@ -12,31 +12,31 @@ platforms:
     groups:
       - group1
     privileged: True
-  - name: zabbix-agent-debian-jessie
-    image: maint/debian-systemd:latest
-    groups:
-      - group1
-    privileged: True
-  - name: zabbix-agent-debian-stretch
-    image: jrei/systemd-debian:latest
-    groups:
-      - group1
-    privileged: True
-  - name: zabbix-agent-ubuntu-xenial
-    image: solita/ubuntu-systemd:xenial
-    groups:
-      - group1
-    privileged: True
-  - name: zabbix-agent-mint
-    image: vcatechnology/linux-mint
-    groups:
-      - group1
-    privileged: True
-  - name: zabbix-agent-ubuntu-bionic
-    image: solita/ubuntu-systemd:bionic
-    groups:
-      - group1
-    privileged: True
+#  - name: zabbix-agent-debian-jessie
+#    image: maint/debian-systemd:latest
+#    groups:
+#      - group1
+#    privileged: True
+#  - name: zabbix-agent-debian-stretch
+#    image: jrei/systemd-debian:latest
+#    groups:
+#      - group1
+#    privileged: True
+#  - name: zabbix-agent-ubuntu-xenial
+#    image: solita/ubuntu-systemd:xenial
+#    groups:
+#      - group1
+#    privileged: True
+#  - name: zabbix-agent-mint
+#    image: vcatechnology/linux-mint
+#    groups:
+#      - group1
+#    privileged: True
+#  - name: zabbix-agent-ubuntu-bionic
+#    image: solita/ubuntu-systemd:bionic
+#    groups:
+#      - group1
+#    privileged: True
 
 provisioner:
   name: ansible
