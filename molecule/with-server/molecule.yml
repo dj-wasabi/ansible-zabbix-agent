@@ -25,7 +25,8 @@ platforms:
     networks:
       - name: zabbix
   - name: zabbix-agent-debian
-    image: jrei/systemd-debian:latest
+    image: minimum2scp/systemd-stretch:latest
+    command: /sbin/init
     groups:
       - zabbix_agent
     privileged: True

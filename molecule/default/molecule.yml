@@ -18,7 +18,8 @@ platforms:
       - group1
     privileged: True
   - name: zabbix-agent-debian-stretch
-    image: jrei/systemd-debian:latest
+    image: minimum2scp/systemd-stretch:latest
+    command: /sbin/init
     groups:
       - group1
     privileged: True
