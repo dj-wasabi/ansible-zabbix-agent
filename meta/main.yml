@@ -30,6 +30,10 @@ galaxy_info:
         - 12.3
         - 13.1
         - 13.2
+    - name: Windows
+      versions:
+        - all
+
   categories:
     - monitoring
   galaxy_tags:
