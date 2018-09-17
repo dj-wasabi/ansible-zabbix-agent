@@ -65,6 +65,7 @@ This role will work on the following operating systems:
  * Debian
  * Ubuntu
  * opensuse
+ * Windows (Best effort)
 
 So, you'll need one of those operating systems.. :-)
 Please sent Pull Requests or suggestions when you want to use this role for other Operating systems.
@@ -236,6 +237,20 @@ Host encryption configuration will be set to match agent configuration.
 * `zabbix_inventory_mode`: Configure Zabbix inventory mode. Needed for building inventory data, manually when configuring a host or automatically by using some automatic population options. This has to be set to `automatic` if you want to make automatically building inventory data.
 
 * `zabbix_visible_hostname` : Configure Zabbix visible name inside Zabbix web UI for the node.
+
+## Windows Variables
+
+NOTE: Supporting Windows is an best effort (I don't have the possibility to either test/verify changes). PR's specific to Windows will almost immediately be merged.
+
+* `zabbix_version_long`: The long (major.minor.patch) version of the Zabbix Agent. 
+
+* `zabbix_win_download_link`: The download url to the `win.zip` file.
+
+* `zabbix_win_install_dir`: The directory where Zabbix needs to be installed.
+
+* `zabbix_agent_win_logfile`: The full path to the logfile for the Zabbix Agent.
+
+* `zabbix_agent_win_include`: The directory in which the Zabbix specific configuration files are stored.
 
 ## Other variables
 

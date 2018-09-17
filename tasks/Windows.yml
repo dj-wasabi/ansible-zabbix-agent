@@ -1,34 +1,59 @@
 ---
 
-- name: "Create directory structure"
+- name: "Windows | Create directory structure"
   win_file:
-    path: "{{ zabbix_win_install_dir }}"
+    path: "{{ item }}"
     state: directory
+  with_items:
+    - "{{ zabbix_win_install_dir }}"
+    - "{{ zabbix_agent_win_include }}"
 
-- name: Download earthrise.jpg to specified path
+- name: "Windows | Check if file is already downloaded"
+  win_stat:
+    path: '{{ zabbix_win_install_dir }}\zabbix_agents_{{ zabbix_version_long }}.win.zip'
+  register: file_info
+
+- name: "Windows | Download Zabbix Agent Zip file"
   win_get_url:
     url: "{{ zabbix_win_download_link }}"
     dest: '{{ zabbix_win_install_dir }}\zabbix_agents_{{ zabbix_version_long }}.win.zip'
+  when: not file_info.stat.exists
 
-- name: Unzip a bz2 (BZip) file
+- name: "Windows | Unzip file"
   win_unzip:
     src: '{{ zabbix_win_install_dir }}\zabbix_agents_{{ zabbix_version_long }}.win.zip'
     dest: "{{ zabbix_win_install_dir }}"
     creates: '{{ zabbix_win_install_dir }}\bin\win64\zabbix_agentd.exe'
 
-- name: "Configure zabbix-agent"
+- name: "Windows | Configure zabbix-agent"
   win_template:
     src: zabbix_agentd.conf.j2
     dest: '{{ zabbix_win_install_dir }}\zabbix_agentd.conf'
 
-- name: Save the result of 'whoami' in 'whoami_out'
+- name: "Windows | Register Service"
   win_command: '{{ zabbix_win_install_dir }}\bin\win64\zabbix_agentd.exe --config {{ zabbix_win_install_dir }}\zabbix_agentd.conf --install'
   register: zabbix_windows_install
   args:
     creates: '{{ zabbix_win_install_dir }}\.installed'
 
-- name: "Create directory structure"
+- name: "Windows | Create done file so it won't register itself again"
   win_file:
     path: '{{ zabbix_win_install_dir }}\.installed'
     state: touch
   when: zabbix_windows_install is changed
+
+- name: "Windows | Set service startup mode to auto and ensure it is started"
+  win_service:
+    name: Zabbix Agent
+    start_mode: auto
+    state: started
+
+- name: "Windows | Firewall rule"
+  win_firewall_rule:
+    name: Zabbix Agent
+    localport: 10050
+    action: allow
+    direction: in
+    protocol: tcp
+    state: present
+    enabled: yes
