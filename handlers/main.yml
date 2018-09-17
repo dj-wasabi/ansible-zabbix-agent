@@ -7,3 +7,6 @@
     state: restarted
     enabled: yes
   become: yes
+
+- name: firewalld-reload
+  command: "firewall-cmd --reload"
