@@ -1,5 +1,15 @@
 ---
 
+- name: "Set default architecture"
+  set_fact:
+    windows_arch: 32
+
+- name: "Override architecture if 64-bit"
+  set_fact:
+    windows_arch: 64
+  when:
+    - ansible_architecture == "64-bit"
+
 - name: "Windows | Create directory structure"
   win_file:
     path: "{{ item }}"
@@ -23,7 +33,7 @@
   win_unzip:
     src: '{{ zabbix_win_install_dir }}\zabbix_agents_{{ zabbix_version_long }}.win.zip'
     dest: "{{ zabbix_win_install_dir }}"
-    creates: '{{ zabbix_win_install_dir }}\bin\win64\zabbix_agentd.exe'
+    creates: '{{ zabbix_win_install_dir }}\bin\win{{ windows_arch }}\zabbix_agentd.exe'
 
 - name: "Windows | Configure zabbix-agent"
   win_template:
@@ -31,7 +41,7 @@
     dest: '{{ zabbix_win_install_dir }}\zabbix_agentd.conf'
 
 - name: "Windows | Register Service"
-  win_command: '{{ zabbix_win_install_dir }}\bin\win64\zabbix_agentd.exe --config {{ zabbix_win_install_dir }}\zabbix_agentd.conf --install'
+  win_command: '{{ zabbix_win_install_dir }}\bin\win{{ windows_arch }}\zabbix_agentd.exe --config {{ zabbix_win_install_dir }}\zabbix_agentd.conf --install'
   register: zabbix_windows_install
   args:
     creates: '{{ zabbix_win_install_dir }}\.installed'
@@ -51,7 +61,7 @@
 - name: "Windows | Firewall rule"
   win_firewall_rule:
     name: Zabbix Agent
-    localport: 10050
+    localport: "{{ zabbix_agent_listenport }}"
     action: allow
     direction: in
     protocol: tcp
