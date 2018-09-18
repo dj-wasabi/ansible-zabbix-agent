@@ -240,9 +240,11 @@ Host encryption configuration will be set to match agent configuration.
 
 ## Windows Variables
 
-NOTE: Supporting Windows is an best effort (I don't have the possibility to either test/verify changes). PR's specific to Windows will almost immediately be merged.
+**NOTE**
 
-* `zabbix_version_long`: The long (major.minor.patch) version of the Zabbix Agent. 
+_Supporting Windows is an best effort (I don't have the possibility to either test/verify changes on the various amount of available Windows instances). PR's specific to Windows will almost immediately be merged, unless some one is able to provide a Windows test mechanism via Travis for Pull Requests._
+
+* `zabbix_version_long`: The long (major.minor.patch) version of the Zabbix Agent. This will be used with the `zabbix_win_download_link` link. If `zabbix_win_download_link` is provided, then there is no need to configure this property.
 
 * `zabbix_win_download_link`: The download url to the `win.zip` file.
 

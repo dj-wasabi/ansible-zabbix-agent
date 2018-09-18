@@ -4,6 +4,12 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+x.x.x  (unreleased)
+
+  * Add Windows
+  * Firewalld #166 (By pull request: 0utsider (Thanks!))
+  * Using same container as with the server #167
+
 1.4.0  (2018-09-11)
 
   * Add configuration to prevent host updating via zabbix api #150 (By pull request: sblaisot (Thanks!))
