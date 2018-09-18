@@ -1,7 +1,0 @@
----
-- hosts: localhost
-  roles:
-    - role: ansible-zabbix-agent
-      agent_server: 192.168.3.33
-      agent_serveractive: 192.168.3.33
-      zabbix_version: 2.4

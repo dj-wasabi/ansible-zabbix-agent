@@ -1,5 +1,5 @@
 # {{ ansible_managed }}
-# this is a config file for zabbix agent (unix)
+# this is a config file for zabbix agent
 # to get more information about zabbix, visit http://www.zabbix.com
 
 ############ general parameters #################
@@ -7,13 +7,19 @@
 ### option: pidfile
 #       name of pid file.
 #
+{% if ansible_os_family != "Windows" %}
 PidFile={{ zabbix_agent_pidfile }}
+{% endif %}
 
 ### option: logfile
 #       name of log file.
 #       if not set, syslog is used.
 #
+{% if ansible_os_family == "Windows" %}
+LogFile={{ zabbix_agent_win_logfile }}
+{% else %}
 LogFile={{ zabbix_agent_logfile }}
+{% endif %}
 
 ### option: logfilesize
 #       maximum size of log file in mb.
@@ -173,6 +179,7 @@ Alias={{ zabbix_agent_zabbix_alias }}
 #
 Timeout={{ zabbix_agent_timeout }}
 
+{% if ansible_os_family != "Windows" %}
 ### option: allowroot
 #       allow the agent to run as 'root'. if disabled and the agent is started by 'root', the agent
 #       will try to switch to user 'zabbix' instead. has no effect if started under a regular user.
@@ -180,13 +187,17 @@ Timeout={{ zabbix_agent_timeout }}
 #       1 - allow
 #
 AllowRoot={{ zabbix_agent_allowroot }}
+{% endif %}
 
 ### option: include
 #       you may include individual files or all files in a directory in the configuration file.
 #       installing zabbix will create include directory in /usr/local/etc, unless modified during the compile time.
 #
+{% if ansible_os_family == "Windows" %}
+Include={{ zabbix_agent_win_include }}
+{% else %}
 Include={{ zabbix_agent_include }}
-
+{% endif %}
 
 ####### user-defined monitored parameters #######
 
@@ -215,7 +226,9 @@ UnsafeUserParameters={{ zabbix_agent_unsafeuserparameters }}
 #       Full path to location of agent modules.
 #       Default depends on compilation options.
 #
+{% if ansible_os_family != "Windows" %}
 LoadModulePath={{ zabbix_agent_loadmodulepath }}
+{% endif %}
 {% endif %}
 
 ### Option: LoadModule
