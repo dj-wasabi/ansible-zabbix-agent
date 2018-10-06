@@ -7,27 +7,35 @@ Table of Contents
 - [Requirements](#requirements)
   * [Operating systems](#operating-systems)
   * [Zabbix Versions](#zabbix-versions)
+    + [Zabbix 4.0](#zabbix-40)
     + [Zabbix 3.4](#zabbix-34)
-    + [Zabbix 3.2:](#zabbix-32-)
-    + [Zabbix 3.0:](#zabbix-30-)
-    + [Zabbix 2.4:](#zabbix-24-)
-    + [Zabbix 2.2:](#zabbix-22-)
+    + [Zabbix 3.2](#zabbix-32)
+    + [Zabbix 3.0](#zabbix-30)
+    + [Zabbix 2.4](#zabbix-24)
+    + [Zabbix 2.2](#zabbix-22)
   * [Zabbix API](#zabbix-api)
 - [Installation](#installation)
 - [Role Variables](#role-variables)
   * [Main variables](#main-variables)
-  * [Zabbix 3.0](#zabbix-30)
+  * [TLS Specific configuration](#tls-specific-configuration)
   * [Zabbix API variables](#zabbix-api-variables)
+  * [Windows Variables](#windows-variables)
+  * [Other variables](#other-variables)
 - [Dependencies](#dependencies)
 - [Example Playbook](#example-playbook)
   * [agent_interfaces](#agent-interfaces)
   * [Other interfaces](#other-interfaces)
   * [Vars in role configuration](#vars-in-role-configuration)
   * [Combination of group_vars and playbook](#combination-of-group-vars-and-playbook)
+  * [Example for TLS PSK encrypted agent communication](#example-for-tls-psk-encrypted-agent-communication)
 - [Molecule](#molecule)
+  * [default](#default)
+  * [with-server](#with-server)
+  * [before-last-version](#before-last-version)
 - [Deploying Userparameters](#deploying-userparameters)
 - [License](#license)
 - [Author Information](#author-information)
+
 
 # Overview
 
@@ -74,6 +82,16 @@ Please sent Pull Requests or suggestions when you want to use this role for othe
 
 See the following list of supported Operating systems with the Zabbix releases:
 
+### Zabbix 4.0
+
+  * CentOS 7.x
+  * Amazon 7.x
+  * RedHat 7.x
+  * OracleLinux 7.x
+  * Scientific Linux 7.x
+  * Ubuntu 14.04, 16.04, 18.04
+  * Debian 8, 9
+
 ### Zabbix 3.4
 
   * CentOS 7.x
@@ -84,7 +102,7 @@ See the following list of supported Operating systems with the Zabbix releases:
   * Ubuntu 14.04, 16.04, 18.04
   * Debian 7, 8, 9
 
-### Zabbix 3.2:
+### Zabbix 3.2
 
   * CentOS 7.x
   * Amazon 7.x
@@ -94,7 +112,7 @@ See the following list of supported Operating systems with the Zabbix releases:
   * Ubuntu 14.04, 16.04
   * Debian 7, 8
 
-### Zabbix 3.0:
+### Zabbix 3.0
 
   * CentOS 5.x, 6.x, 7.x
   * Amazon 5.x, 6.x, 7.x
@@ -104,7 +122,7 @@ See the following list of supported Operating systems with the Zabbix releases:
   * Ubuntu 14.04
   * Debian 7, 8
 
-### Zabbix 2.4:
+### Zabbix 2.4
 
   * CentOS 6.x, 7.x
   * Amazon 6.x, 7.x
@@ -114,7 +132,7 @@ See the following list of supported Operating systems with the Zabbix releases:
   * Ubuntu 12.04 14.04
   * Debian 7
 
-### Zabbix 2.2:
+### Zabbix 2.2
 
   * CentOS 5.x, 6.x
   * RedHat 5.x, 6.x
@@ -164,9 +182,13 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
     * `name`: Userparameter name (should be the same with userparameter template file name)
     * `scripts_dir`: Directory name of the custom scripts needed for userparameters
 
-## Zabbix 3.x
+* `zabbix_agent_allowroot`: Allow the agent to run as 'root'. 0 - do not allow, 1 - allow
 
-These variables are specific for Zabbix 3.0:
+* `zabbix_agent_runas_user`: Drop privileges to a specific, existing user on the system. Only has effect if run as 'root' and AllowRoot is disabled.
+
+## TLS Specific configuration
+
+These variables are specific for Zabbix 3.0 and higher:
 
 * `zabbix_agent_tlsconnect`: How the agent should connect to server or proxy. Used for active checks.
 
@@ -399,6 +421,10 @@ First, a Zabbix Server will be installed on a container. This installation make 
 Each host will register itself on the Zabbix Server and the status should be 0 (This means the Zabbix Server and Zabbix Agent are connected).
 
 The Ubuntu agent will register itself via a PSK, so that communication between the Zabbix Server and Zabbix Agent is encrypted with e Pre-Shared Key.
+
+## before-last-version
+
+The 3rd and last scenario is the `before-last-version`. This is the same scenario like the `default`, but uses the previous Zabbix version.
 
 # Deploying Userparameters
 
