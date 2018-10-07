@@ -16,6 +16,7 @@ script:
   - ansible --version
   - molecule test -s default
   - molecule test -s with-server
+  - molecule test -s before-last-version
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
