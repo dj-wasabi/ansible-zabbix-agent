@@ -113,6 +113,7 @@
     login_password: "{{ zabbix_api_pass }}"
     host_group: "{{ zabbix_host_groups }}"
     state: "{{ zabbix_create_hostgroup }}"
+    validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
   when:
     - zabbix_api_create_hostgroup
   become: no
@@ -141,6 +142,7 @@
     tls_subject: "{{ zabbix_agent_tlsservercertsubject|default(omit) }}"
     tls_connect: "{{ {'unencrypted': '1', 'psk': '2', 'cert' : '4'}[zabbix_agent_tlsaccept if zabbix_agent_tlsaccept else 'unencrypted'] }}"
     tls_accept: "{{ {'unencrypted': '1', 'psk': '2', 'cert' : '4'}[zabbix_agent_tlsconnect if zabbix_agent_tlsconnect else 'unencrypted'] }}"
+    validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
   when:
     - zabbix_api_create_hosts
   become: no
@@ -157,6 +159,7 @@
     host_name: "{{ zabbix_agent_hostname }}"
     macro_name: "{{ item.macro_key }}"
     macro_value: "{{ item.macro_value }}"
+    validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
   with_items: "{{ zabbix_macros | default([]) }}"
   when:
     - zabbix_macros is defined
