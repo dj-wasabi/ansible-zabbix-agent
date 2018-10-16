@@ -226,7 +226,7 @@ These variables are specific for Zabbix 3.0 and higher:
 
 ## Zabbix API variables
 
-These variables needs to be changed/overriden when you want to make use of the zabbix-api for automatically creating and or updating hosts.
+These variables needs to be changed/overriden when you want to make use of the zabbix-api for automatically creating and or updating hosts. 
 
 Host encryption configuration will be set to match agent configuration.
 
@@ -259,6 +259,8 @@ Host encryption configuration will be set to match agent configuration.
 * `zabbix_inventory_mode`: Configure Zabbix inventory mode. Needed for building inventory data, manually when configuring a host or automatically by using some automatic population options. This has to be set to `automatic` if you want to make automatically building inventory data.
 
 * `zabbix_visible_hostname` : Configure Zabbix visible name inside Zabbix web UI for the node.
+
+* `zabbix_validate_certs` : yes (Default) if we need to validate tls certificates of the API. Use `no` in case self-signed certificates are used
 
 ## Windows Variables
 
