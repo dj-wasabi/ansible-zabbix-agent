@@ -6,9 +6,15 @@ Version (Release date)
 
 x.x.x  (unreleased)
 
-  * Add Windows
+  * 
+
+1.5.0  (2018-10-19)
+
+  * Added installation on Windows
   * Firewalld #166 (By pull request: 0utsider (Thanks!))
   * Using same container as with the server #167
+  * Zabbix 4.0 now default installation
+  * enable support for https enabled zabbix frontends/apis #173 (By pull request: rolfvreijdenberger (Thanks!))
 
 1.4.0  (2018-09-11)
 
