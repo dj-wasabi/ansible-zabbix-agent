@@ -68,5 +68,5 @@
         name:
           - net-tools
         state: present
-       when:
+      when:
         - ansible_os_family == 'Debian'
