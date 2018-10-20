@@ -4,20 +4,18 @@
   pre_tasks:
     - name: "Installing packages on CentOS family"
       yum:
-        name: "{{ item }}"
+        name:
+          - net-tools
+          - which
         state: present
-      with_items:
-        - net-tools
-        - which
       when:
         - ansible_os_family == 'RedHat'
 
     - name: "Installing packages on Debian family"
       apt:
-        name: "{{ item }}"
+        name:
+          - net-tools
         state: present
-      with_items:
-        - net-tools
       when:
         - ansible_os_family == 'Debian'
 
