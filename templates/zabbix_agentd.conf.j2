@@ -42,7 +42,7 @@ DebugLevel={{ zabbix_agent_debuglevel }}
 #       source ip address for outgoing connections.
 #
 {% if zabbix_agent_sourceip is defined and zabbix_agent_sourceip %}
-sourceip={{ zabbix_agent_sourceip }}
+SourceIP={{ zabbix_agent_sourceip }}
 {% endif %}
 
 ### option: enableremotecommands
