@@ -102,6 +102,7 @@ zabbix_agent_tlspskfile: ''
 # Windows Related
 zabbix_version_long: 3.4.6
 zabbix_win_download_link: https://www.zabbix.com/downloads/{{ zabbix_version_long }}/zabbix_agents_{{ zabbix_version_long }}.win.zip
+zabbix_4_win_download_link: https://www.zabbix.com/downloads/{{ zabbix_version_long }}/zabbix_agents-{{ zabbix_version_long }}-win-amd64.zip
 zabbix_win_install_dir: 'C:\Zabbix'
 zabbix_agent_win_logfile: 'C:\Zabbix\zabbix_agentd.log'
 zabbix_agent_win_include: 'C:\Zabbix\zabbix_agent.d\'

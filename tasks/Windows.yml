@@ -27,13 +27,27 @@
   win_get_url:
     url: "{{ zabbix_win_download_link }}"
     dest: '{{ zabbix_win_install_dir }}\zabbix_agents_{{ zabbix_version_long }}.win.zip'
-  when: not file_info.stat.exists
+  when: not file_info.stat.exists and zabbix_version_long is version('4.0.0', '<')
+
+- name: "Windows | Download Zabbix Agent Zip file | version >= 4.0.0"
+  win_get_url:
+    url: "{{ zabbix_4_win_download_link }}"
+    dest: '{{ zabbix_win_install_dir }}\zabbix_agents_{{ zabbix_version_long }}.win.zip'
+  when: not file_info.stat.exists and zabbix_version_long is version('4.0.0', '>=')
 
 - name: "Windows | Unzip file"
   win_unzip:
     src: '{{ zabbix_win_install_dir }}\zabbix_agents_{{ zabbix_version_long }}.win.zip'
     dest: "{{ zabbix_win_install_dir }}"
     creates: '{{ zabbix_win_install_dir }}\bin\win{{ windows_arch }}\zabbix_agentd.exe'
+  when: zabbix_version_long is version('4.0.0', '<')
+
+- name: "Windows | Unzip file | version >= 4.0.0"
+  win_unzip:
+    src: '{{ zabbix_win_install_dir }}\zabbix_agents_{{ zabbix_version_long }}.win.zip'
+    dest: "{{ zabbix_win_install_dir }}"
+    creates: '{{ zabbix_win_install_dir }}\bin\zabbix_agentd.exe'
+  when: zabbix_version_long is version('4.0.0', '>=')
 
 - name: "Windows | Configure zabbix-agent"
   win_template:
@@ -45,6 +59,14 @@
   register: zabbix_windows_install
   args:
     creates: '{{ zabbix_win_install_dir }}\.installed'
+  when: zabbix_version_long is version('4.0.0', '<')
+
+- name: "Windows | Register Service | version >= 4.0.0"
+  win_command: '{{ zabbix_win_install_dir }}\bin\zabbix_agentd.exe --config {{ zabbix_win_install_dir }}\zabbix_agentd.conf --install'
+  register: zabbix_windows_install
+  args:
+    creates: '{{ zabbix_win_install_dir }}\.installed'
+  when: zabbix_version_long is version('4.0.0', '>=')
 
 - name: "Windows | Create done file so it won't register itself again"
   win_file:
