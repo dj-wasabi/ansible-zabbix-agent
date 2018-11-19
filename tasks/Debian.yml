@@ -69,7 +69,8 @@
 
 # Note: set cache_valid_time=0 to ensure that an apt-get update after the added repo-key
 # else you often get 'WARNING: The following packages cannot be authenticated!
-# See also: http://askubuntu.com/questions/75565/why-am-i-getting-authentication-errors-for-packages-from-an-ubuntu-repository
+# See also:
+# http://askubuntu.com/questions/75565/why-am-i-getting-authentication-errors-for-packages-from-an-ubuntu-repository
 - name: "Debian | Installing zabbix-agent"
   apt:
     pkg: "{{ zabbix_agent_packages }}"

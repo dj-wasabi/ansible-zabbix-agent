@@ -51,7 +51,7 @@
   become: yes
   when:
     - zabbix_agent_tlspskfile is defined
-    - zabbix_agent_tlspskfile != ''
+    - zabbix_agent_tlspskfile is not None
 
 - name: "Place TLS PSK File"
   copy:
@@ -64,8 +64,8 @@
   when:
     - zabbix_agent_tlspskfile is defined
     - zabbix_agent_tlspsk_secret is defined
-    - zabbix_agent_tlspskfile != ''
-    - zabbix_agent_tlspsk_secret != ''
+    - zabbix_agent_tlspskfile is not None
+    - zabbix_agent_tlspsk_secret is not None
 
 - name: "Create include dir zabbix-agent"
   file:

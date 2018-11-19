@@ -157,13 +157,13 @@ Installing this role is very simple: `ansible-galaxy install dj-wasabi.zabbix-ag
 
 ## Main variables
 
-There are some variables in de default/main.yml which can (Or needs to) be changed/overriden:
+There are some variables in de default/main.yml which can (Or needs to) be overridden:
 
-* `zabbix_agent_server`: The ipaddress for the zabbix-server or zabbix-proxy.
+* `zabbix_agent_server`: The ip address for the zabbix-server or zabbix-proxy.
 
 * `zabbix_agent_serveractive`: The ipaddress for the zabbix-server or zabbix-proxy for active checks.
 
-* `zabbix_version`: This is the version of zabbix. Default it is 3.2, but can be overriden to 3.0, 2.4, 2.2 or 2.0.
+* `zabbix_version`: This is the version of zabbix. Default it is 4.0, but can be overridden to one of the versions mentioned in [Zabbix Versions](#zabbix-versions).
 
 * `zabbix_repo`: Default: _zabbix_
   * _epel_ install agent from EPEL repo
@@ -226,7 +226,7 @@ These variables are specific for Zabbix 3.0 and higher:
 
 ## Zabbix API variables
 
-These variables needs to be changed/overriden when you want to make use of the zabbix-api for automatically creating and or updating hosts. 
+These variables needs to be overridden when you want to make use of the zabbix-api for automatically creating and or updating hosts. 
 
 Host encryption configuration will be set to match agent configuration.
 
