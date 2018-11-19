@@ -172,6 +172,12 @@ There are some variables in de default/main.yml which can (Or needs to) be chang
 
 * `zabbix_agent_listeninterface`: Interface zabbix-agent listens on. Leave blank for all.
 
+* `zabbix_agent_package`: The name of the zabbix-agent package. Default: `zabbix-agent`. In case for EPEL, it is automatically renamed.
+
+* `zabbix_sender_package`: The name of the zabbix-sender package. Default: `zabbix-sender`. In case for EPEL, it is automatically renamed.
+
+* `zabbix_get_package`: The name of the zabbix-get package. Default: `zabbix-get`. In case for EPEL, it is automatically renamed.
+
 * `zabbix_agent_package_state`: If Zabbix-agent needs to be present or latest.
 
 * `zabbix_agent_interfaces`: A list that configured the interfaces you can use when configuring via API.

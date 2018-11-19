@@ -72,7 +72,10 @@
 # See also: http://askubuntu.com/questions/75565/why-am-i-getting-authentication-errors-for-packages-from-an-ubuntu-repository
 - name: "Debian | Installing zabbix-agent"
   apt:
-    pkg: "{{ zabbix_agent_packages }}"
+    pkg:
+      - "{{ zabbix_agent_package }}"
+      - "{{ zabbix_sender_package }}"
+      - "{{ zabbix_get_package }}"
     state: "{{ zabbix_agent_package_state }}"
     update_cache: yes
     cache_valid_time: 0
