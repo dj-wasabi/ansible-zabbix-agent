@@ -97,7 +97,7 @@ zabbix_agent_tlsservercertsubject:
 zabbix_agent_tlscertfile:
 zabbix_agent_tlskeyfile:
 zabbix_agent_tlspskidentity:
-zabbix_agent_tlspskfile: ''
+zabbix_agent_tlspskfile: None
 
 # Windows Related
 zabbix_version_long: 3.4.6
