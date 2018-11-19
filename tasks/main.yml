@@ -106,8 +106,7 @@
   when: ansible_os_family != "Windows"
 
 - name: "Create hostgroups"
-  local_action:
-    module: zabbix_group
+  zabbix_group:
     server_url: "{{ zabbix_url }}"
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
@@ -116,13 +115,13 @@
     validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
   when:
     - zabbix_api_create_hostgroup
+  delegate_to: localhost
   become: no
   tags:
     - api
 
 - name: "Create a new host or update an existing host's info"
-  local_action:
-    module: zabbix_host
+  zabbix_host:
     server_url: "{{ zabbix_url }}"
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
@@ -145,14 +144,14 @@
     validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
   when:
     - zabbix_api_create_hosts
+  delegate_to: localhost
   become: no
   changed_when: false
   tags:
     - api
 
 - name: "Updating host configuration with macros"
-  local_action:
-    module: zabbix_hostmacro
+  zabbix_hostmacro:
     server_url: "{{ zabbix_url }}"
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
@@ -164,6 +163,7 @@
   when:
     - zabbix_macros is defined
     - item.macro_key is defined
+  delegate_to: localhost
   become: no
   tags:
     - api

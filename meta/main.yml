@@ -34,10 +34,8 @@ galaxy_info:
       versions:
         - all
 
-  categories:
-    - monitoring
   galaxy_tags:
     - zabbix
-    - zabbix-agent
+    - zabbix_agent
     - monitoring
 dependencies: []
