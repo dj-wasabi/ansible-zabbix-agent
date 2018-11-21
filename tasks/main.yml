@@ -48,12 +48,27 @@
     - config
     - service
 
-- name: "Set default ip address for zabbix_agent_ip"
+- name: "Get Total Private IP Addresses"
   set_fact:
-    zabbix_agent_ip: "{{ hostvars[inventory_hostname]['ansible_default_ipv4'].address }}"
+    total_private_ip_addresses: "{{ ansible_all_ipv4_addresses | ipaddr('private') | length }}"
+  when:
+    - ansible_all_ipv4_addresses is defined
+
+- name: "Set first public ip address for zabbix_agent_ip"
+  set_fact:
+    zabbix_agent_ip: "{{ ansible_all_ipv4_addresses | ipaddr('public') | first }}"
+    zabbix_agent_server: "{{ zabbix_agent_server_public_ip }}"
+    zabbix_agent_serveractive: "{{ zabbix_agent_serveractive_public_ip }}"
   when:
     - zabbix_agent_ip is not defined
-    - "'ansible_default_ipv4' in hostvars[inventory_hostname]"
+    - total_private_ip_addresses == '0'
+
+- name: "Set first private ip address for zabbix_agent_ip"
+  set_fact:
+    zabbix_agent_ip: "{{ ansible_all_ipv4_addresses | ipaddr('private') | first }}"
+  when:
+    - zabbix_agent_ip is not defined
+    - total_private_ip_addresses != '0'
 
 - name: "Fail invalid specified agent_listeninterface"
   fail:
@@ -161,6 +176,7 @@
     validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
   with_items: "{{ zabbix_macros | default([]) }}"
   when:
+    - zabbix_api_create_hosts
     - zabbix_macros is defined
     - item.macro_key is defined
   delegate_to: localhost
