@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Werner Dijkerman
-  description: Installing and maintaining zabbix-agent for RedHat/Debian/Ubuntu.
+  description: Installing and maintaining zabbix-agent for RedHat/Debian/Ubuntu/Windows/Suse.
   company: myCompany.Dotcom
   license: MIT
   min_ansible_version: 2.5

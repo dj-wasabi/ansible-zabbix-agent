@@ -277,7 +277,6 @@ _Supporting Windows is an best effort (I don't have the possibility to either te
 * `zabbix_version_long`: The long (major.minor.patch) version of the Zabbix Agent. This will be used with the `zabbix_win_download_link` link. If `zabbix_win_download_link` is provided, then there is no need to configure this property.
 
 * `zabbix_win_download_link`: The download url to the `win.zip` file.
-* `zabbix_4_win_download_link`: The download url to the `win.zip` file when `zabbix_version_long` is equal to or above 4.0.0 (new URL naming convention).
 
 * `zabbix_win_install_dir`: The directory where Zabbix needs to be installed.
 
