@@ -12,6 +12,13 @@
     - zabbix-agent
     - init
 
+- name: "RedHat | Set ansible_distribution_major_version to 6 when Amazon"
+  set_fact:
+    ansible_distribution_major_version: 6
+  when:
+    - ansible_distribution == "Amazon"
+    - ansible_distribution_major_version == "NA"
+
 - name: "RedHat | Install basic repo file"
   yum_repository:
     name: "{{ item.name }}"
