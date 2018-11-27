@@ -11,7 +11,8 @@
 - name: "Fix facts for linuxmint - family"
   set_fact:
     ansible_os_family: Debian
-  when: ansible_os_family == "Linuxmint"
+  when:
+    - ansible_os_family == "Linuxmint"
 
 - name: "Include OS-specific variables"
   include_vars: "{{ ansible_os_family }}.yml"
@@ -82,10 +83,17 @@
     - zabbix-agent
     - config
 
+- name: "Set network interface"
+  set_fact:
+    network_interface: ansible_{{ zabbix_agent_listeninterface }}
+  when:
+    - zabbix_agent_listeninterface
+    - not zabbix_agent_listenip
+
 - name: "Get IP of agent_listeninterface when no agent_listenip specified"
   set_fact:
-    zabbix_agent_listenip: "{{ hostvars[inventory_hostname]['ansible_' + zabbix_agent_listeninterface]['ipv4'].address | default('0.0.0.0') }}"
-    zabbix_agent_ip: "{{ hostvars[inventory_hostname]['ansible_' + zabbix_agent_listeninterface]['ipv4'].address | default('0.0.0.0') }}"
+    zabbix_agent_listenip: "{{ hostvars[inventory_hostname][network_interface]['ipv4'].address | default('0.0.0.0') }}"
+    zabbix_agent_ip: "{{ hostvars[inventory_hostname][network_interface]['ipv4'].address | default('0.0.0.0') }}"
   when:
     - zabbix_agent_listeninterface
     - not zabbix_agent_listenip
@@ -156,8 +164,8 @@
     tls_psk_identity: "{{ zabbix_agent_tlspskidentity|default(omit) }}"
     tls_issuer: "{{ zabbix_agent_tlsservercertissuer|default(omit) }}"
     tls_subject: "{{ zabbix_agent_tlsservercertsubject|default(omit) }}"
-    tls_connect: "{{ {'unencrypted': '1', 'psk': '2', 'cert' : '4'}[zabbix_agent_tlsaccept if zabbix_agent_tlsaccept else 'unencrypted'] }}"
-    tls_accept: "{{ {'unencrypted': '1', 'psk': '2', 'cert' : '4'}[zabbix_agent_tlsconnect if zabbix_agent_tlsconnect else 'unencrypted'] }}"
+    tls_connect: "{{ zabbix_agent_tls_config[zabbix_agent_tlsaccept if zabbix_agent_tlsaccept else 'unencrypted'] }}"
+    tls_accept: "{{ zabbix_agent_tls_config[zabbix_agent_tlsconnect if zabbix_agent_tlsconnect else 'unencrypted'] }}"
     validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
   when:
     - zabbix_api_create_hosts
