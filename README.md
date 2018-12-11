@@ -236,6 +236,8 @@ These variables needs to be overridden when you want to make use of the zabbix-a
 
 Host encryption configuration will be set to match agent configuration.
 
+When `zabbix_api_create_hostgroup` or `zabbix_api_create_hosts` is set to `True`, it will install on the host executing the Ansible playbook the `zabbix-api` python module.
+
 * `zabbix_url`: The url on which the Zabbix webpage is available. Example: http://zabbix.example.com
 
 * `zabbix_api_create_hosts`: When you want to enable the Zabbix API to create/delete the host. This has to be set to `True` if you want to make use of `zabbix_create_host`. Default: `False`
