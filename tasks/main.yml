@@ -130,6 +130,15 @@
   include: Linux.yml
   when: ansible_os_family != "Windows"
 
+- name: "Installing the Zabbix-api package on localhost"
+  pip:
+    name: zabbix-api
+    state: present
+  delegate_to: localhost
+  become: True
+  when:
+    - zabbix_api_create_hostgroup or zabbix_api_create_hosts
+
 - name: "Create hostgroups"
   zabbix_group:
     server_url: "{{ zabbix_url }}"
