@@ -63,6 +63,8 @@
   when:
     - zabbix_agent_tlspskfile is defined
     - zabbix_agent_tlspsk_secret is defined
+  notify:
+    - restart zabbix-agent
 
 - name: "Create include dir zabbix-agent"
   file:
