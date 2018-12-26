@@ -134,6 +134,8 @@
   pip:
     name: zabbix-api
     state: present
+  register: zabbix_api_package_installed
+  until: zabbix_api_package_installed is succeeded
   delegate_to: localhost
   become: True
   when:
