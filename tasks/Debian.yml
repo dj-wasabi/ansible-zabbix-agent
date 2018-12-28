@@ -81,6 +81,8 @@
     update_cache: yes
     cache_valid_time: 0
   when: ansible_distribution in ['Ubuntu', 'Debian']
+  register: zabbix_agent_package_installed
+  until: zabbix_agent_package_installed is succeeded
   become: yes
   check_mode: no
   tags:
@@ -94,6 +96,8 @@
     update_cache: yes
     cache_valid_time: 0
   when: ansible_distribution not in ['Ubuntu', 'Debian']
+  register: zabbix_agent_package_installed
+  until: zabbix_agent_package_installed is succeeded
   become: yes
   tags:
     - zabbix-agent
@@ -105,6 +109,8 @@
     state: installed
     update_cache: yes
     cache_valid_time: 0
+  register: zabbix_agent_policycoreutils_installed
+  until: zabbix_agent_package_installed is succeeded
   become: yes
   when: zabbix_selinux
 

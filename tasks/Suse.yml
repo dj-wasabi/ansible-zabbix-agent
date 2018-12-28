@@ -28,6 +28,8 @@
     name: "{{ zabbix_agent_packages }}"
     state: "{{ zabbix_agent_package_state }}"
     disable_gpg_check: yes
+  register: zabbix_agent_package_installed
+  until: zabbix_agent_package_installed is succeeded
   become: yes
   tags:
     - zabbix-agent

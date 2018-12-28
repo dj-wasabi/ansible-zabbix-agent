@@ -51,6 +51,8 @@
       - "{{ zabbix_sender_package }}"
       - "{{ zabbix_get_package }}"
     state: "{{ zabbix_agent_package_state }}"
+  register: zabbix_agent_package_installed
+  until: zabbix_agent_package_installed is succeeded
   become: yes
   tags:
     - init
@@ -60,6 +62,8 @@
   package:
     name: policycoreutils-python
     state: installed
+  register: zabbix_agent_policycoreutils_installed
+  until: zabbix_agent_package_installed is succeeded
   when: zabbix_selinux
   become: yes
   tags:
