@@ -9,7 +9,8 @@
     name: ["python-libxml2", "python-xml"]
     state: present
   become: yes
-  register: dependency
+  register: zabbix_agent_package_dependency
+  until: zabbix_agent_package_dependency is succeeded
 
 - name: "Suse | Install basic repo file"
   zypper_repository:
