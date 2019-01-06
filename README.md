@@ -1,41 +1,38 @@
 Table of Contents
 
 - [Overview](#overview)
-  - [Upgrade](#upgrade)
-    - [1.0.0](#100)
-    - [0.8.0](#080)
 - [Requirements](#requirements)
-  - [Operating systems](#operating-systems)
-  - [Zabbix Versions](#zabbix-versions)
-    - [Zabbix 4.0](#zabbix-40)
-    - [Zabbix 3.4](#zabbix-34)
-    - [Zabbix 3.2](#zabbix-32)
-    - [Zabbix 3.0](#zabbix-30)
-    - [Zabbix 2.4](#zabbix-24)
-    - [Zabbix 2.2](#zabbix-22)
-  - [Zabbix API](#zabbix-api)
-- [Installation](#installation)
+  * [Operating systems](#operating-systems)
+  * [Zabbix Versions](#zabbix-versions)
+    + [Zabbix 4.0](#zabbix-40)
+    + [Zabbix 3.4](#zabbix-34)
+    + [Zabbix 3.2](#zabbix-32)
+    + [Zabbix 3.0](#zabbix-30)
+    + [Zabbix 2.4](#zabbix-24)
+    + [Zabbix 2.2](#zabbix-22)
+- [Getting started](#getting-started)
+  * [Installation](#installation)
+  * [Minimal Configuration](#minimal-configuration)
 - [Role Variables](#role-variables)
-  - [Main variables](#main-variables)
-  - [TLS Specific configuration](#tls-specific-configuration)
-  - [Zabbix API variables](#zabbix-api-variables)
-  - [Windows Variables](#windows-variables)
-  - [Other variables](#other-variables)
+  * [Main variables](#main-variables)
+  * [TLS Specific configuration](#tls-specific-configuration)
+  * [Zabbix API variables](#zabbix-api-variables)
+  * [Windows Variables](#windows-variables)
+  * [Other variables](#other-variables)
 - [Dependencies](#dependencies)
 - [Example Playbook](#example-playbook)
-  - [agent_interfaces](#agentinterfaces)
-  - [Other interfaces](#other-interfaces)
-  - [Vars in role configuration](#vars-in-role-configuration)
-  - [Combination of group_vars and playbook](#combination-of-groupvars-and-playbook)
-  - [Example for TLS PSK encrypted agent communication](#example-for-tls-psk-encrypted-agent-communication)
+  * [agent_interfaces](#agent-interfaces)
+  * [Other interfaces](#other-interfaces)
+  * [Vars in role configuration](#vars-in-role-configuration)
+  * [Combination of group_vars and playbook](#combination-of-group-vars-and-playbook)
+  * [Example for TLS PSK encrypted agent communication](#example-for-tls-psk-encrypted-agent-communication)
 - [Molecule](#molecule)
-  - [default](#default)
-  - [with-server](#with-server)
-  - [before-last-version](#before-last-version)
+  * [default](#default)
+  * [with-server](#with-server)
+  * [before-last-version](#before-last-version)
 - [Deploying Userparameters](#deploying-userparameters)
 - [License](#license)
 - [Author Information](#author-information)
-
 
 # Overview
 
@@ -52,18 +49,6 @@ This is one of the 'dj-wasabi' roles which configures your whole Zabbix environm
  * zabbix-proxy (https://galaxy.ansible.com/dj-wasabi/zabbix-proxy/)
  * zabbix-javagateway (https://galaxy.ansible.com/dj-wasabi/zabbix-javagateway/)
  * zabbix-agent (https://galaxy.ansible.com/dj-wasabi/zabbix-agent/)
-
-## Upgrade
-
-### 1.0.0
-
-With this 1.0.0 release, the following is changed:
-
-* All configuration properties starts with `zabbix_` now. Example, property named `agent_tlsaccept` is now `zabbix_agent_tlsaccept`.
-
-### 0.8.0
-
-As of version 0.8.0, the property `zabbix_api_use` isn't available anymore. It is replaced by the properties `zabbix_api_create_hostgroup` and `zabbix_api_create_hosts`
 
 # Requirements
 ## Operating systems
@@ -142,16 +127,25 @@ See the following list of supported Operating systems with the Zabbix releases:
   * Debian 7
   * xenserver 6
 
+# Getting started
 
-## Zabbix API
-
-When you want to automatically create the hosts in the webinterface, you'll need on your own machine the zabbix-api package.
-
-You can install this locally with the following command: `pip install zabbix-api`.
-
-# Installation
+## Installation
 
 Installing this role is very simple: `ansible-galaxy install dj-wasabi.zabbix-agent`
+
+This will install the zabbix-agent role into your `roles` directory.
+
+## Minimal Configuration
+
+In order to get the Zabbix Agent running, you'll have to define the following properties before executing the role:
+
+* zabbix_version
+* zabbix_agent_server
+* zabbix_agent_serveractive (When using active checks)
+
+The `zabbix_version` is optional. The latest available major.minor version of Zabbix will be installed on the host(s). If you want to use an older version, please specify this in the major.minor format. Example: `zabbix_version: 4.0`, `zabbix_version: 3.4` or `zabbix_version: 2.2`.
+
+The `zabbix_agent_server` (and `zabbix_agent_serveractive`) should contain the ip or fqdn of the host running the Zabbix Server.
 
 # Role Variables
 
