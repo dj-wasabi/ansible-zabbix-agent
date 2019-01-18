@@ -43,6 +43,21 @@
     - config
     - init
 
+- name: Copy zabbix_agent template for Fedora OS
+  copy:
+    src: /etc/zabbix/zabbix_agentd.conf
+    dest: /etc/zabbix_agentd.conf
+    remote_src: yes
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_distribution == "Fedora"
+  notify: restart zabbix agent
+  tags:
+    - zabbix-agent
+    - config
+    - init
+
 - name: "Create directory for PSK file if not exist."
   file:
     path: "{{ zabbix_agent_tlspskfile | dirname }}"

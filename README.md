@@ -55,6 +55,7 @@ This is one of the 'dj-wasabi' roles which configures your whole Zabbix environm
 This role will work on the following operating systems:
 
  * Red Hat
+ * Fedora
  * Debian
  * Ubuntu
  * opensuse
@@ -72,6 +73,7 @@ See the following list of supported Operating systems with the Zabbix releases:
   * CentOS 7.x
   * Amazon 7.x
   * RedHat 7.x
+  * Fedora 27, 29
   * OracleLinux 7.x
   * Scientific Linux 7.x
   * Ubuntu 14.04, 16.04, 18.04
@@ -82,6 +84,7 @@ See the following list of supported Operating systems with the Zabbix releases:
   * CentOS 7.x
   * Amazon 7.x
   * RedHat 7.x
+  * Fedora 27, 29
   * OracleLinux 7.x
   * Scientific Linux 7.x
   * Ubuntu 14.04, 16.04, 18.04
@@ -92,6 +95,7 @@ See the following list of supported Operating systems with the Zabbix releases:
   * CentOS 7.x
   * Amazon 7.x
   * RedHat 7.x
+  * Fedora 27, 29
   * OracleLinux 7.x
   * Scientific Linux 7.x
   * Ubuntu 14.04, 16.04
