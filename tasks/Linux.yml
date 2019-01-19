@@ -31,28 +31,13 @@
 - name: "Configure zabbix-agent"
   template:
     src: zabbix_agentd.conf.j2
-    dest: /etc/zabbix/{{ zabbix_agent_conf }}
+    dest: "{{ zabbix_agent_conf_dir }}/{{ zabbix_agent_conf }}"
     owner: root
     group: root
     mode: 0644
   notify:
     - restart zabbix-agent
   become: yes
-  tags:
-    - zabbix-agent
-    - config
-    - init
-
-- name: Copy zabbix_agent template for Fedora OS
-  copy:
-    src: /etc/zabbix/zabbix_agentd.conf
-    dest: /etc/zabbix_agentd.conf
-    remote_src: yes
-    owner: root
-    group: root
-    mode: 0644
-  when: ansible_distribution == "Fedora"
-  notify: restart zabbix agent
   tags:
     - zabbix-agent
     - config

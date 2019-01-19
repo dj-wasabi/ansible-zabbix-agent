@@ -21,7 +21,8 @@
 
 - name: "Fedora | Set ansible_distribution_major_version to 7 when Fedora"
   set_fact:
-    ansible_distribution_major_version: 7
+    - ansible_distribution_major_version: 7
+    - zabbix_agent_conf_dir: /etc
   when:
     - ansible_distribution == "Fedora"
 
