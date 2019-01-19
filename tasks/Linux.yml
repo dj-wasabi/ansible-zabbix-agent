@@ -31,7 +31,7 @@
 - name: "Configure zabbix-agent"
   template:
     src: zabbix_agentd.conf.j2
-    dest: "{{ zabbix_agent_conf_dir }}/{{ zabbix_agent_conf }}"
+    dest: "/etc/zabbix/{{ zabbix_agent_conf }}"
     owner: root
     group: root
     mode: 0644

@@ -10,7 +10,6 @@ zabbix_agent_package_state: present
 zabbix_agent_server:
 zabbix_agent_serveractive:
 zabbix_selinux: False
-zabbix_agent_conf_dir: /etc/zabbix
 
 zabbix_repo_yum:
   - name: zabbix
