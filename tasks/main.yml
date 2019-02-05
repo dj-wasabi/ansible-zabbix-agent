@@ -51,7 +51,7 @@
 
 - name: "Install local python-netaddr package"
   pip:
-    name: python-netaddr
+    name: netaddr
     state: present
   register: zabbix_python_netaddr_package_installed
   until: zabbix_python_netaddr_package_installed is succeeded
