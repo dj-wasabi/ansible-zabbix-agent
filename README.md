@@ -190,6 +190,8 @@ There are some variables in de default/main.yml which can (Or needs to) be overr
 
 * `zabbix_agent_runas_user`: Drop privileges to a specific, existing user on the system. Only has effect if run as 'root' and AllowRoot is disabled.
 
+* `zabbix_agent_become_on_localhost`: Set to `False` if you don't need to elevate privileges on localhost to install packages locally with pip. Default: True
+
 ## TLS Specific configuration
 
 These variables are specific for Zabbix 3.0 and higher:
