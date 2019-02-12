@@ -56,7 +56,7 @@
   register: zabbix_python_netaddr_package_installed
   until: zabbix_python_netaddr_package_installed is succeeded
   delegate_to: localhost
-  become: True
+  become: "{{ zabbix_agent_become_on_localhost }}"
   when:
     - ansible_all_ipv4_addresses is defined or (zabbix_agent_ip is not defined and total_private_ip_addresses is defined)
 
@@ -148,7 +148,7 @@
   register: zabbix_api_package_installed
   until: zabbix_api_package_installed is succeeded
   delegate_to: localhost
-  become: True
+  become: "{{ zabbix_agent_become_on_localhost }}"
   when:
     - zabbix_api_create_hostgroup or zabbix_api_create_hosts
 

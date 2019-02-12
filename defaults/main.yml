@@ -84,6 +84,7 @@ zabbix_agent_userparameters: []
 zabbix_agent_custom_scripts: false
 zabbix_agent_loadmodulepath: ${libdir}/modules
 zabbix_agent_loadmodule:
+zabbix_agent_become_on_localhost: True
 
 # TLS settings
 zabbix_agent_tlsconnect:
