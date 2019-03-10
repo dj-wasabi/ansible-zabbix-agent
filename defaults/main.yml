@@ -11,10 +11,12 @@ zabbix_agent_server:
 zabbix_agent_serveractive:
 zabbix_selinux: False
 
+zabbix_agent_distribution_major_version: "{{ ansible_distribution_major_version }}"
+
 zabbix_repo_yum:
   - name: zabbix
     description: Zabbix Official Repository - $basearch
-    baseurl: http://repo.zabbix.com/zabbix/{{ zabbix_version }}/rhel/{{ ansible_distribution_major_version }}/$basearch/
+    baseurl: http://repo.zabbix.com/zabbix/{{ zabbix_version }}/rhel/{{ zabbix_agent_distribution_major_version }}/$basearch/
     gpgcheck: 0
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
     state: present

@@ -12,19 +12,14 @@ platforms:
     groups:
       - group1
     privileged: True
-  - name: zabbix-agent-debian-jessie
-    image: maint/debian-systemd:latest
+  - name: zabbix-agent-fedora
+    image: jrei/systemd-fedora:latest
     groups:
       - group1
     privileged: True
   - name: zabbix-agent-debian-stretch
     image: minimum2scp/systemd-stretch:latest
     command: /sbin/init
-    groups:
-      - group1
-    privileged: True
-  - name: zabbix-agent-ubuntu-xenial
-    image: solita/ubuntu-systemd:xenial
     groups:
       - group1
     privileged: True
