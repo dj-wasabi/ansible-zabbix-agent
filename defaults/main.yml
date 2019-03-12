@@ -11,7 +11,10 @@ zabbix_agent_server:
 zabbix_agent_serveractive:
 zabbix_selinux: False
 
+# Override Ansible specific facts
 zabbix_agent_distribution_major_version: "{{ ansible_distribution_major_version }}"
+zabbix_agent_distribution_release: "{{ ansible_distribution_release }}"
+zabbix_agent_os_family: "{{ ansible_os_family }}"
 
 zabbix_repo_yum:
   - name: zabbix
@@ -22,7 +25,7 @@ zabbix_repo_yum:
     state: present
   - name: zabbix-non-supported
     description: Zabbix Official Repository non-supported - $basearch
-    baseurl: http://repo.zabbix.com/non-supported/rhel/{{ ansible_distribution_major_version }}/$basearch/
+    baseurl: http://repo.zabbix.com/non-supported/rhel/{{ zabbix_agent_distribution_major_version }}/$basearch/
     gpgcheck: 0
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX
     state: present

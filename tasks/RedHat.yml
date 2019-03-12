@@ -12,14 +12,14 @@
     - zabbix-agent
     - init
 
-- name: "RedHat | Set ansible_distribution_major_version to 6 when Amazon"
+- name: "RedHat | Set zabbix_agent_distribution_major_version to 6 when Amazon"
   set_fact:
-    ansible_distribution_major_version: 6
+    zabbix_agent_distribution_major_version: 6
   when:
     - ansible_distribution == "Amazon"
     - ansible_distribution_major_version == "NA"
 
-- name: "Fedora | Modify ansible_distribution_major_version and zabbix_agent_conf_dir when Fedora"
+- name: "Fedora | Override zabbix_agent_distribution_major_version for Fedora"
   set_fact:
     zabbix_agent_distribution_major_version: 7
   when:
