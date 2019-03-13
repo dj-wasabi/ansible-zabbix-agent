@@ -14,8 +14,8 @@
 
 - name: "Suse | Install basic repo file"
   zypper_repository:
-    repo: "{{ suse[ansible_distribution][ansible_distribution_major_version]['url'] }}"
-    name: "{{ suse[ansible_distribution][ansible_distribution_major_version]['name'] }}"
+    repo: "{{ suse[ansible_distribution][zabbix_agent_distribution_major_version]['url'] }}"
+    name: "{{ suse[ansible_distribution][zabbix_agent_distribution_major_version]['name'] }}"
     state: present
   when:
     - zabbix_repo == "zabbix"

@@ -3,26 +3,26 @@
 
 - name: "Fix facts for linuxmint - distribution release"
   set_fact:
-    ansible_distribution_release: xenial
+    zabbix_agent_distribution_release: xenial
   when:
     - ansible_os_family == "Linuxmint"
     - ansible_distribution_release == "sonya" or ansible_distribution_release == "serena"
 
 - name: "Fix facts for linuxmint - family"
   set_fact:
-    ansible_os_family: Debian
+    zabbix_agent_os_family: Debian
   when:
     - ansible_os_family == "Linuxmint"
 
 - name: "Include OS-specific variables"
-  include_vars: "{{ ansible_os_family }}.yml"
+  include_vars: "{{ zabbix_agent_os_family }}.yml"
   tags:
     - zabbix-agent
 
 - name: "Install the correct repository"
   include: "RedHat.yml"
   when:
-    - ansible_os_family == "RedHat"
+    - zabbix_agent_os_family == "RedHat"
   tags:
     - zabbix-agent
     - init
@@ -32,7 +32,7 @@
 - name: "Install the correct repository"
   include: "Debian.yml"
   when:
-    - ansible_os_family == "Debian"
+    - zabbix_agent_os_family == "Debian"
   tags:
     - zabbix-agent
     - init
@@ -42,7 +42,7 @@
 - name: "Install the correct repository"
   include: "Suse.yml"
   when:
-    - ansible_os_family == "Suse"
+    - zabbix_agent_os_family == "Suse"
   tags:
     - zabbix-agent
     - init
@@ -135,11 +135,11 @@
 
 - name: "Install the correct repository"
   include: Windows.yml
-  when: ansible_os_family == "Windows"
+  when: zabbix_agent_os_family == "Windows"
 
 - name: "Install the correct repository"
   include: Linux.yml
-  when: ansible_os_family != "Windows"
+  when: zabbix_agent_os_family != "Windows"
 
 - name: "Installing the Zabbix-api package on localhost"
   pip:

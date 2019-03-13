@@ -7,7 +7,7 @@
 ### option: pidfile
 #       name of pid file.
 #
-{% if ansible_os_family != "Windows" %}
+{% if zabbix_agent_os_family != "Windows" %}
 PidFile={{ zabbix_agent_pidfile }}
 {% endif %}
 
@@ -15,7 +15,7 @@ PidFile={{ zabbix_agent_pidfile }}
 #       name of log file.
 #       if not set, syslog is used.
 #
-{% if ansible_os_family == "Windows" %}
+{% if zabbix_agent_os_family == "Windows" %}
 LogFile={{ zabbix_agent_win_logfile }}
 {% else %}
 LogFile={{ zabbix_agent_logfile }}
@@ -179,7 +179,7 @@ Alias={{ zabbix_agent_zabbix_alias }}
 #
 Timeout={{ zabbix_agent_timeout }}
 
-{% if ansible_os_family != "Windows" %}
+{% if zabbix_agent_os_family != "Windows" %}
 ### option: allowroot
 #       allow the agent to run as 'root'. if disabled and the agent is started by 'root', the agent
 #       will try to switch to user 'zabbix' instead. has no effect if started under a regular user.
@@ -204,7 +204,7 @@ User={{ zabbix_agent_runas_user }}
 #       you may include individual files or all files in a directory in the configuration file.
 #       installing zabbix will create include directory in /usr/local/etc, unless modified during the compile time.
 #
-{% if ansible_os_family == "Windows" %}
+{% if zabbix_agent_os_family == "Windows" %}
 Include={{ zabbix_agent_win_include }}
 {% else %}
 Include={{ zabbix_agent_include }}
@@ -237,7 +237,7 @@ UnsafeUserParameters={{ zabbix_agent_unsafeuserparameters }}
 #       Full path to location of agent modules.
 #       Default depends on compilation options.
 #
-{% if ansible_os_family != "Windows" %}
+{% if zabbix_agent_os_family != "Windows" %}
 LoadModulePath={{ zabbix_agent_loadmodulepath }}
 {% endif %}
 {% endif %}
