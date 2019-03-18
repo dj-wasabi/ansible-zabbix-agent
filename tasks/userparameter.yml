@@ -17,7 +17,7 @@
     dest: "/etc/zabbix/scripts/"
     owner: zabbix
     group: zabbix
-    mode: 0644
+    mode: 0755
   notify: restart zabbix-agent
   become: yes
   with_items: "{{ zabbix_agent_userparameters }}"
