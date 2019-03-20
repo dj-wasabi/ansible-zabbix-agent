@@ -192,6 +192,8 @@ There are some variables in de default/main.yml which can (Or needs to) be overr
 
 * `zabbix_agent_become_on_localhost`: Set to `False` if you don't need to elevate privileges on localhost to install packages locally with pip. Default: True
 
+* `zabbix_install_pip_packages`: Set to `False` if you don't want to install the required pip packages. Useful when you control your environment completely. Default: True
+
 ## TLS Specific configuration
 
 These variables are specific for Zabbix 3.0 and higher:
