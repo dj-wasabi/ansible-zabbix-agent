@@ -10,7 +10,7 @@
 
 - name: "Debian | Install gpg key"
   apt_key:
-    id: "{{ sign_keys[zabbix_short_version][ansible_distribution_release]['sign_key'] }}"
+    id: "{{ sign_keys[zabbix_short_version][zabbix_agent_distribution_release]['sign_key'] }}"
     url: http://repo.zabbix.com/zabbix-official-repo.key
   when:
     - zabbix_repo == "zabbix"
@@ -21,7 +21,7 @@
 
 - name: "Debian | Installing deb-src repository Ubuntu"
   apt_repository:
-    repo: "deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
+    repo: "deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ zabbix_agent_distribution_release }} main"
     state: present
   when:
     - ansible_distribution == "Ubuntu"
@@ -33,7 +33,7 @@
 
 - name: "Debian | Installing deb repository Debian"
   apt_repository:
-    repo: "deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main"
+    repo: "deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ zabbix_agent_distribution_release }} main"
     state: present
   when:
     - ansible_distribution == "Debian"
@@ -45,7 +45,7 @@
 
 - name: "Debian | Installing deb-src repository Debian"
   apt_repository:
-    repo: "deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ ansible_distribution_release }} main"
+    repo: "deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ zabbix_agent_distribution_release }} main"
     state: present
   when:
     - ansible_distribution == "Debian"
@@ -57,7 +57,7 @@
 
 - name: "Debian | Installing deb repository Ubuntu"
   apt_repository:
-    repo: "deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ ansible_distribution_release }} main"
+    repo: "deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ zabbix_agent_distribution_release }} main"
     state: present
   when:
     - ansible_distribution == "Ubuntu"

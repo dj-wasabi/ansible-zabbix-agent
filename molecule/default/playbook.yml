@@ -3,8 +3,8 @@
   hosts: all
   pre_tasks:
     - name: "Installing packages on CentOS family"
-      yum:
-        name:
+      package:
+        pkg:
           - net-tools
           - which
         state: present

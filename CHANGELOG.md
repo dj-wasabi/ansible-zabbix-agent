@@ -4,9 +4,19 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
-x.x.x  (unreleased)
+1.6.0  (2019-03-13)
 
-  * 
+  * Added task for installation of the zabbix-api package #191
+  * Restart agent when PSK file changes (fixes #193) #194 (By pull request: pigulla (Thanks!))
+  * Added a until loop to retry installations as suggested by ansible-lint #195
+  * Add fedora 29 support #199 (By pull request: average-joe (Thanks!))
+  * Set default values if property is undefined #203
+  * Add installation of pip package netaddr #204
+  * Add option not to elevate privileges locally #206 (By pull request: dennisse (Thanks!))
+  * Windows zabbix agent handler #209 (By pull request: rnsc (Thanks!))
+  * Add Bionic to sign keys for zabbix-agent v3.0 and v3.2 #211 (By pull request: mamedin (Thanks!))
+  * Fix for: zabbix_agent_tlsconnect and zabbix_agent_tlsaccept are mixed #205
+  * Fix for: Role Should NOT Smash Ansible Facts #207
 
 1.5.0  (2018-10-19)
 
