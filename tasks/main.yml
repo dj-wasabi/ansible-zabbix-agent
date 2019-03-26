@@ -58,6 +58,7 @@
   delegate_to: localhost
   become: "{{ zabbix_agent_become_on_localhost }}"
   when:
+    - zabbix_install_pip_packages
     - ansible_all_ipv4_addresses is defined or (zabbix_agent_ip is not defined and total_private_ip_addresses is defined)
 
 - name: "Get Total Private IP Addresses"
@@ -150,6 +151,7 @@
   delegate_to: localhost
   become: "{{ zabbix_agent_become_on_localhost }}"
   when:
+    - zabbix_install_pip_packages
     - zabbix_api_create_hostgroup or zabbix_api_create_hosts
 
 - name: "Create hostgroups"
