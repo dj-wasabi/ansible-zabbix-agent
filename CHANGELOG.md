@@ -4,6 +4,12 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+UNRELEASED:
+
+  * Update userparameter.yml #215 (By pull request: Jookadin (Thanks!))
+  * Pip packages install variable #217 (By pull request: rnsc (Thanks!))
+  * Added task that was previously in role #219
+
 1.6.0  (2019-03-13)
 
   * Added task for installation of the zabbix-api package #191
