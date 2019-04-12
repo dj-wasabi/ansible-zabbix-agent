@@ -6,6 +6,8 @@ Version (Release date)
 
 UNRELEASED:
 
+1.6.1  (2019-04-12)
+
   * Update userparameter.yml #215 (By pull request: Jookadin (Thanks!))
   * Pip packages install variable #217 (By pull request: rnsc (Thanks!))
   * Added task that was previously in role #219
