@@ -4,6 +4,7 @@ Table of Contents
 - [Requirements](#requirements)
   * [Operating systems](#operating-systems)
   * [Zabbix Versions](#zabbix-versions)
+    + [Zabbix 4.2](#zabbix-42)
     + [Zabbix 4.0](#zabbix-40)
     + [Zabbix 3.4](#zabbix-34)
     + [Zabbix 3.2](#zabbix-32)
@@ -67,6 +68,17 @@ Please sent Pull Requests or suggestions when you want to use this role for othe
 ## Zabbix Versions
 
 See the following list of supported Operating systems with the Zabbix releases:
+
+### Zabbix 4.2
+
+  * CentOS 7.x
+  * Amazon 7.x
+  * RedHat 7.x
+  * Fedora 27, 29
+  * OracleLinux 7.x
+  * Scientific Linux 7.x
+  * Ubuntu 14.04, 16.04, 18.04
+  * Debian 8, 9
 
 ### Zabbix 4.0
 
