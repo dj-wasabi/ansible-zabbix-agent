@@ -48,7 +48,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        zabbix_version: 3.4
+        zabbix_version: 4.0
 
 scenario:
   name: before-last-version
