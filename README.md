@@ -2,35 +2,35 @@ Table of Contents
 
 - [Overview](#overview)
 - [Requirements](#requirements)
-  * [Operating systems](#operating-systems)
-  * [Zabbix Versions](#zabbix-versions)
-    + [Zabbix 4.2](#zabbix-42)
-    + [Zabbix 4.0](#zabbix-40)
-    + [Zabbix 3.4](#zabbix-34)
-    + [Zabbix 3.2](#zabbix-32)
-    + [Zabbix 3.0](#zabbix-30)
-    + [Zabbix 2.4](#zabbix-24)
-    + [Zabbix 2.2](#zabbix-22)
+  - [Operating systems](#operating-systems)
+  - [Zabbix Versions](#zabbix-versions)
+    - [Zabbix 4.2](#zabbix-42)
+    - [Zabbix 4.0](#zabbix-40)
+    - [Zabbix 3.4](#zabbix-34)
+    - [Zabbix 3.2](#zabbix-32)
+    - [Zabbix 3.0](#zabbix-30)
+    - [Zabbix 2.4](#zabbix-24)
+    - [Zabbix 2.2](#zabbix-22)
 - [Getting started](#getting-started)
-  * [Installation](#installation)
-  * [Minimal Configuration](#minimal-configuration)
+  - [Installation](#installation)
+  - [Minimal Configuration](#minimal-configuration)
 - [Role Variables](#role-variables)
-  * [Main variables](#main-variables)
-  * [TLS Specific configuration](#tls-specific-configuration)
-  * [Zabbix API variables](#zabbix-api-variables)
-  * [Windows Variables](#windows-variables)
-  * [Other variables](#other-variables)
+  - [Main variables](#main-variables)
+  - [TLS Specific configuration](#tls-specific-configuration)
+  - [Zabbix API variables](#zabbix-api-variables)
+  - [Windows Variables](#windows-variables)
+  - [Other variables](#other-variables)
 - [Dependencies](#dependencies)
 - [Example Playbook](#example-playbook)
-  * [agent_interfaces](#agent-interfaces)
-  * [Other interfaces](#other-interfaces)
-  * [Vars in role configuration](#vars-in-role-configuration)
-  * [Combination of group_vars and playbook](#combination-of-group-vars-and-playbook)
-  * [Example for TLS PSK encrypted agent communication](#example-for-tls-psk-encrypted-agent-communication)
+  - [agent_interfaces](#agentinterfaces)
+  - [Other interfaces](#other-interfaces)
+  - [Vars in role configuration](#vars-in-role-configuration)
+  - [Combination of group_vars and playbook](#combination-of-groupvars-and-playbook)
+  - [Example for TLS PSK encrypted agent communication](#example-for-tls-psk-encrypted-agent-communication)
 - [Molecule](#molecule)
-  * [default](#default)
-  * [with-server](#with-server)
-  * [before-last-version](#before-last-version)
+  - [default](#default)
+  - [with-server](#with-server)
+  - [before-last-version](#before-last-version)
 - [Deploying Userparameters](#deploying-userparameters)
 - [License](#license)
 - [Author Information](#author-information)
@@ -246,7 +246,7 @@ These variables are specific for Zabbix 3.0 and higher:
 
 ## Zabbix API variables
 
-These variables needs to be overridden when you want to make use of the zabbix-api for automatically creating and or updating hosts. 
+These variables needs to be overridden when you want to make use of the zabbix-api for automatically creating and or updating hosts.
 
 Host encryption configuration will be set to match agent configuration.
 
@@ -290,7 +290,7 @@ When `zabbix_api_create_hostgroup` or `zabbix_api_create_hosts` is set to `True`
 
 _Supporting Windows is an best effort (I don't have the possibility to either test/verify changes on the various amount of available Windows instances). PR's specific to Windows will almost immediately be merged, unless some one is able to provide a Windows test mechanism via Travis for Pull Requests._
 
-* `zabbix_version_long`: The long (major.minor.patch) version of the Zabbix Agent. This will be used with the `zabbix_win_download_link` link. If `zabbix_win_download_link` is provided, then there is no need to configure this property.
+* `zabbix_version_long`: The long (major.minor.patch) version of the Zabbix Agent. This will be used to generate the `zabbix_win_download_link` link and for Zabbix Agent update if `zabbix_agent_package_state: latest`.
 
 * `zabbix_win_download_link`: The download url to the `win.zip` file.
 
