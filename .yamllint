@@ -8,6 +8,6 @@ rules:
     max-spaces-inside: 1
     level: error
   line-length:
-    max: 180
+    max: 200
     level: warning
   truthy: disable

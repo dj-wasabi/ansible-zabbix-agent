@@ -30,12 +30,22 @@
   win_file_version:
     path: "{{ zabbix_win_exe_path }}"
   register: zabbix_win_exe_info
-  when: agent_file_info.stat.exists
+  when:
+    - agent_file_info.stat.exists
+
+- name: "Windows | Checking Update (Set default)"
+  set_fact:
+    update_zabbix_agent: False
+  when:
+    - agent_file_info.stat.exists
 
 - name: "Windows | Checking Update"
   set_fact:
-    update_zabbix_agent: "{{ true if (( zabbix_win_exe_info.win_file_version.product_version is version(zabbix_version_long, '<')) and (zabbix_agent_package_state == 'latest')) else false }}"
-  when: agent_file_info.stat.exists
+    update_zabbix_agent: True
+  when:
+    - agent_file_info.stat.exists
+    - zabbix_win_exe_info.win_file_version.product_version is version(zabbix_version_long, '<')
+    - zabbix_agent_package_state == 'latest'
 
 - name: "Windows | Stop Zabbix (Update)"
   win_service:
@@ -79,6 +89,8 @@
     url: "{{ zabbix_win_download_link }}"
     dest: '{{ zabbix_win_install_dir }}\{{ zabbix_win_package }}'
     force: False
+  register: zabbix_agent_win_download_zip
+  until: zabbix_agent_win_download_zip is succeeded
 
 - name: "Windows | Unzip file"
   win_unzip:
