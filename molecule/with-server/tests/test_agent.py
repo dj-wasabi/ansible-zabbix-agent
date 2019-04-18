@@ -15,9 +15,9 @@ def authenticate():
     return zapi
 
 
-def test_psk_host(Command):
+def test_psk_host(host):
     zapi = authenticate()
-    hostname = Command.check_output('hostname -s')
+    hostname = host.check_output('hostname -s')
     host_name = "zabbix-agent-ubuntu"
 
     server_data = zapi.host.get({'output': 'extend', 'selectInventory': 'extend', 'filter': {'host': [hostname]}})
@@ -31,11 +31,11 @@ def test_psk_host(Command):
         assert server_data[0]['tls_accept'] == "1"
 
 
-def test_zabbix_agent_psk(File, Command):
-    hostname = Command.check_output('hostname -s')
+def test_zabbix_agent_psk(host):
+    hostname = host.check_output('hostname -s')
     host_name = "zabbix-agent-ubuntu"
 
-    psk_file = File("/etc/zabbix/zabbix_agent_pskfile.psk")
+    psk_file = host.file("/etc/zabbix/zabbix_agent_pskfile.psk")
     if hostname == host_name:
         assert psk_file.user == "zabbix"
         assert psk_file.group == "zabbix"
