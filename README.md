@@ -246,7 +246,7 @@ These variables are specific for Zabbix 3.0 and higher:
 
 ## Zabbix API variables
 
-These variables needs to be overridden when you want to make use of the zabbix-api for automatically creating and or updating hosts. 
+These variables needs to be overridden when you want to make use of the zabbix-api for automatically creating and or updating hosts.
 
 Host encryption configuration will be set to match agent configuration.
 
@@ -290,7 +290,7 @@ When `zabbix_api_create_hostgroup` or `zabbix_api_create_hosts` is set to `True`
 
 _Supporting Windows is an best effort (I don't have the possibility to either test/verify changes on the various amount of available Windows instances). PR's specific to Windows will almost immediately be merged, unless some one is able to provide a Windows test mechanism via Travis for Pull Requests._
 
-* `zabbix_version_long`: The long (major.minor.patch) version of the Zabbix Agent. This will be used with the `zabbix_win_download_link` link. If `zabbix_win_download_link` is provided, then there is no need to configure this property.
+* `zabbix_version_long`: The long (major.minor.patch) version of the Zabbix Agent. This will be used to generate the `zabbix_win_download_link` link and for Zabbix Agent update if `zabbix_agent_package_state: latest`.
 
 * `zabbix_win_download_link`: The download url to the `win.zip` file.
 
@@ -299,6 +299,8 @@ _Supporting Windows is an best effort (I don't have the possibility to either te
 * `zabbix_agent_win_logfile`: The full path to the logfile for the Zabbix Agent.
 
 * `zabbix_agent_win_include`: The directory in which the Zabbix specific configuration files are stored.
+
+* `zabbix_agent_win_svc_recovery`: Enable Zabbix Agent service auto-recovery settings.
 
 ## Other variables
 
