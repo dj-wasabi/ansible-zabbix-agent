@@ -300,6 +300,8 @@ _Supporting Windows is an best effort (I don't have the possibility to either te
 
 * `zabbix_agent_win_include`: The directory in which the Zabbix specific configuration files are stored.
 
+* `zabbix_agent_win_svc_recovery`: Enable Zabbix Agent service auto-recovery settings.
+
 ## Other variables
 
 * `zabbix_agent_firewall_enable`: If IPtables needs to be updated by opening an TCP port for port configured in `zabbix_agent_listenport`.

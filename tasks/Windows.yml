@@ -110,6 +110,18 @@
     start_mode: auto
     state: started
 
+- name: "Windows | Getting Zabbix Service Recovery Settings"
+  win_shell: sc.exe qfailure "Zabbix Agent"
+  register: svc_recovery
+  changed_when: false
+  when: zabbix_agent_win_svc_recovery
+
+- name: "Windows | Setting Zabbix Service Recovery"
+  win_shell: sc.exe failure "Zabbix Agent" actions= restart/5000/restart/10000/restart/20000 reset= 86400
+  when:
+    - "'RESTART -- Delay' not in svc_recovery.stdout"
+    - zabbix_agent_win_svc_recovery
+
 - name: "Windows | Firewall rule"
   win_firewall_rule:
     name: Zabbix Agent
