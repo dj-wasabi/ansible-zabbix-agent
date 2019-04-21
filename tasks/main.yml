@@ -1,5 +1,5 @@
 ---
-# tasks file for wdijkerman.zabbix
+# tasks file for dj-wasabi.zabbix-agent
 
 - name: "Fix facts for linuxmint - distribution release"
   set_fact:
@@ -23,6 +23,7 @@
   include: "RedHat.yml"
   when:
     - zabbix_agent_os_family == "RedHat"
+    - not zabbix_agent_docker
   tags:
     - zabbix-agent
     - init
@@ -33,6 +34,7 @@
   include: "Debian.yml"
   when:
     - zabbix_agent_os_family == "Debian"
+    - not zabbix_agent_docker
   tags:
     - zabbix-agent
     - init
@@ -43,6 +45,7 @@
   include: "Suse.yml"
   when:
     - zabbix_agent_os_family == "Suse"
+    - not zabbix_agent_docker
   tags:
     - zabbix-agent
     - init
@@ -143,11 +146,13 @@
 
 - name: "Install the correct repository"
   include: Windows.yml
-  when: zabbix_agent_os_family == "Windows"
+  when:
+    - zabbix_agent_os_family == "Windows"
 
 - name: "Install the correct repository"
   include: Linux.yml
-  when: zabbix_agent_os_family != "Windows"
+  when:
+    - zabbix_agent_os_family != "Windows" or zabbix_agent_docker
 
 - name: "Installing the Zabbix-api package on localhost"
   pip:

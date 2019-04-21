@@ -1,65 +1,16 @@
 ---
-- name: Prepare
-  hosts: zabbix_server
-  pre_tasks:
-    - name: "Installing EPEL"
-      yum:
-        name:
-          - epel-release
-        state: present
-      when: ansible_distribution == 'CentOS'
 
-    - name: "Installing packages"
-      yum:
-        name:
-          - net-tools
-          - which
-          - libselinux-python
-          - python-pip
-        state: present
-      register: installation_dependencies
-      when: ansible_distribution == 'CentOS'
-
-    - name: "Installing which on NON-CentOS"
-      apt:
-        name:
-          - net-tools
-          - python-pip
-          - curl
-        state: present
-      when: ansible_distribution != 'CentOS'
-
-    - name: "Configure SUDO."
-      lineinfile:
-        dest: /etc/sudoers
-        line: "Defaults    !requiretty"
-        state: present
-
-    - name: "Make sure the docs are installed."
-      lineinfile:
-        dest: /etc/yum.conf
-        line: "tsflags=nodocs"
-        state: absent
-
-    - name: "Installing some python dependencies"
-      pip:
-        name: py-zabbix
-        state: present
-
-  roles:
-    - role: geerlingguy.mysql
-    - role: dj-wasabi.zabbix-server
-    - role: dj-wasabi.zabbix-web
-
-- name: Prepare
-  hosts: all:!zabbix_server:!docker
+- name: Converge
+  hosts: all
   tasks:
     - name: "Installing packages on CentOS family"
-      yum:
-        name:
+      package:
+        pkg:
           - net-tools
           - which
         state: present
+      register: zabbix_agent_prepare_packages_install
+      until: zabbix_agent_prepare_packages_install is succeeded
       when:
         - ansible_os_family == 'RedHat'
 
@@ -68,11 +19,21 @@
         name:
           - net-tools
         state: present
+      register: zabbix_agent_prepare_packages_install
+      until: zabbix_agent_prepare_packages_install is succeeded
       when:
         - ansible_os_family == 'Debian'
 
+    - name: "Installing packages on Suse family"
+      shell: zypper install -y python-xml python-libxml2 net-tools which
+      register: zabbix_agent_prepare_packages_install
+      until: zabbix_agent_prepare_packages_install is succeeded
+      when: ansible_os_family == 'Suse'
+      tags:
+        - skip_ansible_lint
+
 - name: Converge
-  hosts: docker 
+  hosts: docker
   tasks:
     - name: "Download Docker CE repo file"
       get_url:

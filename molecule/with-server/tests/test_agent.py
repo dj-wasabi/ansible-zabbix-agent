@@ -8,7 +8,6 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('zabbix_agent')
 
 
-@pytest.fixture
 def authenticate():
     zapi = ZabbixAPI(server='http://zabbix-server-centos/api_jsonrpc.php')
     zapi.login("Admin", "zabbix")
@@ -21,6 +20,8 @@ def test_psk_host(host):
     host_name = "zabbix-agent-ubuntu"
 
     server_data = zapi.host.get({'output': 'extend', 'selectInventory': 'extend', 'filter': {'host': [hostname]}})
+    print (server_data)
+
     if hostname == host_name:
         assert server_data[0]['tls_psk'] == "b7e3d380b9d400676d47198ecf3592ccd4795a59668aa2ade29f0003abbbd40d"
         assert server_data[0]['tls_psk_identity'] == "myhost PSK"

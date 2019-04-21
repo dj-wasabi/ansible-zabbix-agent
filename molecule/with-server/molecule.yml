@@ -17,28 +17,37 @@ platforms:
       - name: zabbix
     published_ports:
       - "80:80"
-  - name: zabbix-agent-centos
+  - name: zabbix-agent-docker-centos
     image: milcom/centos7-systemd:latest
-    groups:
-      - zabbix_agent
-    privileged: True
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     networks:
       - name: zabbix
-  - name: zabbix-agent-debian
-    image: minimum2scp/systemd-stretch:latest
-    command: /sbin/init
     groups:
-      - zabbix_agent
+      - docker
     privileged: True
-    networks:
-      - name: zabbix
-  - name: zabbix-agent-ubuntu
-    image: solita/ubuntu-systemd:bionic
-    groups:
-      - zabbix_agent
-    privileged: True
-    networks:
-      - name: zabbix
+  # - name: zabbix-agent-centos
+  #   image: milcom/centos7-systemd:latest
+  #   groups:
+  #     - zabbix_agent
+  #   privileged: True
+  #   networks:
+  #     - name: zabbix
+  # - name: zabbix-agent-debian
+  #   image: minimum2scp/systemd-stretch:latest
+  #   command: /sbin/init
+  #   groups:
+  #     - zabbix_agent
+  #   privileged: True
+  #   networks:
+  #     - name: zabbix
+  # - name: zabbix-agent-ubuntu
+  #   image: solita/ubuntu-systemd:bionic
+  #   groups:
+  #     - zabbix_agent
+  #   privileged: True
+  #   networks:
+  #     - name: zabbix
 
 provisioner:
   name: ansible
@@ -61,6 +70,8 @@ provisioner:
         zabbix_server_dbport: 3306
         database_type: mysql
         database_type_long: mysql
+      docker:
+        zabbix_agent_docker: True
     host_vars:
       zabbix-agent-ubuntu:
         zabbix_agent_tlsaccept: psk
