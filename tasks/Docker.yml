@@ -7,7 +7,6 @@
       ZBX_TLSPSKFILE: tlspskfile
   when:
     - zabbix_agent_tlspskfile is defined
-    - zabbix_agent_tlspskfile
 
 - name: "Add zabbix_agent_tlspskfile to volume mount"
   set_fact:
@@ -15,7 +14,6 @@
     zabbix_agent_docker_env: "{{ zabbix_agent_docker_env | combine(tls_key) }}"
   when:
     - zabbix_agent_tlspskfile is defined
-    - zabbix_agent_tlspskfile
 
 - name: "Ensure Zabbix Docker container is running"
   docker_container:
