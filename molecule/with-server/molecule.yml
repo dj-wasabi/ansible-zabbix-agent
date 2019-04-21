@@ -26,28 +26,28 @@ platforms:
     groups:
       - docker
     privileged: True
-  # - name: zabbix-agent-centos
-  #   image: milcom/centos7-systemd:latest
-  #   groups:
-  #     - zabbix_agent
-  #   privileged: True
-  #   networks:
-  #     - name: zabbix
-  # - name: zabbix-agent-debian
-  #   image: minimum2scp/systemd-stretch:latest
-  #   command: /sbin/init
-  #   groups:
-  #     - zabbix_agent
-  #   privileged: True
-  #   networks:
-  #     - name: zabbix
-  # - name: zabbix-agent-ubuntu
-  #   image: solita/ubuntu-systemd:bionic
-  #   groups:
-  #     - zabbix_agent
-  #   privileged: True
-  #   networks:
-  #     - name: zabbix
+  - name: zabbix-agent-centos
+    image: milcom/centos7-systemd:latest
+    groups:
+      - zabbix_agent
+    privileged: True
+    networks:
+      - name: zabbix
+  - name: zabbix-agent-debian
+    image: minimum2scp/systemd-stretch:latest
+    command: /sbin/init
+    groups:
+      - zabbix_agent
+    privileged: True
+    networks:
+      - name: zabbix
+  - name: zabbix-agent-ubuntu
+    image: solita/ubuntu-systemd:bionic
+    groups:
+      - zabbix_agent
+    privileged: True
+    networks:
+      - name: zabbix
 
 provisioner:
   name: ansible

@@ -145,7 +145,7 @@ zabbix_agent_docker_volumes:
   - /var/run:/var/run
 zabbix_agent_docker_env:
   ZBX_HOSTNAME: "{{ zabbix_agent_hostname }}"
-  ZBX_SERVER_HOST:  "{{ zabbix_agent_server }}"
+  ZBX_SERVER_HOST: "{{ zabbix_agent_server }}"
   ZBX_PASSIVE_ALLOW: "{{ zabbix_agent_serverpassive_allow | default(omit) }}"
   ZBX_PASSIVESERVERS: "{{ zabbix_agent_serverpassive | default(omit) }}"
   ZBX_ACTIVE_ALLOW: "{{ zabbix_agent_serveractive_allow | default(omit) }}"

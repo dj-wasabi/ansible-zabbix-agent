@@ -1,5 +1,4 @@
 import os
-import pytest
 from zabbix_api import ZabbixAPI
 
 import testinfra.utils.ansible_runner
@@ -8,14 +7,12 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('zabbix_server')
 
 
-# @pytest.fixture
 def authenticate():
     zapi = ZabbixAPI(server='http://zabbix-server-centos/api_jsonrpc.php')
     zapi.login("Admin", "zabbix")
     return zapi
 
 
-# @pytest.fixture
 def get_hosts():
     return [
         "zabbix-agent-debian",

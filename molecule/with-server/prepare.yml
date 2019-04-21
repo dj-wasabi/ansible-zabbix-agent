@@ -72,7 +72,7 @@
         - ansible_os_family == 'Debian'
 
 - name: Converge
-  hosts: docker 
+  hosts: docker
   tasks:
     - name: "Download Docker CE repo file"
       get_url:
