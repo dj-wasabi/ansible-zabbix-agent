@@ -7,6 +7,8 @@
     state: restarted
     enabled: yes
   become: yes
+  when:
+    - not zabbix_agent_docker
 
 - name: firewalld-reload
   command: "firewall-cmd --reload"

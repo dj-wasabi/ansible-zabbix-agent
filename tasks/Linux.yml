@@ -28,6 +28,28 @@
   when:
     - zabbix_selinux
 
+- name: "Adding zabbix group"
+  group:
+    name: zabbix
+    state: present
+    gid: "{{ zabbix_agent_docker_user_gid | default(omit) }}"
+  become: yes
+  when:
+    - zabbix_agent_docker
+
+- name: "Adding zabbix user"
+  user:
+    name: zabbix
+    group: zabbix
+    state: present
+    create_home: False
+    home: /etc/zabbix
+    uid: "{{ zabbix_agent_docker_user_uid | default(omit) }}"
+    system: True
+  become: yes
+  when:
+    - zabbix_agent_docker
+
 - name: "Configure zabbix-agent"
   template:
     src: zabbix_agentd.conf.j2
@@ -38,6 +60,8 @@
   notify:
     - restart zabbix-agent
   become: yes
+  when:
+    - not zabbix_agent_docker
   tags:
     - zabbix-agent
     - config
@@ -77,6 +101,11 @@
     - config
     - include
 
+- name: "Install the Docker container"
+  include: Docker.yml
+  when:
+    - zabbix_agent_docker
+
 - name: "Configure IPTables"
   iptables:
     destination_port: "{{ zabbix_agent_listenport }}"
@@ -104,6 +133,8 @@
     state: started
     enabled: yes
   become: yes
+  when:
+    - not zabbix_agent_docker
   tags:
     - init
     - service

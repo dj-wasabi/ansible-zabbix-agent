@@ -19,6 +19,7 @@ Table of Contents
   * [TLS Specific configuration](#tls-specific-configuration)
   * [Zabbix API variables](#zabbix-api-variables)
   * [Windows Variables](#windows-variables)
+  * [Docker Variables](#docker-variables)
   * [Other variables](#other-variables)
 - [Dependencies](#dependencies)
 - [Example Playbook](#example-playbook)
@@ -35,13 +36,14 @@ Table of Contents
 - [License](#license)
 - [Author Information](#author-information)
 
-# Overview
-
 Build Status:
 
 [![Build Status](https://travis-ci.org/dj-wasabi/ansible-zabbix-agent.svg?branch=master)](https://travis-ci.org/dj-wasabi/ansible-zabbix-agent)
 
-This is an role for installing and maintaining the zabbix-agent.
+# Introduction
+
+This is an role for installing and maintaining the zabbix-agent. It will install the Zabbix Agent on any host with an operating system that is defined [here](#operating-systems) or
+will install a Docker container and start that.
 
 This is one of the 'dj-wasabi' roles which configures your whole Zabbix environment. See an list for the complete list:
 
@@ -301,6 +303,52 @@ _Supporting Windows is an best effort (I don't have the possibility to either te
 * `zabbix_agent_win_include`: The directory in which the Zabbix specific configuration files are stored.
 
 * `zabbix_agent_win_svc_recovery`: Enable Zabbix Agent service auto-recovery settings.
+
+## Docker Variables
+
+When you don't want to install the Zabbix Agent on the host, but would like to run it in a container then these properties are useful. When `zabbix_agent_docker` is set to `True`, then a
+Docker image will be downloaded and a Container will be started. No other installations will be done on the host, with the excetion of the PSK file and the "Zabbix Include Directory".
+
+The following directories are mounted in the Container:
+
+```
+  - /etc/zabbix/zabbix_agentd.d:/etc/zabbix/zabbix_agentd.d
+  - /:/hostfs:ro
+  - /etc:/hostfs/etc:ro
+  - /proc:/hostfs/proc:ro
+  - /sys:/hostfs/sys:ro
+  - /var/run:/var/run
+```
+
+Keep in mind that using the Zabbix Agent in a Container, requires changes to the Zabbix Template for Linux as `/proc`, `/sys` and `/etc` are mounted in a directory `/hostfs`.
+
+* `zabbix_agent_docker`: When set to `True`, it will install a Docker container on the target host instead of installation on the target. Default: `False`
+
+* `zabbix_agent_docker_state`: Default: `started`
+
+* `zabbix_agent_docker_name`: The name of the Container. Default: `zabbix-agent`
+
+* `zabbix_agent_docker_image`: The name of the Docker image. Default: `zabbix/zabbix-agent`
+
+* `zabbix_agent_docker_image_tag`: The tag of the Docker image.
+
+* `zabbix_agent_docker_user_gid`: The group id of the zabbix user in the Container.
+
+* `zabbix_agent_docker_user_uid`: The user id of the zabbix user in the Container.
+
+* `zabbix_agent_docker_network_mode`: The name of the (Docker) network that should be used for the Container. Default `host`.
+
+* `zabbix_agent_docker_restart_policy`: The restart policy of the Container. Default: `unless-stopped`
+
+* `zabbix_agent_docker_privileged`: When set to `True`, the container is running in privileged mode.
+
+* `zabbix_agent_docker_ports`: A list with `<PORT>:<PORT>` values to open ports to the container.
+
+* `zabbix_agent_docker_security_opts`: A list with available security options.
+
+* `zabbix_agent_docker_volumes`: A list with all directories that needs to be available in the Container.
+
+* `zabbix_agent_docker_env`: A dict with all environment variables that needs to be set for the Container.
 
 ## Other variables
 
