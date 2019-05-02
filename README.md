@@ -3,6 +3,7 @@ Table of Contents
 - [Overview](#overview)
 - [Requirements](#requirements)
   * [Operating systems](#operating-systems)
+  * [Local system access](#local-system-access)
   * [Zabbix Versions](#zabbix-versions)
     + [Zabbix 4.2](#zabbix-42)
     + [Zabbix 4.0](#zabbix-40)
@@ -66,6 +67,10 @@ This role will work on the following operating systems:
 
 So, you'll need one of those operating systems.. :-)
 Please sent Pull Requests or suggestions when you want to use this role for other Operating systems.
+
+## Local system access
+
+To successfully complete the install the role requires `python-netaddr` on the controller to be able to manage IP addresses. This requires that the library is available on your local machine (or that `pip` is installed to be able to run). This will likely mean that running the role will require `sudo` access to your local machine and therefore you may need the `-K` flag to be able to enter your local machine password if you are not running under root.
 
 ## Zabbix Versions
 
