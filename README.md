@@ -361,7 +361,7 @@ Keep in mind that using the Zabbix Agent in a Container, requires changes to the
 
 * `zabbix_agent_firewall_source`: When provided, IPtables will be configuring to only allow traffic from this IP address/range.
 
-* `zabbix_agent_firewalld_enable`: If firewalld needs to be updated by opening an TCP port for port configured in `zabbix_agent_listenport`.
+* `zabbix_agent_firewalld_enable`: If firewalld needs to be updated by opening an TCP port for port configured in `zabbix_agent_listenport` and `zabbix_agent_jmx_listenport` if defined.
 
 * `zabbix_agent_firewalld_source`: When provided, firewalld will be configuring to only allow traffic for IP configured in `zabbix_agent_server`.
 

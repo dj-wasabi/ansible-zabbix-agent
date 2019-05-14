@@ -106,7 +106,7 @@
   when:
     - zabbix_agent_docker
 
-- name: "Configure IPTables"
+- name: "Configure IPTables (zabbix_agent_listenport)"
   iptables:
     destination_port: "{{ zabbix_agent_listenport }}"
     source: "{{ zabbix_agent_firewall_source | default(omit) }}"
@@ -116,13 +116,34 @@
   become: yes
   when: zabbix_agent_firewall_enable
 
-- name: "Configure firewalld"
+- name: "Configure IPTables (zabbix_agent_jmx_listenport)"
+  iptables:
+    destination_port: "{{ zabbix_agent_listenport }}"
+    source: "{{ zabbix_agent_firewall_source | default(omit) }}"
+    protocol: tcp
+    chain: INPUT
+    jump: ACCEPT
+  become: yes
+  when: (zabbix_agent_firewall_enable and zabbix_agent_jmx_listenport)
+
+- name: "Configure firewalld (zabbix_agent_listenport)"
   firewalld:
     rich_rule: 'rule family="ipv4" source address="{{ zabbix_agent_firewalld_source }}" port protocol="tcp" port="{{ zabbix_agent_listenport }}" accept'
     permanent: true
     state: enabled
   become: yes
   when: zabbix_agent_firewalld_enable
+  notify:
+    - firewalld-reload
+  tags: zabbix_agent_firewalld_enable
+
+- name: "Configure firewalld (zabbix_agent_jmx_listenport)"
+  firewalld:
+    rich_rule: 'rule family="ipv4" source address="{{ zabbix_agent_firewalld_source }}" port protocol="tcp" port="{{ zabbix_agent_jmx_listenport }}" accept'
+    permanent: true
+    state: enabled
+  become: yes
+  when: (zabbix_agent_firewalld_enable and zabbix_agent_jmx_listenport)
   notify:
     - firewalld-reload
   tags: zabbix_agent_firewalld_enable

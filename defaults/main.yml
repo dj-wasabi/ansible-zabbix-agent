@@ -72,6 +72,7 @@ zabbix_agent_sourceip:
 zabbix_agent_enableremotecommands: 0
 zabbix_agent_logremotecommands: 0
 zabbix_agent_listenport: 10050
+zabbix_agent_jmx_listenport:
 zabbix_agent_listeninterface:
 zabbix_agent_listenip:
 zabbix_agent_startagents: 3
