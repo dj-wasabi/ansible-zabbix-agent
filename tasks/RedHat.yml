@@ -70,7 +70,7 @@
     state: installed
   register: zabbix_agent_policycoreutils_installed
   until: zabbix_agent_package_installed is succeeded
-  when: zabbix_selinux
+  when: zabbix_selinux | bool
   become: yes
   tags:
     - init

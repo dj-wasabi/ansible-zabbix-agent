@@ -26,7 +26,7 @@
     permissive: true
   become: yes
   when:
-    - zabbix_selinux
+    - zabbix_selinux | bool
 
 - name: "Adding zabbix group"
   group:
@@ -35,7 +35,7 @@
     gid: "{{ zabbix_agent_docker_user_gid | default(omit) }}"
   become: yes
   when:
-    - zabbix_agent_docker
+    - zabbix_agent_docker | bool
 
 - name: "Adding zabbix user"
   user:
@@ -48,7 +48,7 @@
     system: True
   become: yes
   when:
-    - zabbix_agent_docker
+    - zabbix_agent_docker | bool
 
 - name: "Configure zabbix-agent"
   template:
@@ -61,7 +61,7 @@
     - restart zabbix-agent
   become: yes
   when:
-    - not zabbix_agent_docker
+    - not (zabbix_agent_docker | bool)
   tags:
     - zabbix-agent
     - config
@@ -104,7 +104,7 @@
 - name: "Install the Docker container"
   include: Docker.yml
   when:
-    - zabbix_agent_docker
+    - zabbix_agent_docker | bool
 
 - name: "Configure IPTables (zabbix_agent_listenport)"
   iptables:
@@ -114,7 +114,7 @@
     chain: INPUT
     jump: ACCEPT
   become: yes
-  when: zabbix_agent_firewall_enable
+  when: zabbix_agent_firewall_enable | bool
 
 - name: "Configure IPTables (zabbix_agent_jmx_listenport)"
   iptables:
@@ -124,7 +124,7 @@
     chain: INPUT
     jump: ACCEPT
   become: yes
-  when: (zabbix_agent_firewall_enable and zabbix_agent_jmx_listenport)
+  when: (zabbix_agent_firewall_enable  | bool) and (zabbix_agent_jmx_listenport | bool)
 
 - name: "Configure firewalld (zabbix_agent_listenport)"
   firewalld:
@@ -132,7 +132,7 @@
     permanent: true
     state: enabled
   become: yes
-  when: zabbix_agent_firewalld_enable
+  when: zabbix_agent_firewalld_enable | bool
   notify:
     - firewalld-reload
   tags: zabbix_agent_firewalld_enable
@@ -143,7 +143,7 @@
     permanent: true
     state: enabled
   become: yes
-  when: (zabbix_agent_firewalld_enable and zabbix_agent_jmx_listenport)
+  when: (zabbix_agent_firewalld_enable | bool) and (zabbix_agent_jmx_listenport | bool)
   notify:
     - firewalld-reload
   tags: zabbix_agent_firewalld_enable
@@ -155,7 +155,7 @@
     enabled: yes
   become: yes
   when:
-    - not zabbix_agent_docker
+    - not (zabbix_agent_docker | bool)
   tags:
     - init
     - service

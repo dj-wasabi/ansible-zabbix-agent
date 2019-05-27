@@ -80,6 +80,8 @@
     state: "{{ zabbix_agent_package_state }}"
     update_cache: yes
     cache_valid_time: 0
+    force_apt_get: "{{ zabbix_apt_force_apt_get }}"
+    install_recommends: "{{ zabbix_apt_install_recommends }}"
   when: ansible_distribution in ['Ubuntu', 'Debian']
   register: zabbix_agent_package_installed
   until: zabbix_agent_package_installed is succeeded
@@ -95,6 +97,8 @@
     state: "{{ zabbix_agent_package_state }}"
     update_cache: yes
     cache_valid_time: 0
+    force_apt_get: "{{ zabbix_apt_force_apt_get }}"
+    install_recommends: "{{ zabbix_apt_install_recommends }}"
   when: ansible_distribution not in ['Ubuntu', 'Debian']
   register: zabbix_agent_package_installed
   until: zabbix_agent_package_installed is succeeded
@@ -109,10 +113,12 @@
     state: installed
     update_cache: yes
     cache_valid_time: 0
+    force_apt_get: "{{ zabbix_apt_force_apt_get }}"
+    install_recommends: "{{ zabbix_apt_install_recommends }}"
   register: zabbix_agent_policycoreutils_installed
   until: zabbix_agent_package_installed is succeeded
   become: yes
-  when: zabbix_selinux
+  when: zabbix_selinux | bool
 
 - name: "Debian | Enable the service"
   service:
