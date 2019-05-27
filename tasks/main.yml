@@ -23,7 +23,7 @@
   include: "RedHat.yml"
   when:
     - zabbix_agent_os_family == "RedHat"
-    - not zabbix_agent_docker
+    - not (zabbix_agent_docker | bool)
   tags:
     - zabbix-agent
     - init
@@ -34,7 +34,7 @@
   include: "Debian.yml"
   when:
     - zabbix_agent_os_family == "Debian"
-    - not zabbix_agent_docker
+    - not (zabbix_agent_docker | bool)
   tags:
     - zabbix-agent
     - init
@@ -45,7 +45,7 @@
   include: "Suse.yml"
   when:
     - zabbix_agent_os_family == "Suse"
-    - not zabbix_agent_docker
+    - not (zabbix_agent_docker | bool)
   tags:
     - zabbix-agent
     - init
@@ -61,7 +61,7 @@
   delegate_to: localhost
   become: "{{ zabbix_agent_become_on_localhost }}"
   when:
-    - zabbix_install_pip_packages
+    - zabbix_install_pip_packages | bool
     - ansible_all_ipv4_addresses is defined or (zabbix_agent_ip is not defined and total_private_ip_addresses is defined)
 
 - name: "Set default ip address for zabbix_agent_ip"
@@ -99,7 +99,7 @@
   fail:
     msg: "The specified network interface does not exist"
   when:
-    - zabbix_agent_listeninterface
+    - zabbix_agent_listeninterface | bool
     - (zabbix_agent_listeninterface not in ansible_all_ipv4_addresses)
   tags:
     - zabbix-agent
@@ -109,16 +109,16 @@
   set_fact:
     network_interface: ansible_{{ zabbix_agent_listeninterface }}
   when:
-    - zabbix_agent_listeninterface
-    - not zabbix_agent_listenip
+    - zabbix_agent_listeninterface | bool
+    - not (zabbix_agent_listenip | bool)
 
 - name: "Get IP of agent_listeninterface when no agent_listenip specified"
   set_fact:
     zabbix_agent_listenip: "{{ hostvars[inventory_hostname][network_interface]['ipv4'].address | default('0.0.0.0') }}"
     zabbix_agent_ip: "{{ hostvars[inventory_hostname][network_interface]['ipv4'].address | default('0.0.0.0') }}"
   when:
-    - zabbix_agent_listeninterface
-    - not zabbix_agent_listenip
+    - zabbix_agent_listeninterface | bool
+    - not (zabbix_agent_listenip | bool)
   tags:
     - zabbix-agent
     - config
@@ -128,7 +128,7 @@
   set_fact:
     zabbix_agent_listenip: '0.0.0.0'
   when:
-    - not zabbix_agent_listenip
+    - not (zabbix_agent_listenip | bool)
   tags:
     - zabbix-agent
     - config
@@ -152,7 +152,7 @@
 - name: "Install the correct repository"
   include: Linux.yml
   when:
-    - zabbix_agent_os_family != "Windows" or zabbix_agent_docker
+    - (zabbix_agent_os_family != "Windows") or (zabbix_agent_docker | bool)
 
 - name: "Installing the Zabbix-api package on localhost"
   pip:
@@ -163,8 +163,8 @@
   delegate_to: localhost
   become: "{{ zabbix_agent_become_on_localhost }}"
   when:
-    - zabbix_install_pip_packages
-    - zabbix_api_create_hostgroup or zabbix_api_create_hosts
+    - zabbix_install_pip_packages | bool
+    - (zabbix_api_create_hostgroup | bool) or (zabbix_api_create_hosts | bool)
 
 - name: "Create hostgroups"
   zabbix_group:
@@ -175,7 +175,7 @@
     state: "{{ zabbix_create_hostgroup }}"
     validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
   when:
-    - zabbix_api_create_hostgroup
+    - zabbix_api_create_hostgroup | bool
   delegate_to: localhost
   become: no
   tags:
@@ -204,7 +204,7 @@
     tls_connect: "{{ zabbix_agent_tls_config[zabbix_agent_tlsconnect if zabbix_agent_tlsconnect else 'unencrypted'] }}"
     validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
   when:
-    - zabbix_api_create_hosts
+    - zabbix_api_create_hosts | bool
   delegate_to: localhost
   become: no
   changed_when: false
@@ -222,7 +222,7 @@
     validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
   with_items: "{{ zabbix_macros | default([]) }}"
   when:
-    - zabbix_api_create_hosts
+    - zabbix_api_create_hosts | bool
     - zabbix_macros is defined
     - item.macro_key is defined
   delegate_to: localhost

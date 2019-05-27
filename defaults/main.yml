@@ -14,6 +14,8 @@ zabbix_selinux: False
 
 # Zabbix role related vars
 zabbix_install_pip_packages: true
+zabbix_apt_force_apt_get: yes
+zabbix_apt_install_recommends: no
 
 # Override Ansible specific facts
 zabbix_agent_distribution_major_version: "{{ ansible_distribution_major_version }}"
