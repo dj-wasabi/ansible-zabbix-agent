@@ -6,6 +6,17 @@ Version (Release date)
 
 UNRELEASED:
 
+1.7.0  (2019-05-30)
+
+  * Updated to Zabbix 4.2 to default installations #221
+  * Fixed for the default scenario the warnings #222
+  * Add Windows Agent update and service auto-recovery #223 (By pull request: pimooss (Thanks!))
+  * Added Docker image #224
+  * Add details on requiring sudo access for python-netaddr #226 (By pull request: willhallonline (Thanks!))
+  * Defining different jmx port number to configuring firewall #227 (By pull request: 0utsider (Thanks!))
+  * Update syntax to ansible 2.8 #228 (By pull request: crazikPL (Thanks!))
+  * Use EPEL 7 when Amazon 2 #230 (By pull request: bkmeneguello (Thanks!))
+
 1.6.1  (2019-04-12)
 
   * Update userparameter.yml #215 (By pull request: Jookadin (Thanks!))
