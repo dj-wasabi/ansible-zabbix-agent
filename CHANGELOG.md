@@ -6,6 +6,10 @@ Version (Release date)
 
 UNRELEASED:
 
+1.7.1  (2019-06-4)
+
+  * Revert breaking changes #232 (By pull request: crazikPL (Thanks!))
+
 1.7.0  (2019-05-30)
 
   * Updated to Zabbix 4.2 to default installations #221
