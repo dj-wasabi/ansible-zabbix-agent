@@ -39,7 +39,7 @@
     path: "{{ item.path }}"
     state: absent
 
-  loop: "{{ repositories.files}}"
+  loop: "{{ repositories.files }}"
   when:
     - ansible_distribution == "Ubuntu"
     - zabbix_repo == "zabbix"
