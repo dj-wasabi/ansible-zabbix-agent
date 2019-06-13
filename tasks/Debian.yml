@@ -7,12 +7,41 @@
 - name: "Set short version name"
   set_fact:
     zabbix_short_version: "{{ zabbix_version | regex_replace('\\.', '') }}"
+    zabbix_underscore_version: "{{ zabbix_version | regex_replace('\\.', '_') }}"
 
 - name: "Debian | Install gpg key"
   apt_key:
     id: "{{ sign_keys[zabbix_short_version][zabbix_agent_distribution_release]['sign_key'] }}"
     url: http://repo.zabbix.com/zabbix-official-repo.key
   when:
+    - zabbix_repo == "zabbix"
+  become: yes
+  tags:
+    - zabbix-agent
+    - init
+
+- name: "Debian | Check for zabbix repositories"
+  find:
+    paths: /etc/apt/sources.list.d
+    patterns: repo_zabbix_com_zabbix*.list
+    excludes: "repo_zabbix_com_zabbix_{{ zabbix_underscore_version }}_ubuntu.list"
+  register: repositories
+  become: yes
+  when:
+    - ansible_distribution == "Ubuntu"
+    - zabbix_repo == "zabbix"
+  tags:
+    - zabbix-agent
+    - init
+
+- name: "Debian | Remove unecessary zabbix repositories"
+  file:
+    path: "{{ item.path }}"
+    state: absent
+
+  loop: "{{ repositories.files}}"
+  when:
+    - ansible_distribution == "Ubuntu"
     - zabbix_repo == "zabbix"
   become: yes
   tags:
