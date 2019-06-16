@@ -49,6 +49,9 @@ provisioner:
   lint:
     name: ansible-lint
   inventory:
+    host_vars:
+      zabbix-agent-fedora:
+        ansible_python_interpreter: /usr/bin/python3
     group_vars:
       all:
         zabbix_agent_server: 192.168.3.33

@@ -73,6 +73,8 @@ provisioner:
       docker:
         zabbix_agent_docker: True
     host_vars:
+      zabbix-agent-fedora:
+        ansible_python_interpreter: /usr/bin/python3
       zabbix-agent-ubuntu:
         zabbix_agent_tlsaccept: psk
         zabbix_agent_tlsconnect: psk
