@@ -39,6 +39,7 @@
     baseurl: "{{ item.baseurl }}"
     gpgcheck: "{{ item.gpgcheck }}"
     gpgkey: "{{ item.gpgkey }}"
+    priority: "{{ item.priority | default('99') }}"
     state: "{{ item.state | default('present') }}"
   with_items: "{{ zabbix_repo_yum }}"
   register: yum_repo_installed
