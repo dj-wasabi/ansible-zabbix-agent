@@ -17,6 +17,7 @@
 - name: "Include OS-specific variables"
   include_vars: "{{ zabbix_agent_os_family }}.yml"
   tags:
+    - vars
     - zabbix-agent
 
 - name: "Install the correct repository"
