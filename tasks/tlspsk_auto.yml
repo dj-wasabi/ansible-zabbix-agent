@@ -28,12 +28,12 @@
   when: zabbix_agent_tlspskcheck.stat.exists
 
 - name: AutoPSK | Use existing TLS PSK secret
-  set_fact: 
+  set_fact:
     zabbix_agent_tlspsk_secret: "{{ zabbix_agent_tlspsk_read }}"
   when: zabbix_agent_tlspskcheck.stat.exists and zabbix_agent_tlspsk_read|length >= 32
 
 - name: AutoPSK | Generate new TLS PSK secret
-  set_fact: 
+  set_fact:
     zabbix_agent_tlspsk_secret: "{{ lookup('password', '/dev/null chars=hexdigits length=64') }}"
   when: not zabbix_agent_tlspskcheck.stat.exists or zabbix_agent_tlspsk_read|length < 32
 
@@ -49,12 +49,12 @@
   when: zabbix_agent_tlspskidentity_check.stat.exists
 
 - name: AutoPSK | Use existing TLS PSK identity
-  set_fact: 
+  set_fact:
     zabbix_agent_tlspskidentity: "{{ zabbix_agent_tlspskidentity_base64['content'] | b64decode | trim }}"
   when: zabbix_agent_tlspskidentity_check.stat.exists
 
 - name: AutoPSK | Generate new TLS PSK identity
-  set_fact: 
+  set_fact:
     zabbix_agent_tlspskidentity: "{{ zabbix_visible_hostname + '_' + lookup('password', '/dev/null chars=hexdigits length=4') }}"
   when: not zabbix_agent_tlspskidentity_check.stat.exists
 
