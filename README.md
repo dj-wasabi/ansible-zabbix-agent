@@ -247,9 +247,13 @@ These variables are specific for Zabbix 3.0 and higher:
 
 * `zabbix_agent_tlspskidentity`: Unique, case sensitive string used to identify the pre-shared key.
 
+* `zabbix_agent_tlspskidentity_file`: Full pathname of a file containing the pre-shared key identity.
+
 * `zabbix_agent_tlspskfile`: Full pathname of a file containing the pre-shared key.
 
 * `zabbix_agent_tlspsk_secret`: The pre-shared secret key that should be placed in the file configured with `agent_tlspskfile`.
+
+* `zabbix_agent_tlspsk_auto`: Enables auto generation and storing of individual pre-shared keys and identities on clients.
 
 ## Zabbix API variables
 
