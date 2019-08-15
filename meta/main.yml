@@ -24,6 +24,7 @@ galaxy_info:
         - wheezy
         - jessie
         - stretch
+        - buster
     - name: opensuse
       versions:
         - 12.1

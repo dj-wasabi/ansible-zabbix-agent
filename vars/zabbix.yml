@@ -16,6 +16,8 @@ sign_keys:
       sign_key: 79EA5ED4
     jessie:
       sign_key: 79EA5ED4
+    buster:
+      sign_key: 79EA5ED4
     trusty:
       sign_key: 79EA5ED4
     xenial:
@@ -34,6 +36,8 @@ sign_keys:
     wheezy:
       sign_key: 79EA5ED4
     jessie:
+      sign_key: 79EA5ED4
+    buster:
       sign_key: 79EA5ED4
     trusty:
       sign_key: 79EA5ED4
