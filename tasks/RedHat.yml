@@ -84,6 +84,18 @@
     - init
     - zabbix-agent
 
+- name: "Install selinux-policy-targeted"
+  package:
+    name: selinux-policy-targeted
+    state: installed
+  register: zabbix_agent_selinuxpolicytargeted_installed
+  until: zabbix_agent_package_installed is succeeded
+  when: zabbix_selinux | bool
+  become: yes
+  tags:
+    - init
+    - zabbix-agent
+
 - name: "RedHat | Enable the service"
   service:
     name: "{{ zabbix_agent_service }}"
