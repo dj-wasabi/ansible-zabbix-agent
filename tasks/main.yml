@@ -30,7 +30,7 @@
     - init
     - config
     - service
-    
+
 - name: "Install the correct repository"
   include: "RedHat.yml"
   when:
@@ -41,7 +41,7 @@
     - init
     - config
     - service
-    
+
 - name: "Install the correct repository"
   include: "Debian.yml"
   when:
