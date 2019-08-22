@@ -13,7 +13,7 @@
       until: zabbix_agent_prepare_packages_install is succeeded
       when:
         - ansible_os_family == 'RedHat'
-        
+
     - name: "Installing packages on CentOS (Sangoma) family"
       package:
         pkg:
@@ -24,7 +24,7 @@
       until: zabbix_agent_prepare_packages_install is succeeded
       when:
         - ansible_os_family == 'Sangoma'
-        
+ 
     - name: "Installing packages on Debian family"
       apt:
         name:
