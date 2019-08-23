@@ -22,6 +22,7 @@ Table of Contents
   * [Windows Variables](#windows-variables)
   * [Docker Variables](#docker-variables)
   * [Other variables](#other-variables)
+  * [proxy](#proxy)
 - [Dependencies](#dependencies)
 - [Example Playbook](#example-playbook)
   * [agent_interfaces](#agent-interfaces)
@@ -370,6 +371,13 @@ Keep in mind that using the Zabbix Agent in a Container, requires changes to the
 * `zabbix_agent_firewalld_source`: When provided, firewalld will be configuring to only allow traffic for IP configured in `zabbix_agent_server`.
 
 * `zabbix_agent_firewalld_zone`: When provided, the firewalld rule will be attached to this zone (only if zabbix_agent_firewalld_enable is set to true). The default behavior is to use the default zone define by the remote host firewalld configuration.
+
+## proxy
+
+When the target host does not have access to the internet, but you do have a proxy available then the following properties needs to be set to download the packages via the proxy:
+
+* `zabbix_http_proxy`
+* `zabbix_https_proxy`
 
 # Dependencies
 

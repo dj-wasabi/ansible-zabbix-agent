@@ -8,6 +8,9 @@
   zypper:
     name: ["python-libxml2", "python-xml"]
     state: present
+  environment:
+    http_proxy: "{{ zabbix_http_proxy | default(None) | default(omit) }}"
+    https_proxy: "{{ zabbix_https_proxy | default(None) | default(omit) }}"
   become: yes
   register: zabbix_agent_package_dependency
   until: zabbix_agent_package_dependency is succeeded
@@ -17,6 +20,9 @@
     repo: "{{ suse[ansible_distribution][zabbix_agent_distribution_major_version]['url'] }}"
     name: "{{ suse[ansible_distribution][zabbix_agent_distribution_major_version]['name'] }}"
     state: present
+  environment:
+    http_proxy: "{{ zabbix_http_proxy | default(None) | default(omit) }}"
+    https_proxy: "{{ zabbix_https_proxy | default(None) | default(omit) }}"
   when:
     - zabbix_repo == "zabbix"
   become: yes
@@ -29,6 +35,9 @@
     name: "{{ zabbix_agent_packages }}"
     state: "{{ zabbix_agent_package_state }}"
     disable_gpg_check: yes
+  environment:
+    http_proxy: "{{ zabbix_http_proxy | default(None) | default(omit) }}"
+    https_proxy: "{{ zabbix_https_proxy | default(None) | default(omit) }}"
   register: zabbix_agent_package_installed
   until: zabbix_agent_package_installed is succeeded
   become: yes
