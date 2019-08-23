@@ -32,6 +32,17 @@
     - service
 
 - name: "Install the correct repository"
+  include: "RedHat.yml"
+  when:
+    - zabbix_agent_os_family == "Sangoma"
+    - not (zabbix_agent_docker | bool)
+  tags:
+    - zabbix-agent
+    - init
+    - config
+    - service
+
+- name: "Install the correct repository"
   include: "Debian.yml"
   when:
     - zabbix_agent_os_family == "Debian"
