@@ -8,6 +8,8 @@ sign_keys:
       sign_key: A14FE591
     serena:
       sign_key: A14FE591
+    buster:
+      sign_key: A14FE591
     stretch:
       sign_key: A14FE591
     wheezy:
@@ -24,6 +26,8 @@ sign_keys:
     sonya:
       sign_key: A14FE591
     serena:
+      sign_key: A14FE591
+    buster:
       sign_key: A14FE591
     stretch:
       sign_key: A14FE591
@@ -77,6 +81,8 @@ sign_keys:
     jessie:
       sign_key: 79EA5ED4
     stretch:
+      sign_key: A14FE591
+    buster:
       sign_key: A14FE591
     trusty:
       sign_key: 79EA5ED4

@@ -67,6 +67,8 @@ zabbix_agent_interfaces:
 zabbix_agent_firewall_enable: False
 zabbix_agent_firewalld_enable: False
 zabbix_agent_firewalld_source: "{{ zabbix_agent_server }}"
+# By default, a null zone will trigger the use of the default zone on the remote host
+zabbix_agent_firewalld_zone:
 # Zabbix configuration variables
 zabbix_agent_pidfile: /var/run/zabbix/zabbix_agentd.pid
 zabbix_agent_logfile: /var/log/zabbix/zabbix_agentd.log
@@ -110,6 +112,7 @@ zabbix_agent_tlsservercertsubject:
 zabbix_agent_tlscertfile:
 zabbix_agent_tlskeyfile:
 zabbix_agent_tlspskidentity:
+zabbix_agent_tlspsk_auto: False
 
 zabbix_agent_tls_config:
   unencrypted: '1'

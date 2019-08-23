@@ -17,12 +17,24 @@
 - name: "Include OS-specific variables"
   include_vars: "{{ zabbix_agent_os_family }}.yml"
   tags:
+    - vars
     - zabbix-agent
 
 - name: "Install the correct repository"
   include: "RedHat.yml"
   when:
     - zabbix_agent_os_family == "RedHat"
+    - not (zabbix_agent_docker | bool)
+  tags:
+    - zabbix-agent
+    - init
+    - config
+    - service
+
+- name: "Install the correct repository"
+  include: "RedHat.yml"
+  when:
+    - zabbix_agent_os_family == "Sangoma"
     - not (zabbix_agent_docker | bool)
   tags:
     - zabbix-agent
@@ -143,6 +155,13 @@
   tags:
     - zabbix-agent
     - config
+
+- name: "Encrypt with TLS PSK auto management"
+  include_tasks: tlspsk_auto.yml
+  when:
+    - zabbix_agent_tlspsk_auto | bool
+    - (zabbix_agent_tlspskfile is undefined) or (zabbix_agent_tlspskfile | length == '0')
+    - (zabbix_agent_tlspsk_secret is undefined) or (zabbix_agent_tlspsk_secret | length == '0')
 
 - name: "Install the correct repository"
   include: Windows.yml
