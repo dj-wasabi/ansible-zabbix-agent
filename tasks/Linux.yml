@@ -94,7 +94,8 @@
   file:
     path: "{{ zabbix_agent_include }}"
     owner: root
-    group: root
+    group: zabbix
+    mode: 0750
     state: directory
   become: yes
   tags:

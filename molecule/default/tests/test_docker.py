@@ -15,7 +15,7 @@ def test_zabbix_include_dir(host):
     zabbixagent = host.file("/etc/zabbix/zabbix_agentd.d")
     assert zabbixagent.is_directory
     assert zabbixagent.user == "root"
-    assert zabbixagent.group == "root"
+    assert zabbixagent.group == "zabbix"
 
 
 def test_socket(host):
