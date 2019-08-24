@@ -126,7 +126,7 @@
     state: started
 
 - name: "Windows | Getting Zabbix Service Recovery Settings"
-  win_shell: sc.exe qfailure "Zabbix Agent"
+  win_shell: sc.exe qfailure "Zabbix Agent" 1100
   register: svc_recovery
   changed_when: false
   when: zabbix_agent_win_svc_recovery
