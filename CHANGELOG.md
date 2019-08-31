@@ -6,7 +6,20 @@ Version (Release date)
 
 UNRELEASED:
 
-1.7.1  (2019-06-4)
+  * fix repository problem #236 (By pull request: kmonticolo (Thanks!))
+  * Added ansible_python_interpreter for Fedora #238
+  * Allow to use a (http|https) proxy for downloading of packages #239
+  * fix repository problem #240 (By pull request: kmonticolo (Thanks!))
+  * Add Debian 10 (buster) for Zabbix 4.2,4.0 and 3.0 #243 (By pull request: patede (Thanks!))
+  * Add "vars" tag to include variables #247 (By pull request: j8r (Thanks!))
+  * Introduce AutoPSK for easy encryption; Closes dj-wasabi/ansible-zabbix-agent#250 #251 (By pull request: kr4ut (Thanks!))
+  * Install selinux-policy-targeted (dependency) #255 (By pull request: Maelstrom96 (Thanks!))
+  * Add support to FreePBX #261 (By pull request: darco1991 (Thanks!))
+  * Add support for firewalld zone #262 (By pull request: darco1991 (Thanks!))
+  * Fix group membership zabbix_agent.d dir according to #246 #264
+  * According to #263 1100 needs to be added to the sc.exe call #265
+
+1.7.1  (2019-06-04)
 
   * Revert breaking changes #232 (By pull request: crazikPL (Thanks!))
 
