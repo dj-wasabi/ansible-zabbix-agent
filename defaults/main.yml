@@ -67,6 +67,9 @@ zabbix_agent_interfaces:
 zabbix_agent_firewall_enable: False
 zabbix_agent_firewalld_enable: False
 zabbix_agent_firewalld_source: "{{ zabbix_agent_server }}"
+zabbix_agent_firewall_action: insert
+zabbix_agent_firewall_chain: INPUT
+
 # By default, a null zone will trigger the use of the default zone on the remote host
 zabbix_agent_firewalld_zone:
 # Zabbix configuration variables
