@@ -372,6 +372,10 @@ Keep in mind that using the Zabbix Agent in a Container, requires changes to the
 
 * `zabbix_agent_firewalld_zone`: When provided, the firewalld rule will be attached to this zone (only if zabbix_agent_firewalld_enable is set to true). The default behavior is to use the default zone define by the remote host firewalld configuration.
 
+* `zabbix_agent_firewall_action`: When to `insert` the rule or to `append` to IPTables. Default: `insert`.
+
+* `zabbix_agent_firewall_chain`: Which `chain` to add the rule to IPTables. Default `INPUT`
+
 ## proxy
 
 When the target host does not have access to the internet, but you do have a proxy available then the following properties needs to be set to download the packages via the proxy:
