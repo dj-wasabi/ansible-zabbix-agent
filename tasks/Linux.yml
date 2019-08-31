@@ -109,6 +109,7 @@
 
 - name: "Configure IPTables (zabbix_agent_listenport)"
   iptables:
+    action: insert
     destination_port: "{{ zabbix_agent_listenport }}"
     source: "{{ zabbix_agent_firewall_source | default(omit) }}"
     protocol: tcp
@@ -119,6 +120,7 @@
 
 - name: "Configure IPTables (zabbix_agent_jmx_listenport)"
   iptables:
+    action: insert
     destination_port: "{{ zabbix_agent_listenport }}"
     source: "{{ zabbix_agent_firewall_source | default(omit) }}"
     protocol: tcp
