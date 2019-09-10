@@ -4,6 +4,103 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+UNRELEASED:
+
+  * fix repository problem #236 (By pull request: kmonticolo (Thanks!))
+  * Added ansible_python_interpreter for Fedora #238
+  * Allow to use a (http|https) proxy for downloading of packages #239
+  * fix repository problem #240 (By pull request: kmonticolo (Thanks!))
+  * Add Debian 10 (buster) for Zabbix 4.2,4.0 and 3.0 #243 (By pull request: patede (Thanks!))
+  * Add "vars" tag to include variables #247 (By pull request: j8r (Thanks!))
+  * Introduce AutoPSK for easy encryption; Closes dj-wasabi/ansible-zabbix-agent#250 #251 (By pull request: kr4ut (Thanks!))
+  * Install selinux-policy-targeted (dependency) #255 (By pull request: Maelstrom96 (Thanks!))
+  * Add support to FreePBX #261 (By pull request: darco1991 (Thanks!))
+  * Add support for firewalld zone #262 (By pull request: darco1991 (Thanks!))
+  * Fix group membership zabbix_agent.d dir according to #246 #264
+  * According to #263 1100 needs to be added to the sc.exe call #265
+
+1.7.1  (2019-06-04)
+
+  * Revert breaking changes #232 (By pull request: crazikPL (Thanks!))
+
+1.7.0  (2019-05-30)
+
+  * Updated to Zabbix 4.2 to default installations #221
+  * Fixed for the default scenario the warnings #222
+  * Add Windows Agent update and service auto-recovery #223 (By pull request: pimooss (Thanks!))
+  * Added Docker image #224
+  * Add details on requiring sudo access for python-netaddr #226 (By pull request: willhallonline (Thanks!))
+  * Defining different jmx port number to configuring firewall #227 (By pull request: 0utsider (Thanks!))
+  * Update syntax to ansible 2.8 #228 (By pull request: crazikPL (Thanks!))
+  * Use EPEL 7 when Amazon 2 #230 (By pull request: bkmeneguello (Thanks!))
+
+1.6.1  (2019-04-12)
+
+  * Update userparameter.yml #215 (By pull request: Jookadin (Thanks!))
+  * Pip packages install variable #217 (By pull request: rnsc (Thanks!))
+  * Added task that was previously in role #219
+
+1.6.0  (2019-03-13)
+
+  * Added task for installation of the zabbix-api package #191
+  * Restart agent when PSK file changes (fixes #193) #194 (By pull request: pigulla (Thanks!))
+  * Added a until loop to retry installations as suggested by ansible-lint #195
+  * Add fedora 29 support #199 (By pull request: average-joe (Thanks!))
+  * Set default values if property is undefined #203
+  * Add installation of pip package netaddr #204
+  * Add option not to elevate privileges locally #206 (By pull request: dennisse (Thanks!))
+  * Windows zabbix agent handler #209 (By pull request: rnsc (Thanks!))
+  * Add Bionic to sign keys for zabbix-agent v3.0 and v3.2 #211 (By pull request: mamedin (Thanks!))
+  * Fix for: zabbix_agent_tlsconnect and zabbix_agent_tlsaccept are mixed #205
+  * Fix for: Role Should NOT Smash Ansible Facts #207
+
+1.5.0  (2018-10-19)
+
+  * Added installation on Windows
+  * Firewalld #166 (By pull request: 0utsider (Thanks!))
+  * Using same container as with the server #167
+  * Zabbix 4.0 now default installation
+  * enable support for https enabled zabbix frontends/apis #173 (By pull request: rolfvreijdenberger (Thanks!))
+
+1.4.0  (2018-09-11)
+
+  * Add configuration to prevent host updating via zabbix api #150 (By pull request: sblaisot (Thanks!))
+  * Handle encryption when adding host to zabbix server #151 (By pull request: sblaisot (Thanks!))
+  * Removed the warning message #156
+  * Updating versions to be installed #157
+  * Added 2nd Molecule Scenario #158
+  * Parameterizing userparameter deployment #159 (By pull request: rubentsirunyan (Thanks!))
+  * fix typo #160 (By pull request: kmonticolo (Thanks!))
+  * Reflect changed license in README #161 (By pull request: stephankn (Thanks!))
+  * remove deprecated loop #162 (By pull request: stephankn (Thanks!))
+  * Fix when running ansible in --check mode #163 (By pull request: AlbanAndrieu (Thanks!))
+
+1.3.0  (2018-06-23)
+
+  * fixes issue "Configure iptables task fail" #128 (By pull request: andreagrax (Thanks!))
+  * Fix travis docker #131
+  * Added several 'become: yes' to tasks #133
+  * Added gpg key id for agent version 3.0 in Debian Stretch #135 (By pull request: hatifnatt (Thanks!))
+  * Upgrade minimum Ansible version from 1.9 --> 2.4
+  * Added a License, Code of Conduct and some more files
+  * Fix for Misleading repo name #147
+  * fixes for the userparameter task #138 (By pull request: HNKNTA (Thanks!))
+  * Support for Debian 9 and Ubuntu 18.04
+  * Added fix for: Host autoregistered in zabbix with IP 0.0.0.0 when Lis… #141
+
+1.2.0  (2018-01-25)
+
+  * Fix for: Some RedHat subtask are missing become option #116
+  * Delete option "run_once" from task "Create hostgroups" #119 (By pull request: mgornikov (Thanks!))
+  * Fix the CI Travis build again.
+  * Fix for: Changing zabbix_version breaks role #117
+  * Added sonya #120
+  * Add clean all #121
+  * allow 127.0.0.1 for listenip #124 (By pull request: blodone (Thanks!))
+  * Get selinux status #125 (By pull request: andreagrax (Thanks!))
+  * Add new variable zabbix_visible_hostname #126 (By pull request: samyscoub (Thanks!))
+  * Replaced `yum` with `package` #127  (By pull request: average-joe (Thanks!))
+
 1.1.0  (2017-11-13)
 
   * Add zabbix_ to agent_serveractive and agent_server #101 (By pull request: asosso (Thanks!))

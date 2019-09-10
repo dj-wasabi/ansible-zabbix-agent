@@ -1,5 +1,5 @@
-# {{ ansible_managed }}
-# this is a config file for zabbix agent (unix)
+{{ ansible_managed | comment }}
+# this is a config file for zabbix agent
 # to get more information about zabbix, visit http://www.zabbix.com
 
 ############ general parameters #################
@@ -7,13 +7,19 @@
 ### option: pidfile
 #       name of pid file.
 #
+{% if zabbix_agent_os_family != "Windows" %}
 PidFile={{ zabbix_agent_pidfile }}
+{% endif %}
 
 ### option: logfile
 #       name of log file.
 #       if not set, syslog is used.
 #
+{% if zabbix_agent_os_family == "Windows" %}
+LogFile={{ zabbix_agent_win_logfile }}
+{% else %}
 LogFile={{ zabbix_agent_logfile }}
+{% endif %}
 
 ### option: logfilesize
 #       maximum size of log file in mb.
@@ -36,7 +42,7 @@ DebugLevel={{ zabbix_agent_debuglevel }}
 #       source ip address for outgoing connections.
 #
 {% if zabbix_agent_sourceip is defined and zabbix_agent_sourceip %}
-sourceip={{ zabbix_agent_sourceip }}
+SourceIP={{ zabbix_agent_sourceip }}
 {% endif %}
 
 ### option: enableremotecommands
@@ -76,7 +82,9 @@ ListenPort={{ zabbix_agent_listenport }}
 #       list of comma delimited ip addresses that the agent should listen on.
 #       first ip address is sent to zabbix server if connecting to it to retrieve list of active checks.
 #
+{% if zabbix_agent_listenip !='0.0.0.0' %}
 ListenIP={{ zabbix_agent_listenip }}
+{% endif %}
 
 ### option: startagents
 #       number of pre-forked instances of zabbix_agentd that process passive checks.
@@ -171,6 +179,7 @@ Alias={{ zabbix_agent_zabbix_alias }}
 #
 Timeout={{ zabbix_agent_timeout }}
 
+{% if zabbix_agent_os_family != "Windows" %}
 ### option: allowroot
 #       allow the agent to run as 'root'. if disabled and the agent is started by 'root', the agent
 #       will try to switch to user 'zabbix' instead. has no effect if started under a regular user.
@@ -178,13 +187,28 @@ Timeout={{ zabbix_agent_timeout }}
 #       1 - allow
 #
 AllowRoot={{ zabbix_agent_allowroot }}
+{% endif %}
+
+### Option: User
+#	Drop privileges to a specific, existing user on the system.
+#	Only has effect if run as 'root' and AllowRoot is disabled.
+#
+# Mandatory: no
+# Default:
+
+{% if zabbix_agent_runas_user is defined and zabbix_agent_runas_user %}
+User={{ zabbix_agent_runas_user }}
+{% endif %}
 
 ### option: include
 #       you may include individual files or all files in a directory in the configuration file.
 #       installing zabbix will create include directory in /usr/local/etc, unless modified during the compile time.
 #
+{% if zabbix_agent_os_family == "Windows" %}
+Include={{ zabbix_agent_win_include }}
+{% else %}
 Include={{ zabbix_agent_include }}
-
+{% endif %}
 
 ####### user-defined monitored parameters #######
 
@@ -208,12 +232,14 @@ UnsafeUserParameters={{ zabbix_agent_unsafeuserparameters }}
 # disabled. an configuration file should be placed on directory: {{ zabbix_agent_include }}
 
 ####### LOADABLE MODULES #######
-{% if zabbix_version | version_compare('2.2', '>=') %}
+{% if zabbix_version is version_compare('2.2', '>=') %}
 ### Option: LoadModulePath
 #       Full path to location of agent modules.
 #       Default depends on compilation options.
 #
+{% if zabbix_agent_os_family != "Windows" %}
 LoadModulePath={{ zabbix_agent_loadmodulepath }}
+{% endif %}
 {% endif %}
 
 ### Option: LoadModule
@@ -226,7 +252,7 @@ LoadModulePath={{ zabbix_agent_loadmodulepath }}
 LoadModule={{ zabbix_agent_loadmodule }}
 {% endif %}
 
-{% if zabbix_version | version_compare('3.0', '>=') %}
+{% if zabbix_version is version_compare('3.0', '>=') %}
 ####### TLS-RELATED PARAMETERS #######
 
 ### Option: TLSConnect

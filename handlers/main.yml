@@ -7,3 +7,14 @@
     state: restarted
     enabled: yes
   become: yes
+  when:
+    - not zabbix_agent_docker
+
+- name: firewalld-reload
+  command: "firewall-cmd --reload"
+
+- name: restart win zabbix agent
+  win_service:
+    name: "{{ zabbix_win_agent_service }}"
+    state: restarted
+    enabled: yes

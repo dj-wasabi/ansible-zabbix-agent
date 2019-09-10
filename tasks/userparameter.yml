@@ -1,11 +1,24 @@
 ---
 
-- name: "Installing sample file"
+- name: "Installing user-defined userparameters"
+  template:
+    src: "userparameters/{{ item.name }}.j2"
+    dest: "{{ zabbix_agent_include }}/userparameter_{{ item.name }}.conf"
+    owner: zabbix
+    group: zabbix
+    mode: 0644
+  notify: restart zabbix-agent
+  become: yes
+  with_items: "{{ zabbix_agent_userparameters }}"
+
+- name: "Installing user-defined scripts"
   copy:
-    src: sample.conf
-    dest: "{{ agent_include }}/mysql.conf"
+    src: "scripts/{{ item.scripts_dir }}"
+    dest: "/etc/zabbix/scripts/"
     owner: zabbix
     group: zabbix
     mode: 0755
   notify: restart zabbix-agent
   become: yes
+  with_items: "{{ zabbix_agent_userparameters }}"
+  when: item.scripts_dir is defined

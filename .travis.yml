@@ -1,15 +1,25 @@
 ---
 sudo: required
 language: python
+python:
+  - "2.7"
 services:
   - docker
 
+addons:
+  hosts:
+    - zabbix-server-centos
+
 install:
-  - pip install molecule ansible docker
+  - curl -sSlo requirements.txt https://raw.githubusercontent.com/dj-wasabi/ansible-ci-base/master/requirements.txt
+  - pip install -r requirements.txt
 
 script:
   - molecule --version
   - ansible --version
-  - molecule test
+  - molecule test -s default
+  - molecule test -s with-server
+  - molecule test -s before-last-version
+
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
