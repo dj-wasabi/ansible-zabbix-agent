@@ -22,7 +22,9 @@ galaxy_info:
       versions:
         - squeeze
         - wheezy
+        - jessie
         - stretch
+        - buster
     - name: opensuse
       versions:
         - 12.1
