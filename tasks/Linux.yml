@@ -189,20 +189,22 @@
 
 - name: "Configure IPTables (zabbix_agent_listenport)"
   iptables:
+    action: "{{ zabbix_agent_firewall_action }}"
     destination_port: "{{ zabbix_agent_listenport }}"
     source: "{{ zabbix_agent_firewall_source | default(omit) }}"
     protocol: tcp
-    chain: INPUT
+    chain: "{{ zabbix_agent_firewall_chain }}"
     jump: ACCEPT
   become: yes
   when: zabbix_agent_firewall_enable | bool
 
 - name: "Configure IPTables (zabbix_agent_jmx_listenport)"
   iptables:
+    action: "{{ zabbix_agent_firewall_action }}"
     destination_port: "{{ zabbix_agent_listenport }}"
     source: "{{ zabbix_agent_firewall_source | default(omit) }}"
     protocol: tcp
-    chain: INPUT
+    chain: "{{ zabbix_agent_firewall_chain }}"
     jump: ACCEPT
   become: yes
   when: (zabbix_agent_firewall_enable  | bool) and (zabbix_agent_jmx_listenport | bool)

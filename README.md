@@ -86,7 +86,7 @@ See the following list of supported Operating systems with the Zabbix releases:
   * OracleLinux 7.x
   * Scientific Linux 7.x
   * Ubuntu 14.04, 16.04, 18.04
-  * Debian 8, 9
+  * Debian 8, 9, 10
 
 ### Zabbix 4.0
 
@@ -97,7 +97,7 @@ See the following list of supported Operating systems with the Zabbix releases:
   * OracleLinux 7.x
   * Scientific Linux 7.x
   * Ubuntu 14.04, 16.04, 18.04
-  * Debian 8, 9
+  * Debian 8, 9, 10
 
 ### Zabbix 3.4
 
@@ -371,6 +371,10 @@ Keep in mind that using the Zabbix Agent in a Container, requires changes to the
 * `zabbix_agent_firewalld_source`: When provided, firewalld will be configuring to only allow traffic for IP configured in `zabbix_agent_server`.
 
 * `zabbix_agent_firewalld_zone`: When provided, the firewalld rule will be attached to this zone (only if zabbix_agent_firewalld_enable is set to true). The default behavior is to use the default zone define by the remote host firewalld configuration.
+
+* `zabbix_agent_firewall_action`: When to `insert` the rule or to `append` to IPTables. Default: `insert`.
+
+* `zabbix_agent_firewall_chain`: Which `chain` to add the rule to IPTables. Default `INPUT`
 
 ## proxy
 
