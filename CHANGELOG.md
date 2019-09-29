@@ -6,6 +6,9 @@ Version (Release date)
 
 UNRELEASED:
 
+2.0.0  (2019-09-29)
+
+  * Using Ansible 2.7 as minimal version;
   * fix repository problem #236 (By pull request: kmonticolo (Thanks!))
   * Added ansible_python_interpreter for Fedora #238
   * Allow to use a (http|https) proxy for downloading of packages #239
@@ -18,6 +21,11 @@ UNRELEASED:
   * Add support for firewalld zone #262 (By pull request: darco1991 (Thanks!))
   * Fix group membership zabbix_agent.d dir according to #246 #264
   * According to #263 1100 needs to be added to the sc.exe call #265
+  * Changing gpg keys #267
+  * Added suggested task for correct installation of Zabbix on Amazon #270
+  * Added some properties for configuring iptables #271
+  * Bare variable deprecation #272 (By pull request: average-joe (Thanks!))
+  * Moving zabbix_agent_ip to Linux.yml and create a new one for Windows.yml #268
 
 1.7.1  (2019-06-04)
 
