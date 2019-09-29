@@ -4,7 +4,7 @@ galaxy_info:
   description: Installing and maintaining zabbix-agent for RedHat/Debian/Ubuntu/Windows/Suse.
   company: myCompany.Dotcom
   license: MIT
-  min_ansible_version: 2.5
+  min_ansible_version: 2.7
   platforms:
     - name: EL
       versions:
