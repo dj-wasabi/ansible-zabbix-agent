@@ -38,7 +38,7 @@ Table of Contents
 - [License](#license)
 - [Author Information](#author-information)
 
-Build Status:
+Badges:
 
 [![Build Status](https://travis-ci.org/dj-wasabi/ansible-zabbix-agent.svg?branch=master)](https://travis-ci.org/dj-wasabi/ansible-zabbix-agent) <img src="https://img.shields.io/ansible/role/d/2079"/> <img src="https://img.shields.io/ansible/quality/2079"/>
 
