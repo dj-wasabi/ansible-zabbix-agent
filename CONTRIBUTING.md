@@ -1,6 +1,6 @@
 # Contributing to this role
 
-**Table of content**
+**Table of contents**
 
 - [Contributing to this role](#contributing-to-this-role)
   * [Contributing](#contributing)
@@ -25,26 +25,26 @@ Please note that this project is released with a Contributor Code of Conduct. By
     
     b. Don't forget to add/update tests so we can test the functionality during each Pull Request;
     
-    c. Make sure the tests will succeed.
+    c. Make sure the tests succeed.
 
 3. Push the branch to your fork and submit a pull request.
 
 **Note**
 
-Pull Requests that fails during the tests will not be merged.
+Pull Requests that fail during the tests will not be merged.
 
 ## Coding Guidelines
 
 Style guides are important because they ensure consistency in the content, look, and feel of a book or a website.
 
 * [Ansible Style Guide](http://docs.ansible.com/ansible/latest/dev_guide/style_guide/)
-* It's "Ansible" when referring to the product and ``ansible`` when referring to the command  line tool, package, etc
+* It's "Ansible" when referring to the product and ``ansible`` when referring to the command line tool, package, etc
 * Playbooks should be written in multi-line YAML with ``key: value``. The form ``key=value`` is only for ``ansible`` ad-hoc, not for ``ansible-playbook``.
 * Tasks should always have a ``name:``
 
 ## (local) Development
 
-This role make use of Molecule to test the execution of the role and verificate it. In the root of the repository, a file named `requirements.txt` exists and contains the versions used by the tests.
+This role makes use of Molecule to test the execution of the role and verify it. In the root of the repository https://github.com/dj-wasabi/ansible-ci-base, a file named `requirements.txt` exists and contains the versions used by the tests.
 
 ### Requirements
 
@@ -71,7 +71,7 @@ It should run without any issues.
 
 Suggestion is to create a virtualenv so you won't have issues with other projects.
 
-Some web pages describing for virtual env:
+Some web pages describing virtualenvs:
 
 * http://thepythonguru.com/python-virtualenv-guide/
 * https://realpython.com/python-virtual-environments-a-primer/

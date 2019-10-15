@@ -44,10 +44,10 @@ Badges:
 
 # Introduction
 
-This is an role for installing and maintaining the zabbix-agent. It will install the Zabbix Agent on any host with an operating system that is defined [here](#operating-systems) or
+This is a role for installing and maintaining the zabbix-agent. It will install the Zabbix Agent on any host with an operating system that is defined [here](#operating-systems) or
 will install a Docker container and start that.
 
-This is one of the 'dj-wasabi' roles which configures your whole Zabbix environment. See an list for the complete list:
+This is one of the 'dj-wasabi' roles which configure your whole Zabbix environment. See the complete list:
 
  * zabbix-server (https://galaxy.ansible.com/dj-wasabi/zabbix-server/)
  * zabbix-web (https://galaxy.ansible.com/dj-wasabi/zabbix-web/)
@@ -175,11 +175,11 @@ The `zabbix_agent_server` (and `zabbix_agent_serveractive`) should contain the i
 
 ## Main variables
 
-There are some variables in de default/main.yml which can (Or needs to) be overridden:
+There are some variables in default/main.yml which can (or need to) be overridden:
 
 * `zabbix_agent_server`: The ip address for the zabbix-server or zabbix-proxy.
 
-* `zabbix_agent_serveractive`: The ipaddress for the zabbix-server or zabbix-proxy for active checks.
+* `zabbix_agent_serveractive`: The ip address for the zabbix-server or zabbix-proxy for active checks.
 
 * `zabbix_version`: This is the version of zabbix. Default it is 4.0, but can be overridden to one of the versions mentioned in [Zabbix Versions](#zabbix-versions).
 
@@ -258,7 +258,7 @@ These variables are specific for Zabbix 3.0 and higher:
 
 ## Zabbix API variables
 
-These variables needs to be overridden when you want to make use of the zabbix-api for automatically creating and or updating hosts.
+These variables need to be overridden when you want to make use of the zabbix-api for automatically creating and or updating hosts.
 
 Host encryption configuration will be set to match agent configuration.
 
@@ -284,11 +284,11 @@ When `zabbix_api_create_hostgroup` or `zabbix_api_create_hosts` is set to `True`
 
 * `zabbix_useuip`: 1 if connection to zabbix-agent is made via ip, 0 for fqdn.
 
-* `zabbix_host_groups`: An list of hostgroups which this host belongs to.
+* `zabbix_host_groups`: A list of hostgroups which this host belongs to.
 
-* `zabbix_link_templates`: An list of templates which needs to be link to this host. The templates should exist.
+* `zabbix_link_templates`: A list of templates which needs to be link to this host. The templates should exist.
 
-* `zabbix_macros`: An list with macro_key and macro_value for creating hostmacro's.
+* `zabbix_macros`: A list with macro_key and macro_value for creating hostmacro's.
 
 * `zabbix_inventory_mode`: Configure Zabbix inventory mode. Needed for building inventory data, manually when configuring a host or automatically by using some automatic population options. This has to be set to `automatic` if you want to make automatically building inventory data.
 
@@ -300,7 +300,7 @@ When `zabbix_api_create_hostgroup` or `zabbix_api_create_hosts` is set to `True`
 
 **NOTE**
 
-_Supporting Windows is an best effort (I don't have the possibility to either test/verify changes on the various amount of available Windows instances). PR's specific to Windows will almost immediately be merged, unless some one is able to provide a Windows test mechanism via Travis for Pull Requests._
+_Supporting Windows is a best effort (I don't have the possibility to either test/verify changes on the various amount of available Windows instances). PRs specific to Windows will almost immediately be merged, unless someone is able to provide a Windows test mechanism via Travis for Pull Requests._
 
 * `zabbix_version_long`: The long (major.minor.patch) version of the Zabbix Agent. This will be used to generate the `zabbix_win_download_link` link and for Zabbix Agent update if `zabbix_agent_package_state: latest`.
 
@@ -317,7 +317,7 @@ _Supporting Windows is an best effort (I don't have the possibility to either te
 ## Docker Variables
 
 When you don't want to install the Zabbix Agent on the host, but would like to run it in a container then these properties are useful. When `zabbix_agent_docker` is set to `True`, then a
-Docker image will be downloaded and a Container will be started. No other installations will be done on the host, with the excetion of the PSK file and the "Zabbix Include Directory".
+Docker image will be downloaded and a Container will be started. No other installations will be done on the host, with the exception of the PSK file and the "Zabbix Include Directory".
 
 The following directories are mounted in the Container:
 
@@ -330,7 +330,7 @@ The following directories are mounted in the Container:
   - /var/run:/var/run
 ```
 
-Keep in mind that using the Zabbix Agent in a Container, requires changes to the Zabbix Template for Linux as `/proc`, `/sys` and `/etc` are mounted in a directory `/hostfs`.
+Keep in mind that using the Zabbix Agent in a Container requires changes to the Zabbix Template for Linux as `/proc`, `/sys` and `/etc` are mounted in a directory `/hostfs`.
 
 * `zabbix_agent_docker`: When set to `True`, it will install a Docker container on the target host instead of installation on the target. Default: `False`
 
