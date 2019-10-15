@@ -44,7 +44,7 @@ Style guides are important because they ensure consistency in the content, look,
 
 ## (local) Development
 
-This role makes use of Molecule to test the execution of the role and verify it. In the root of the repository, a file named `requirements.txt` exists and contains the versions used by the tests.
+This role makes use of Molecule to test the execution of the role and verify it. In the root of the repository https://github.com/dj-wasabi/ansible-ci-base, a file named `requirements.txt` exists and contains the versions used by the tests.
 
 ### Requirements
 
