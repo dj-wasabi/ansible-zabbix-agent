@@ -115,6 +115,8 @@
     validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
   when:
     - zabbix_api_create_hostgroup | bool
+  register: zabbix_api_hostgroup_created
+  until: zabbix_api_hostgroup_created is succeeded
   delegate_to: localhost
   become: no
   tags:
@@ -134,16 +136,18 @@
     proxy: "{{ zabbix_proxy }}"
     inventory_mode: "{{ zabbix_inventory_mode }}"
     interfaces: "{{ zabbix_agent_interfaces }}"
-    visible_name: "{{ zabbix_visible_hostname|default(zabbix_agent_hostname) }}"
-    tls_psk: "{{ zabbix_agent_tlspsk_secret|default(omit) }}"
-    tls_psk_identity: "{{ zabbix_agent_tlspskidentity|default(omit) }}"
-    tls_issuer: "{{ zabbix_agent_tlsservercertissuer|default(omit) }}"
-    tls_subject: "{{ zabbix_agent_tlsservercertsubject|default(omit) }}"
+    visible_name: "{{ zabbix_visible_hostname | default(zabbix_agent_hostname) }}"
+    tls_psk: "{{ zabbix_agent_tlspsk_secret | default(omit) }}"
+    tls_psk_identity: "{{ zabbix_agent_tlspskidentity | default(omit) }}"
+    tls_issuer: "{{ zabbix_agent_tlsservercertissuer | default(omit) }}"
+    tls_subject: "{{ zabbix_agent_tlsservercertsubject | default(omit) }}"
     tls_accept: "{{ zabbix_agent_tls_config[zabbix_agent_tlsaccept if zabbix_agent_tlsaccept else 'unencrypted'] }}"
     tls_connect: "{{ zabbix_agent_tls_config[zabbix_agent_tlsconnect if zabbix_agent_tlsconnect else 'unencrypted'] }}"
-    validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
+    validate_certs: "{{ zabbix_validate_certs | default(omit) }}"
   when:
     - zabbix_api_create_hosts | bool
+  register: zabbix_api_host_created
+  until: zabbix_api_host_created is succeeded
   delegate_to: localhost
   become: no
   changed_when: false
@@ -158,12 +162,14 @@
     host_name: "{{ zabbix_agent_hostname }}"
     macro_name: "{{ item.macro_key }}"
     macro_value: "{{ item.macro_value }}"
-    validate_certs: "{{ zabbix_validate_certs|default(omit) }}"
+    validate_certs: "{{ zabbix_validate_certs | default(omit) }}"
   with_items: "{{ zabbix_macros | default([]) }}"
   when:
     - zabbix_api_create_hosts | bool
     - zabbix_macros is defined
     - item.macro_key is defined
+  register: zabbix_api_hostmarcro_created
+  until: zabbix_api_hostmarcro_created is succeeded
   delegate_to: localhost
   become: no
   tags:

@@ -17,15 +17,6 @@ platforms:
       - name: zabbix
     published_ports:
       - "80:80"
-  - name: zabbix-agent-docker-centos
-    image: milcom/centos7-systemd:latest
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    networks:
-      - name: zabbix
-    groups:
-      - docker
-    privileged: True
   - name: zabbix-agent-centos
     image: milcom/centos7-systemd:latest
     groups:
@@ -70,8 +61,6 @@ provisioner:
         zabbix_server_dbport: 3306
         database_type: mysql
         database_type_long: mysql
-      docker:
-        zabbix_agent_docker: True
     host_vars:
       zabbix-agent-fedora:
         ansible_python_interpreter: /usr/bin/python3
