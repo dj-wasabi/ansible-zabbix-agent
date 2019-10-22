@@ -54,6 +54,15 @@
     - zabbix_win_exe_info.win_file_version.product_version is version(zabbix_version_long, '<')
     - zabbix_agent_package_state == 'latest'
 
+- name: "Windows | Place TLS-PSK file"
+  win_copy:
+    content: "{{ zabbix_agent_tlspsk_secret }}"
+    dest: "{{ zabbix_agent_tlspskfile }}"
+  when:
+    - zabbix_agent_tlspskfile is defined
+    - zabbix_agent_tlspsk_secret is defined
+  notify: restart win zabbix agent
+
 - name: "Windows | Stop Zabbix (Update)"
   win_service:
     name: Zabbix Agent
