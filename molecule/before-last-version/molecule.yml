@@ -51,7 +51,7 @@ provisioner:
         ansible_python_interpreter: /usr/bin/python3
     group_vars:
       all:
-        zabbix_version: 4.0
+        zabbix_version: 4.2
 
 scenario:
   name: before-last-version
