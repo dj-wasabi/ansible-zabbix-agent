@@ -266,6 +266,9 @@ When `zabbix_api_create_hostgroup` or `zabbix_api_create_hosts` is set to `True`
 
 * `zabbix_url`: The url on which the Zabbix webpage is available. Example: http://zabbix.example.com
 
+* `zabbix_api_http_user`: The http user to access zabbix url with Basic Auth
+* `zabbix_api_http_password`: The http password to access zabbix url with Basic Auth
+
 * `zabbix_api_create_hosts`: When you want to enable the Zabbix API to create/delete the host. This has to be set to `True` if you want to make use of `zabbix_create_host`. Default: `False`
 
 * `zabbix_api_create_hostgroup`: When you want to enable the Zabbix API to create/delete the hostgroups. This has to be set to `True` if you want to make use of `zabbix_create_hostgroup`.Default: `False`
