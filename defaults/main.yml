@@ -40,6 +40,8 @@ zabbix_repo_yum:
 
 # Zabbix API stuff
 zabbix_url: "http://zabbix.dj-wasabi.local"
+# zabbix_api_http_user: admin
+# zabbix_api_http_password: admin
 zabbix_api_user: Admin
 zabbix_api_pass: zabbix
 zabbix_api_create_hostgroup: False

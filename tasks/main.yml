@@ -108,6 +108,8 @@
 - name: "Create hostgroups"
   zabbix_group:
     server_url: "{{ zabbix_url }}"
+    http_login_user: "{{ zabbix_api_http_user | default(omit) }}"
+    http_login_password: "{{ zabbix_api_http_password | default(omit) }}"
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
     host_group: "{{ zabbix_host_groups }}"
@@ -125,6 +127,8 @@
 - name: "Create a new host or update an existing host's info"
   zabbix_host:
     server_url: "{{ zabbix_url }}"
+    http_login_user: "{{ zabbix_api_http_user | default(omit) }}"
+    http_login_password: "{{ zabbix_api_http_password | default(omit) }}"
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
     host_name: "{{ zabbix_agent_hostname }}"
@@ -157,6 +161,8 @@
 - name: "Updating host configuration with macros"
   zabbix_hostmacro:
     server_url: "{{ zabbix_url }}"
+    http_login_user: "{{ zabbix_api_http_user | default(omit) }}"
+    http_login_password: "{{ zabbix_api_http_password | default(omit) }}"
     login_user: "{{ zabbix_api_user }}"
     login_password: "{{ zabbix_api_pass }}"
     host_name: "{{ zabbix_agent_hostname }}"
