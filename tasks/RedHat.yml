@@ -91,7 +91,22 @@
     https_proxy: "{{ zabbix_https_proxy | default(None) | default(omit) }}"
   register: zabbix_agent_policycoreutils_installed
   until: zabbix_agent_package_installed is succeeded
-  when: zabbix_selinux | bool
+  when: (zabbix_selinux | bool) and (zabbix_agent_distribution_major_version == "6" or zabbix_agent_distribution_major_version == "7")
+  become: yes
+  tags:
+    - init
+    - zabbix-agent
+
+- name: "Install python3-policycoreutils on RHEL8"
+  package:
+    name: python3-policycoreutils
+    state: installed
+  environment:
+    http_proxy: "{{ zabbix_http_proxy | default(None) | default(omit) }}"
+    https_proxy: "{{ zabbix_https_proxy | default(None) | default(omit) }}"
+  register: zabbix_agent_policycoreutils_installed
+  until: zabbix_agent_package_installed is succeeded
+  when: (zabbix_selinux | bool) and ansible_distribution_major_version == "8"
   become: yes
   tags:
     - init
