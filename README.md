@@ -206,6 +206,10 @@ There are some variables in default/main.yml which can (or need to) be overridde
     * `name`: Userparameter name (should be the same with userparameter template file name)
     * `scripts_dir`: Directory name of the custom scripts needed for userparameters
 
+* `zabbix_agent_userparameters_templates_src`: indicates the relative path (from `templates/`) where userparameter templates are searched
+
+* `zabbix_agent_userparameters_scripts_src`: indicates the relative path (from `files/`) where userparameter scripts are searched
+
 * `zabbix_agent_allowroot`: Allow the agent to run as 'root'. 0 - do not allow, 1 - allow
 
 * `zabbix_agent_runas_user`: Drop privileges to a specific, existing user on the system. Only has effect if run as 'root' and AllowRoot is disabled.
@@ -530,8 +534,8 @@ The 3rd and last scenario is the `before-last-version`. This is the same scenari
 
 The following steps are required to install custom userparameters and/or scripts:
 
-* Put the desired userparameter file in the `templates/userparameters` directory and name it as `<userparameter_name>.j2`. For example: `templates/userparameters/mysql.j2`
-* Put the scripts directory (if any) in the `files/scripts` directory. For example: `files/scripts/mysql`
+* Put the desired userparameter file in the `templates/userparameters` directory and name it as `<userparameter_name>.j2`. For example: `templates/userparameters/mysql.j2`. You can change the default directory to a custom one modifying `zabbix_agent_userparameters_templates_src` variable.
+* Put the scripts directory (if any) in the `files/scripts` directory. For example: `files/scripts/mysql`. You can change the default directory to a custom one modifying `zabbix_agent_userparameters_scripts_src` variable.
 * Add `zabbix_agent_userparameters` variable to the playbook as a list of dictionaries and define userparameter name and scripts directory name (if there are no scripts just no not specify the `scripts_dir` variable).
 
 Example:
