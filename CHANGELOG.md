@@ -6,6 +6,18 @@ Version (Release date)
 
 UNRELEASED:
 
+2.1.0  (2019-11-25)
+
+  * Fix typos #274 (By pull request: akamch (Thanks!))
+  * Added retry for API related tasks #275
+  * Added missing task for adding a TLS-PSK file #280
+  * Remove the host running Docker from Molecule for now #281
+  * Updating to Zabbix 4.4 #282
+  * Trying to use a Matrix in Travis and see what happens.. :-)
+  * Pass params to Ansible Zabbix modules used by role to allow HTTP Basi… #285 (By pull request: nadley (Thanks!))
+  * RHEL8 specific changes for SELinux #286 (By pull request: bdekker-routit (Thanks!))
+  * userparameters from parametizable sources #287 (By pull request: santiagomr (Thanks!))
+
 2.0.0  (2019-09-29)
 
   * Using Ansible 2.7 as minimal version;
