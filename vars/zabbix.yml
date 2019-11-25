@@ -2,6 +2,8 @@
 
 sign_keys:
   "44":
+    cosmic:
+      sign_key: A14FE591
     bionic:
       sign_key: A14FE591
     sonya:
@@ -21,6 +23,8 @@ sign_keys:
     xenial:
       sign_key: E709712C
   "42":
+    cosmic:
+      sign_key: A14FE591
     bionic:
       sign_key: A14FE591
     sonya:
