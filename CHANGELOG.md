@@ -17,6 +17,7 @@ UNRELEASED:
   * Pass params to Ansible Zabbix modules used by role to allow HTTP Basi… #285 (By pull request: nadley (Thanks!))
   * RHEL8 specific changes for SELinux #286 (By pull request: bdekker-routit (Thanks!))
   * userparameters from parametizable sources #287 (By pull request: santiagomr (Thanks!))
+  * Added cosmic to the zabbix.yml vars file.
 
 2.0.0  (2019-09-29)
 
