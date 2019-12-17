@@ -5,6 +5,7 @@ Table of Contents
   * [Operating systems](#operating-systems)
   * [Local system access](#local-system-access)
   * [Zabbix Versions](#zabbix-versions)
+    + [Zabbix 4.4](#zabbix-44)
     + [Zabbix 4.2](#zabbix-42)
     + [Zabbix 4.0](#zabbix-40)
     + [Zabbix 3.4](#zabbix-34)
@@ -15,6 +16,7 @@ Table of Contents
 - [Getting started](#getting-started)
   * [Installation](#installation)
   * [Minimal Configuration](#minimal-configuration)
+  * [Issues](#issues)
 - [Role Variables](#role-variables)
   * [Main variables](#main-variables)
   * [TLS Specific configuration](#tls-specific-configuration)
@@ -76,6 +78,17 @@ To successfully complete the install the role requires `python-netaddr` on the c
 ## Zabbix Versions
 
 See the following list of supported Operating systems with the Zabbix releases:
+
+### Zabbix 4.2
+
+  * CentOS 7.x, 8.x
+  * Amazon 7.x
+  * RedHat 7.x, 8.x
+  * Fedora 27, 29
+  * OracleLinux 7.x, 8.x
+  * Scientific Linux 7.x, 8.x
+  * Ubuntu 14.04, 16.04, 18.04
+  * Debian 8, 9, 10
 
 ### Zabbix 4.2
 
@@ -170,6 +183,10 @@ In order to get the Zabbix Agent running, you'll have to define the following pr
 The `zabbix_version` is optional. The latest available major.minor version of Zabbix will be installed on the host(s). If you want to use an older version, please specify this in the major.minor format. Example: `zabbix_version: 4.0`, `zabbix_version: 3.4` or `zabbix_version: 2.2`.
 
 The `zabbix_agent_server` (and `zabbix_agent_serveractive`) should contain the ip or fqdn of the host running the Zabbix Server.
+
+## Issues
+
+Due to issue discussed on #291, the Ansible Version 2.9.{0,1,2} isn't working correctly on Windows related targets.
 
 # Role Variables
 
