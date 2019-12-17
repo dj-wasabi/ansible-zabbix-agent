@@ -105,6 +105,7 @@
     url: "{{ zabbix_win_download_link }}"
     dest: '{{ zabbix_win_install_dir }}\{{ zabbix_win_package }}'
     force: False
+    follow_redirects: all
   environment:
     http_proxy: "{{ zabbix_http_proxy | default(None) | default(omit) }}"
     https_proxy: "{{ zabbix_https_proxy | default(None) | default(omit) }}"
