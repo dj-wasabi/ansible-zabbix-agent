@@ -79,7 +79,7 @@ To successfully complete the install the role requires `python-netaddr` on the c
 
 See the following list of supported Operating systems with the Zabbix releases:
 
-### Zabbix 4.2
+### Zabbix 4.4
 
   * CentOS 7.x, 8.x
   * Amazon 7.x
@@ -186,7 +186,7 @@ The `zabbix_agent_server` (and `zabbix_agent_serveractive`) should contain the i
 
 ## Issues
 
-Due to issue discussed on #291, the Ansible Version 2.9.{0,1,2} isn't working correctly on Windows related targets.
+Due to issue discussed on [#291](https://github.com/dj-wasabi/ansible-zabbix-agent/issues/291), the Ansible Version 2.9.{0,1,2} isn't working correctly on Windows related targets.
 
 # Role Variables
 
