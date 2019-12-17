@@ -56,7 +56,7 @@ zabbix_useuip: 1
 zabbix_host_groups:
   - Linux servers
 zabbix_link_templates:
-  - Template OS Linux
+  - Template OS Linux by Zabbix agent
 
 zabbix_agent_interfaces:
   - type: 1
