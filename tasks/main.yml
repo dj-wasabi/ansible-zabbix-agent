@@ -21,42 +21,8 @@
     - zabbix-agent
 
 - name: "Install the correct repository"
-  include: "RedHat.yml"
+  include_tasks: "{{ zabbix_agent_os_family if (zabbix_agent_os_family not in ['Sangoma']) else 'RedHat' }}.yml"
   when:
-    - zabbix_agent_os_family == "RedHat"
-    - not (zabbix_agent_docker | bool)
-  tags:
-    - zabbix-agent
-    - init
-    - config
-    - service
-
-- name: "Install the correct repository"
-  include: "RedHat.yml"
-  when:
-    - zabbix_agent_os_family == "Sangoma"
-    - not (zabbix_agent_docker | bool)
-  tags:
-    - zabbix-agent
-    - init
-    - config
-    - service
-
-- name: "Install the correct repository"
-  include: "Debian.yml"
-  when:
-    - zabbix_agent_os_family == "Debian"
-    - not (zabbix_agent_docker | bool)
-  tags:
-    - zabbix-agent
-    - init
-    - config
-    - service
-
-- name: "Install the correct repository"
-  include: "Suse.yml"
-  when:
-    - zabbix_agent_os_family == "Suse"
     - not (zabbix_agent_docker | bool)
   tags:
     - zabbix-agent
@@ -84,12 +50,12 @@
     - (zabbix_agent_tlspsk_secret is undefined) or (zabbix_agent_tlspsk_secret | length == '0')
 
 - name: "Install the correct repository"
-  include: Windows.yml
+  include_tasks: Windows.yml
   when:
     - zabbix_agent_os_family == "Windows"
 
 - name: "Install the correct repository"
-  include: Linux.yml
+  include_tasks: Linux.yml
   when:
     - (zabbix_agent_os_family != "Windows") or (zabbix_agent_docker | bool)
 
@@ -182,7 +148,7 @@
     - api
 
 - name: "Including userparameters"
-  include: "userparameter.yml"
+  include_tasks: "userparameter.yml"
   when: zabbix_agent_userparameters|length > 0
   tags:
     - zabbix-agent
