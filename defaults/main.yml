@@ -1,7 +1,8 @@
 ---
 # defaults file for zabbix-agent
 
-zabbix_version: 4.4
+zabbix_agent_version: 4.4
+zabbix_version: "{{ zabbix_agent_version }}"
 zabbix_version_patch: 0
 zabbix_repo: zabbix
 zabbix_agent_package: zabbix-agent
@@ -39,7 +40,8 @@ zabbix_repo_yum:
     state: present
 
 # Zabbix API stuff
-zabbix_url: "http://zabbix.dj-wasabi.local"
+zabbix_agent_server_url: "http://zabbix.dj-wasabi.local"
+zabbix_url: "{{ zabbix_agent_server_url }}"
 # zabbix_api_http_user: admin
 # zabbix_api_http_password: admin
 zabbix_api_user: Admin
