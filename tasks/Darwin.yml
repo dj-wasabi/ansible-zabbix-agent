@@ -147,10 +147,13 @@
     - zabbix_agent_docker | bool
 
 - name: "Check if zabbix-agent service is running"
-  shell: "launchctl list | grep com.zabbix.zabbix_agentd | awk '{print $1}'"
+  shell: |
+    set -o pipefail
+    launchctl list | grep com.zabbix.zabbix_agentd | awk '{print $1}'
   register: launchctl_pid
   check_mode: no
   changed_when: false
+  failed_when: launchctl_pid.rc == 2
   become: yes
   tags:
     - init
