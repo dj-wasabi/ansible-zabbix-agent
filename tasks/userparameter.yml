@@ -7,7 +7,10 @@
     owner: zabbix
     group: zabbix
     mode: 0644
-  notify: restart zabbix-agent
+  notify:
+    - restart zabbix-agent
+    - restart win zabbix-agent
+    - restart mac zabbix agent
   become: yes
   with_items: "{{ zabbix_agent_userparameters }}"
 
@@ -18,7 +21,10 @@
     owner: zabbix
     group: zabbix
     mode: 0755
-  notify: restart zabbix-agent
+  notify:
+    - restart zabbix-agent
+    - restart win zabbix-agent
+    - restart mac zabbix agent
   become: yes
   with_items: "{{ zabbix_agent_userparameters }}"
   when: item.scripts_dir is defined

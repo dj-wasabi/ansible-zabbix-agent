@@ -9,6 +9,7 @@
   become: yes
   when:
     - not zabbix_agent_docker
+    - zabbix_agent_os_family != "Windows" and zabbix_agent_os_family != "Darwin"
 
 - name: firewalld-reload
   command: "firewall-cmd --reload"
@@ -18,3 +19,12 @@
     name: "{{ zabbix_win_agent_service }}"
     state: restarted
     enabled: yes
+  when:
+    - zabbix_agent_os_family == "Windows"
+
+- name: restart mac zabbix agent
+  command: "launchctl kickstart -k system/{{ zabbix_agent_service }}"
+  become: true
+  when:
+    - not zabbix_agent_docker
+    - zabbix_agent_os_family == "Darwin"

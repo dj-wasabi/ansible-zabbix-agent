@@ -67,6 +67,7 @@ This role will work on the following operating systems:
  * Ubuntu
  * opensuse
  * Windows (Best effort)
+ * macOS
 
 So, you'll need one of those operating systems.. :-)
 Please sent Pull Requests or suggestions when you want to use this role for other Operating systems.
@@ -89,6 +90,7 @@ See the following list of supported Operating systems with the Zabbix releases:
   * Scientific Linux 7.x, 8.x
   * Ubuntu 14.04, 16.04, 18.04
   * Debian 8, 9, 10
+  * macOS 10.14, 10.15
 
 ### Zabbix 4.2
 
@@ -100,6 +102,7 @@ See the following list of supported Operating systems with the Zabbix releases:
   * Scientific Linux 7.x
   * Ubuntu 14.04, 16.04, 18.04
   * Debian 8, 9, 10
+  * macOS 10.14, 10.15
 
 ### Zabbix 4.0
 
@@ -111,6 +114,7 @@ See the following list of supported Operating systems with the Zabbix releases:
   * Scientific Linux 7.x
   * Ubuntu 14.04, 16.04, 18.04
   * Debian 8, 9, 10
+  * macOS 10.14, 10.15
 
 ### Zabbix 3.4
 
@@ -337,6 +341,12 @@ _Supporting Windows is a best effort (I don't have the possibility to either tes
 * `zabbix_agent_win_include`: The directory in which the Zabbix specific configuration files are stored.
 
 * `zabbix_agent_win_svc_recovery`: Enable Zabbix Agent service auto-recovery settings.
+
+## macOS Variables
+
+* `zabbix_version_long`: The long (major.minor.patch) version of the Zabbix Agent. This will be used to generate the `zabbix_mac_download_link` link.
+
+* `zabbix_mac_download_link`: The download url to the `pkg` file.
 
 ## Docker Variables
 
