@@ -125,8 +125,10 @@ zabbix_agent_tls_config:
   psk: '2'
   cert: '4'
 
+# Windows/macOS Related
+zabbix_version_long: 4.4.4
+
 # Windows Related
-zabbix_version_long: 4.2.0
 zabbix_win_package: zabbix_agents_{{ zabbix_version_long }}.win.zip
 zabbix_win_download_url: https://www.zabbix.com/downloads
 zabbix_win_download_link: "{{ zabbix_win_download_url }}/{{ zabbix_version_long }}/{{ zabbix_win_package }}"
@@ -134,6 +136,11 @@ zabbix_win_install_dir: 'C:\Zabbix'
 zabbix_agent_win_logfile: 'C:\Zabbix\zabbix_agentd.log'
 zabbix_agent_win_include: 'C:\Zabbix\zabbix_agent.d\'
 zabbix_agent_win_svc_recovery: True
+
+# macOS Related
+zabbix_mac_package: zabbix_agent-{{ zabbix_version_long }}-macos-amd64-openssl.pkg
+zabbix_mac_download_url: https://www.zabbix.com/downloads
+zabbix_mac_download_link: "{{ zabbix_mac_download_url }}/{{ zabbix_version_long }}/{{ zabbix_mac_package }}"
 
 # Zabbix Agent Docker facts
 zabbix_agent_docker: False

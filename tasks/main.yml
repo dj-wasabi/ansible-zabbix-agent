@@ -57,7 +57,12 @@
 - name: "Install the correct repository"
   include_tasks: Linux.yml
   when:
-    - (zabbix_agent_os_family != "Windows") or (zabbix_agent_docker | bool)
+    - (zabbix_agent_os_family != "Windows" and zabbix_agent_os_family != "Darwin") or (zabbix_agent_docker | bool)
+
+- name: "Install the correct repository"
+  include_tasks: macOS.yml
+  when:
+    - zabbix_agent_os_family == "Darwin"
 
 - name: "Installing the Zabbix-api package on localhost"
   pip:
