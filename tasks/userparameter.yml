@@ -9,7 +9,7 @@
     mode: 0644
   notify:
     - restart zabbix-agent
-    - restart win zabbix-agent
+    - restart win zabbix agent
     - restart mac zabbix agent
   become: yes
   with_items: "{{ zabbix_agent_userparameters }}"
@@ -23,7 +23,7 @@
     mode: 0755
   notify:
     - restart zabbix-agent
-    - restart win zabbix-agent
+    - restart win zabbix agent
     - restart mac zabbix agent
   become: yes
   with_items: "{{ zabbix_agent_userparameters }}"

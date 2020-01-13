@@ -70,7 +70,7 @@
     - zabbix_agent_tlspskidentity is defined
   notify:
     - restart zabbix-agent
-    - restart win zabbix-agent
+    - restart win zabbix agent
     - restart mac zabbix agent
 
 - name: AutoPSK | Default tlsaccept and tlsconnect to enforce PSK
