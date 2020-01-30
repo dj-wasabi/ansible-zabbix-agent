@@ -11,6 +11,12 @@
   set_fact:
     windows_arch: 32
 
+- name: "Windows | Override architecture if 64-bit"
+  set_fact:
+    windows_arch: 64
+  when:
+    - ansible_architecture == "64-bit"
+
 - name: "Windows | Set path to zabbix.exe"
   set_fact:
     zabbix_win_exe_path: '{{ zabbix_win_install_dir }}\bin\win{{ windows_arch }}\zabbix_agentd.exe'
@@ -21,12 +27,6 @@
     zabbix_win_exe_path: '{{ zabbix_win_install_dir }}\bin\zabbix_agentd.exe'
   when:
     - zabbix_version_long is version('4.0.0', '>=')
-
-- name: "Windows | Override architecture if 64-bit"
-  set_fact:
-    windows_arch: 64
-  when:
-    - ansible_architecture == "64-bit"
 
 - name: "Windows | Check if Zabbix agent is present"
   win_stat:
