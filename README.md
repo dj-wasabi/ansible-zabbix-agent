@@ -180,11 +180,11 @@ This will install the zabbix-agent role into your `roles` directory.
 
 In order to get the Zabbix Agent running, you'll have to define the following properties before executing the role:
 
-* zabbix_version
+* zabbix_agent_version
 * zabbix_agent_server
 * zabbix_agent_serveractive (When using active checks)
 
-The `zabbix_version` is optional. The latest available major.minor version of Zabbix will be installed on the host(s). If you want to use an older version, please specify this in the major.minor format. Example: `zabbix_version: 4.0`, `zabbix_version: 3.4` or `zabbix_version: 2.2`.
+The `zabbix_agent_version` is optional. The latest available major.minor version of Zabbix will be installed on the host(s). If you want to use an older version, please specify this in the major.minor format. Example: `zabbix_agent_version: 4.0`, `zabbix_agent_version: 3.4` or `zabbix_agent_version: 2.2`.
 
 The `zabbix_agent_server` (and `zabbix_agent_serveractive`) should contain the ip or fqdn of the host running the Zabbix Server.
 
@@ -202,7 +202,7 @@ There are some variables in default/main.yml which can (or need to) be overridde
 
 * `zabbix_agent_serveractive`: The ip address for the zabbix-server or zabbix-proxy for active checks.
 
-* `zabbix_version`: This is the version of zabbix. Default it is 4.0, but can be overridden to one of the versions mentioned in [Zabbix Versions](#zabbix-versions).
+* `zabbix_agent_version`: This is the version of zabbix. Default it is 4.4, but can be overridden to one of the versions mentioned in [Zabbix Versions](#zabbix-versions). Previously the variable `zabbix_version` was used directly but it could cause [some inconvenience](https://github.com/dj-wasabi/ansible-zabbix-agent/pull/303). That variable is maintained by retrocompativility.
 
 * `zabbix_repo`: Default: _zabbix_
   * _epel_ install agent from EPEL repo
