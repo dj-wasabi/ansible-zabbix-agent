@@ -109,6 +109,8 @@ zabbix_agent_custom_scripts: false
 zabbix_agent_loadmodulepath: ${libdir}/modules
 zabbix_agent_loadmodule:
 zabbix_agent_become_on_localhost: True
+zabbix_agent_description:
+zabbix_agent_inventory_zabbix:
 
 # TLS settings
 zabbix_agent_tlsconnect:
@@ -126,6 +128,12 @@ zabbix_agent_tls_config:
   unencrypted: '1'
   psk: '2'
   cert: '4'
+
+# IPMI settings
+zabbix_agent_ipmi_authtype:
+zabbix_agent_ipmi_password:
+zabbix_agent_ipmi_privilege:
+zabbix_agent_ipmi_username:
 
 # Windows/macOS Related
 zabbix_version_long: 4.4.4

@@ -410,6 +410,20 @@ Keep in mind that using the Zabbix Agent in a Container requires changes to the 
 
 * `zabbix_agent_firewall_chain`: Which `chain` to add the rule to IPTables. Default `INPUT`
 
+* `zabbix_agent_description`: Description of the host in Zabbix.
+
+* `zabbix_agent_inventory_zabbix`: Adds Facts for a zabbix inventory
+
+## IPMI variables
+
+* `zabbix_agent_ipmi_authtype`: IPMI authentication algorithm. Possible values are 1 (callback), 2 (user), 3 (operator), 4 (admin), 5 (OEM), with 2 being the API default.
+
+* `zabbix_agent_ipmi_password`: IPMI password.
+
+* `zabbix_agent_ipmi_privilege`: IPMI privilege level. Possible values are 1 (callback), 2 (user), 3 (operator), 4 (admin), 5 (OEM), with 2 being the API default.
+
+* `zabbix_agent_ipmi_username`: IPMI username.
+
 ## proxy
 
 When the target host does not have access to the internet, but you do have a proxy available then the following properties needs to be set to download the packages via the proxy:
