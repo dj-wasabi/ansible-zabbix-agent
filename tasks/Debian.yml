@@ -51,6 +51,9 @@
   apt_repository:
     repo: "deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ zabbix_agent_distribution_release }} main"
     state: present
+  environment:
+    http_proxy: "{{ zabbix_http_proxy | default(None) | default(omit) }}"
+    https_proxy: "{{ zabbix_https_proxy | default(None) | default(omit) }}"
   when:
     - ansible_distribution == "Debian"
     - zabbix_repo == "zabbix"
@@ -63,6 +66,9 @@
   apt_repository:
     repo: "deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/debian/ {{ zabbix_agent_distribution_release }} main"
     state: present
+  environment:
+    http_proxy: "{{ zabbix_http_proxy | default(None) | default(omit) }}"
+    https_proxy: "{{ zabbix_https_proxy | default(None) | default(omit) }}"
   when:
     - ansible_distribution == "Debian"
     - zabbix_repo == "zabbix"
@@ -75,6 +81,9 @@
   apt_repository:
     repo: "deb-src http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ zabbix_agent_distribution_release }} main"
     state: present
+  environment:
+    http_proxy: "{{ zabbix_http_proxy | default(None) | default(omit) }}"
+    https_proxy: "{{ zabbix_https_proxy | default(None) | default(omit) }}"
   when:
     - ansible_distribution == "Ubuntu"
     - zabbix_repo == "zabbix"
@@ -87,6 +96,9 @@
   apt_repository:
     repo: "deb http://repo.zabbix.com/zabbix/{{ zabbix_version }}/ubuntu/ {{ zabbix_agent_distribution_release }} main"
     state: present
+  environment:
+    http_proxy: "{{ zabbix_http_proxy | default(None) | default(omit) }}"
+    https_proxy: "{{ zabbix_https_proxy | default(None) | default(omit) }}"
   when:
     - ansible_distribution == "Ubuntu"
     - zabbix_repo == "zabbix"
