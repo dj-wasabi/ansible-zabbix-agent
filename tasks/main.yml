@@ -119,6 +119,12 @@
     tls_accept: "{{ zabbix_agent_tls_config[zabbix_agent_tlsaccept if zabbix_agent_tlsaccept else 'unencrypted'] }}"
     tls_connect: "{{ zabbix_agent_tls_config[zabbix_agent_tlsconnect if zabbix_agent_tlsconnect else 'unencrypted'] }}"
     validate_certs: "{{ zabbix_validate_certs | default(omit) }}"
+    description: "{{ zabbix_agent_description | default(omit) }}"
+    inventory_zabbix: "{{ zabbix_agent_inventory_zabbix | default(omit) }}"
+    ipmi_authtype: "{{ zabbix_agent_ipmi_authtype | default(omit) }}"
+    ipmi_password: "{{ zabbix_agent_ipmi_password| default(omit) }}"
+    ipmi_privilege: "{{ zabbix_agent_ipmi_privilege | default(omit) }}"
+    ipmi_username: "{{ zabbix_agent_ipmi_username | default(omit) }}"
   when:
     - zabbix_api_create_hosts | bool
   register: zabbix_api_host_created
