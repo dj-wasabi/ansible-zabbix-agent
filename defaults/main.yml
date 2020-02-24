@@ -130,9 +130,9 @@ zabbix_agent_tls_config:
   cert: '4'
 
 # IPMI settings
-zabbix_agent_ipmi_authtype:
+zabbix_agent_ipmi_authtype: 2
 zabbix_agent_ipmi_password:
-zabbix_agent_ipmi_privilege:
+zabbix_agent_ipmi_privilege: 2
 zabbix_agent_ipmi_username:
 
 # Windows/macOS Related
