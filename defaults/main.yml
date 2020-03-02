@@ -110,7 +110,7 @@ zabbix_agent_loadmodulepath: ${libdir}/modules
 zabbix_agent_loadmodule:
 zabbix_agent_become_on_localhost: True
 zabbix_agent_description:
-zabbix_agent_inventory_zabbix:
+zabbix_agent_inventory_zabbix: {}
 
 # TLS settings
 zabbix_agent_tlsconnect:

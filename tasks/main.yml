@@ -120,7 +120,7 @@
     tls_connect: "{{ zabbix_agent_tls_config[zabbix_agent_tlsconnect if zabbix_agent_tlsconnect else 'unencrypted'] }}"
     validate_certs: "{{ zabbix_validate_certs | default(omit) }}"
     description: "{{ zabbix_agent_description | default(omit) }}"
-    inventory_zabbix: "{{ zabbix_agent_inventory_zabbix | default(omit) }}"
+    inventory_zabbix: "{{ zabbix_agent_inventory_zabbix | default({}) }}"
     ipmi_authtype: "{{ zabbix_agent_ipmi_authtype | default(omit) }}"
     ipmi_password: "{{ zabbix_agent_ipmi_password| default(omit) }}"
     ipmi_privilege: "{{ zabbix_agent_ipmi_privilege | default(omit) }}"
