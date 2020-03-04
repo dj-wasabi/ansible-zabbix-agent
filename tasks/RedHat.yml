@@ -48,7 +48,7 @@
     gpgkey: "{{ item.gpgkey }}"
     priority: "{{ item.priority | default('99') }}"
     state: "{{ item.state | default('present') }}"
-    proxy: "{{ zabbix_http_proxy | default(None) | default(omit) }}"
+    proxy: "{{ zabbix_http_proxy | default(omit) }}"
   with_items: "{{ zabbix_repo_yum }}"
   register: yum_repo_installed
   become: yes
