@@ -28,7 +28,7 @@
   register: repositories
   become: yes
   when:
-    - ansible_distribution == "Ubuntu"
+    - ansible_distribution in ['Ubuntu', 'Debian']
     - zabbix_repo == "zabbix"
   tags:
     - zabbix-agent
@@ -40,7 +40,7 @@
     state: absent
   loop: "{{ repositories.files }}"
   when:
-    - ansible_distribution == "Ubuntu"
+    - ansible_distribution in ['Ubuntu', 'Debian']
     - zabbix_repo == "zabbix"
   become: yes
   tags:
