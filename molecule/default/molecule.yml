@@ -12,30 +12,30 @@ platforms:
     groups:
       - agent
     privileged: True
-  - name: zabbix-agent-fedora
-    image: jrei/systemd-fedora:latest
-    command: /sbin/init
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    groups:
-      - agent
-    privileged: True
+  # - name: zabbix-agent-fedora
+  #   image: jrei/systemd-fedora:latest
+  #   command: /sbin/init
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  #   groups:
+  #     - agent
+  #   privileged: True
   - name: zabbix-agent-debian-stretch
     image: minimum2scp/systemd-stretch:latest
     command: /sbin/init
     groups:
       - agent
     privileged: True
-  - name: zabbix-agent-mint
-    image: vcatechnology/linux-mint
-    groups:
-      - agent
-    privileged: True
-  - name: zabbix-agent-ubuntu-bionic
-    image: solita/ubuntu-systemd:bionic
-    groups:
-      - agent
-    privileged: True
+  # - name: zabbix-agent-mint
+  #   image: vcatechnology/linux-mint
+  #   groups:
+  #     - agent
+  #   privileged: True
+  # - name: zabbix-agent-ubuntu-bionic
+  #   image: solita/ubuntu-systemd:bionic
+  #   groups:
+  #     - agent
+  #   privileged: True
 
 provisioner:
   name: ansible
@@ -43,10 +43,13 @@ provisioner:
     name: ansible-lint
   inventory:
     host_vars:
+      zabbix-agent-debian-stretch:
+        ansible_python_interpreter: /usr/bin/python
       zabbix-agent-fedora:
         ansible_python_interpreter: /usr/bin/python3
     group_vars:
       all:
+        zabbix_install_pip_packages: False
         zabbix_agent_server: 192.168.3.33
         zabbix_agent_serveractive: 192.168.3.33
         zabbix_agent_listenip: 0.0.0.0
