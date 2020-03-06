@@ -51,6 +51,7 @@ provisioner:
   inventory:
     group_vars:
       all:
+        zabbix_agent_src_reinstall: False
         zabbix_api_create_hosts: True
         zabbix_api_create_hostgroup: True
         zabbix_url: http://zabbix-server-centos

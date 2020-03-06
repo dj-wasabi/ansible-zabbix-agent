@@ -42,6 +42,7 @@
   when:
     - ansible_distribution in ['Ubuntu', 'Debian']
     - zabbix_repo == "zabbix"
+    - zabbix_agent_src_reinstall
   become: yes
   tags:
     - zabbix-agent
