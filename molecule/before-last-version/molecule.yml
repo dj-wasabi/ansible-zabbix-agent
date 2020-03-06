@@ -52,6 +52,7 @@ provisioner:
     group_vars:
       all:
         zabbix_version: 4.2
+        zabbix_agent_src_reinstall: False
 
 scenario:
   name: before-last-version
