@@ -13,6 +13,11 @@ zabbix_agent_server:
 zabbix_agent_serveractive:
 zabbix_selinux: False
 
+zabbix_agent_packages:
+  - zabbix-agent
+  - zabbix-sender
+  - zabbix-get
+
 # Zabbix role related vars
 zabbix_install_pip_packages: true
 zabbix_apt_force_apt_get: yes
