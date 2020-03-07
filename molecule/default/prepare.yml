@@ -29,6 +29,7 @@
       apt:
         name:
           - net-tools
+          - gnupg2
         state: present
       register: zabbix_agent_prepare_packages_install
       until: zabbix_agent_prepare_packages_install is succeeded
