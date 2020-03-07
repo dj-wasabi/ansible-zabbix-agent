@@ -117,7 +117,7 @@
 
 - name: "Debian | Configuring the weight for APT"
   copy:
-    dest: "/etc/apt/preferences.d/zabbix-agent-{{ zabbix_version }}"
+    dest: "/etc/apt/preferences.d/zabbix-agent-{{ zabbix_underscore_version }}"
     content: |
       Package: zabbix-agent
       Pin: origin repo.zabbix.com
