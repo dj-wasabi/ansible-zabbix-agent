@@ -239,6 +239,8 @@ There are some variables in default/main.yml which can (or need to) be overridde
 
 * `zabbix_install_pip_packages`: Set to `False` if you don't want to install the required pip packages. Useful when you control your environment completely. Default: True
 
+* `zabbix_agent_apt_priority`: Add a weight (`Pin-Priority`) for the APT repository.
+
 ## TLS Specific configuration
 
 These variables are specific for Zabbix 3.0 and higher:
