@@ -13,6 +13,7 @@ zabbix_agent_server:
 zabbix_agent_serveractive:
 zabbix_selinux: False
 zabbix_agent_src_reinstall: True
+zabbix_agent_apt_priority:
 
 zabbix_agent_packages:
   - zabbix-agent
