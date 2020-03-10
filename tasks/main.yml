@@ -37,6 +37,7 @@
   register: zabbix_python_netaddr_package_installed
   until: zabbix_python_netaddr_package_installed is succeeded
   delegate_to: localhost
+  run_once: True
   become: "{{ zabbix_agent_become_on_localhost }}"
   when:
     - zabbix_install_pip_packages | bool
@@ -71,6 +72,7 @@
   register: zabbix_api_package_installed
   until: zabbix_api_package_installed is succeeded
   delegate_to: localhost
+  run_once: True
   become: "{{ zabbix_agent_become_on_localhost }}"
   when:
     - zabbix_install_pip_packages | bool
