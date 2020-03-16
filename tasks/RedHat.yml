@@ -39,6 +39,12 @@
   when:
     - ansible_distribution == "Fedora"
 
+- name: "XCP-ng | Override zabbix_agent_distribution_major_version for XCP-ng"
+  set_fact:
+    zabbix_agent_distribution_major_version: 7
+  when:
+    - ansible_distribution == "XCP-ng"
+
 - name: "RedHat | Install basic repo file"
   yum_repository:
     name: "{{ item.name }}"
