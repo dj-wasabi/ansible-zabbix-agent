@@ -141,3 +141,13 @@
     - zabbix-agent
     - init
     - service
+
+- name: "Allow httpd to connect to db (SELinux)"
+  seboolean:
+    name: zabbix_run_sudo
+    persistent: yes
+    state: yes
+  when:
+    - ansible_selinux.status == "enabled"
+    - selinux_allow_zabbix_run_sudo|bool
+  tags: selinux
