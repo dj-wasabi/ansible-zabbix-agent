@@ -142,7 +142,7 @@
     - init
     - service
 
-- name: "Allow httpd to connect to db (SELinux)"
+- name: "Allow zabbix to run sudo commands (SELinux)"
   seboolean:
     name: zabbix_run_sudo
     persistent: yes
