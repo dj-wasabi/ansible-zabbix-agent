@@ -190,7 +190,7 @@
 - name: "Configure IPTables (zabbix_agent_listenport)"
   iptables:
     action: "{{ zabbix_agent_firewall_action }}"
-    destination_port: "{{ zabbix_agent_listenport }}"
+    destination_port: "{{ zabbix_agent_listenport | string }}"
     source: "{{ zabbix_agent_firewall_source | default(omit) }}"
     protocol: tcp
     chain: "{{ zabbix_agent_firewall_chain }}"
@@ -201,7 +201,7 @@
 - name: "Configure IPTables (zabbix_agent_jmx_listenport)"
   iptables:
     action: "{{ zabbix_agent_firewall_action }}"
-    destination_port: "{{ zabbix_agent_listenport }}"
+    destination_port: "{{ zabbix_agent_listenport | string }}"
     source: "{{ zabbix_agent_firewall_source | default(omit) }}"
     protocol: tcp
     chain: "{{ zabbix_agent_firewall_chain }}"
