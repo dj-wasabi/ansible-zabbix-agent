@@ -40,22 +40,10 @@ Table of Contents
 - [License](#license)
 - [Author Information](#author-information)
 
-Badges:
-
-[![Build Status](https://travis-ci.org/dj-wasabi/ansible-zabbix-agent.svg?branch=master)](https://travis-ci.org/dj-wasabi/ansible-zabbix-agent) <img src="https://img.shields.io/ansible/role/d/2079"/> <img src="https://img.shields.io/ansible/quality/2079"/>
-
 # Introduction
 
-This is a role for installing and maintaining the zabbix-agent. It will install the Zabbix Agent on any host with an operating system that is defined [here](#operating-systems) or
-will install a Docker container and start that.
-
-This is one of the 'dj-wasabi' roles which configure your whole Zabbix environment. See the complete list:
-
- * zabbix-server (https://galaxy.ansible.com/dj-wasabi/zabbix-server/)
- * zabbix-web (https://galaxy.ansible.com/dj-wasabi/zabbix-web/)
- * zabbix-proxy (https://galaxy.ansible.com/dj-wasabi/zabbix-proxy/)
- * zabbix-javagateway (https://galaxy.ansible.com/dj-wasabi/zabbix-javagateway/)
- * zabbix-agent (https://galaxy.ansible.com/dj-wasabi/zabbix-agent/)
+This role is migrated to: https://github.com/ansible-collections/community.zabbix/
+In this repository, a read only version is/will be available for those who can not make use of collections (yet). Changes/updates will only be applied to the collection and not in this repository.
 
 # Requirements
 ## Operating systems

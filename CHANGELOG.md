@@ -4,7 +4,16 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
-UNRELEASED:
+FINAL and LAST release for this role in this repository. This role will be transferred to: https://github.com/ansible-collections/community.zabbix/
+
+2.3.0  (2020-05-05)
+
+  * Prevent to run multiple time installation on localhost #334 (By pull request: SimBou (Thanks!))
+  * Add support for XCP-ng as a dialect of RHEL7 #335 (By pull request: KurtSchluss (Thanks!))
+  * Fix: Changed apt state to present from installed. #336 (By pull request: sebedh (Thanks!))
+  * Selinux boolean to allow zabbix to run sudo commands #340 (By pull request: Vinclame (Thanks!))
+  * Added performance userparameter.yml on Windows #342 (By pull request: ComradeAx0n (Thanks!))
+  * Added some missing ubuntu ids #344
 
 2.2.0  (2020-03-07)
 
